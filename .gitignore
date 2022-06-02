@@ -1,0 +1,9 @@
+out
+dist
+dist-vue
+**/node_modules
+.vscode-test/
+*.vsix
+
+**/.idea
+**/.DS_Store
