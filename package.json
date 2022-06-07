@@ -40,12 +40,14 @@
 				"jsonSchemaBuilder.openStandardEditor": {
 					"type": "boolean",
 					"default": true,
-					"description": "Open the Standard VS Code Text Editor besides the custom editor."
+					"description": "Open the Standard VS Code Text Editor besides the custom editor.",
+					"order": 1
 				},
 				"jsonSchemaBuilder.closeStandardEditor": {
 					"type": "boolean",
 					"default": false,
-					"description": "Close the Standard VS Code Text Editor when the Form Builder is closed."
+					"description": "Close the Standard VS Code Text Editor when the Form Builder is closed.",
+					"order": 2
 				}
 			}
 		}
