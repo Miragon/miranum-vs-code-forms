@@ -28,7 +28,7 @@
 				"displayName": "JSON Schema Builder",
 				"selector": [
 					{
-						"filenamePattern": "*.form.json"
+						"filenamePattern": "*.form"
 					}
 				],
 				"priority": "default"
