@@ -81,11 +81,11 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
                 // Update the webviews content.
                 switch (e.reason) {
-                    case 1: {
+                    case 1: {   // Undo
                         updateWebview(JsonSchemaBuilderProvider.viewType + '.undo');
                         break;
                     }
-                    case 2: {
+                    case 2: {   // Redo
                         updateWebview(JsonSchemaBuilderProvider.viewType + '.redo');
                         break;
                     }
@@ -135,7 +135,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             }
         });
 
-        // Make sure we get rid of the listeners when our editor is closed
+        // Make sure we get rid of the listeners when our editor is closed.
         webviewPanel.onDidDispose(() => {
             // Close also every standard text editor with the same document.
             if (vscode.workspace.getConfiguration('jsonSchemaBuilder').get('closeStandardEditor')) {
@@ -153,7 +153,6 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             changeViewState.dispose();
             receivedMessage.dispose();
             changeDocumentSubscription.dispose();
-
         });
 
         // Initial message which sends the data to the webview
