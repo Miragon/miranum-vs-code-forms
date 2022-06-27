@@ -20,6 +20,3 @@ licensing:
     ids:
       - Other
       - NA
-
-secretscanning:
-  level: all

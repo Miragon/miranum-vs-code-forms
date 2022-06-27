@@ -15,5 +15,3 @@ jobs:
         with:
           policy: GeekMasher/security-queries
           policy-path: policies/default.yml
-
-          token: ${{ secrets.GITHUB_TOKEN }}
