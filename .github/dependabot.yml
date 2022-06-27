@@ -6,6 +6,7 @@ updates:
     schedule:
       interval: weekly
       time: '05:00'
+    target-branch: "develop"
     open-pull-requests-limit: 10
     reviewers:
       - lmoesle
@@ -21,6 +22,7 @@ updates:
     schedule:
       interval: weekly
       time: '05:00'
+    target-branch: "develop"
     open-pull-requests-limit: 10
     reviewers:
       - lmoesle
