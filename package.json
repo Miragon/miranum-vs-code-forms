@@ -10,7 +10,7 @@
 		"url": "https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder.git"
 	},
 	"engines": {
-		"vscode": "^1.67.0"
+		"vscode": "^1.69.0"
 	},
 	"icon": "images/logo-marketplace.png",
 	"categories": [
