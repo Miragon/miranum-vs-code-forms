@@ -198,7 +198,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         ));
 
         const styleAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
-            this.context.extensionUri, 'dist-vue', 'css/app.css'
+            this.context.extensionUri, 'dist-vue', 'css/chunk-vendors.css'
         ));
 
         const styleResetUri = webview.asWebviewUri(vscode.Uri.joinPath(
@@ -215,6 +215,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
                 <meta http-equiv="Content-Security-Policy" content="default-src 'none';
                     style-src ${webview.cspSource};
+                    font-src ${webview.cspSource};
                     img-src ${webview.cspSource};
                     script-src 'nonce-${nonce}';">
 
