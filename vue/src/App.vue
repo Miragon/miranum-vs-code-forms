@@ -1,84 +1,113 @@
 <template>
-   <div id="app">
-      <text-editor ref="textEditor" :viewType="viewType"></text-editor>
-   </div>
+  <v-app>
+    <v-main>
+      <v-tabs
+          fixed-tabs
+          dark
+      >
+        <v-tab>
+          Builder
+        </v-tab>
+        <v-tab>
+          Renderer
+        </v-tab>
+        <v-tab-item>
+          <VFormBuilder @input="schemaChanged" :value="schema" :builder-settings="builderSettings"></VFormBuilder>
+          {{currentSchema}}
+        </v-tab-item>
+        <v-tab-item>
+          <div style="background-color: white; padding: 10px">
+            <VJsonRenderer :options="{}" :schema="currentSchema"></VJsonRenderer>
+          </div>
+        </v-tab-item>
+      </v-tabs>
+    </v-main>
+  </v-app>
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted, onUnmounted, provide, ref} from "@vue/composition-api";
-import {VsCode} from "@/types/VSCodeApi";
-import TextEditor from "@/components/TextEditor.vue";
+import Vue from 'vue';
+import {VJsonRenderer} from "@muenchen/digiwf-form-renderer";
+import {VFormBuilder} from "@muenchen/digiwf-form-builder";
+import {Settings} from "./settings/Settings";
 
-declare const vscode: VsCode;
+export default Vue.extend({
+  name: 'App',
 
-export default defineComponent({
-   name: 'App',
-   components: {TextEditor},
-   setup() {
-      const textEditor = ref<InstanceType<typeof TextEditor>>()
-      const viewType = ref('');
-
-      /**
-       * Receive and process the content of the message.
-       * @param event Message which was sent from the extension.
-       */
-      function getData(event: MessageEvent): void {
-         const message = event.data;
-         const text = message.text;
-
-         switch (message.type) {
-            case 'initial.updateFromExtension': {
-               viewType.value = message.viewType;
-               textEditor.value?.updateContent(text);
-               break;
+  components: {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    VJsonRenderer,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    VFormBuilder
+  },
+  data: () => ({
+    schema: {
+      "key": "MyStartForm", "type": "object", "allOf": [{
+        "key": "sectionKey1",
+        "title": "First Section",
+        "type": "object",
+        "x-options": {"sectionsTitlesClasses": ["d-none"]},
+        "allOf": [{
+          "key": "group1",
+          "title": "First Group",
+          "type": "object",
+          "x-options": {"childrenClass": "pl-0"},
+          "properties": {
+            "stringProp1": {
+              "fieldType": "text",
+              "title": "I am a text",
+              "type": "string",
+              "x-options": {"fieldColProps": {"cols": 12, "sm": 6}},
+              "x-props": {"outlined": true, "dense": true}
+            },
+            "numberProp1": {
+              "fieldType": "integer",
+              "type": "integer",
+              "title": "I am a number",
+              "x-options": {"fieldColProps": {"cols": 12, "sm": 6}},
+              "x-props": {"outlined": true, "dense": true}
+            },
+            "textarea1": {
+              "fieldType": "textarea",
+              "type": "string",
+              "x-display": "textarea",
+              "title": "I am a textarea",
+              "x-props": {"outlined": true, "dense": true}
+            },
+            "booleanprop": {
+              "fieldType": "boolean",
+              "type": "boolean",
+              "title": "I am a checkbox",
+              "x-props": {"outlined": true, "dense": true}
+            },
+            "dateprop": {
+              "fieldType": "date",
+              "type": "string",
+              "format": "date",
+              "title": "I am a date",
+              "x-props": {"outlined": true, "dense": true}
             }
-            case viewType.value + '.updateFromExtension': {
-               textEditor.value?.updateContent(text);
-               break;
-            }
-            case viewType.value + '.undo':
-            case viewType.value + '.redo': {
-               textEditor.value?.updateContent(text, true);
-               break;
-            }
-            default: break;
-         }
-      }
+          }
+        }]
+      }]
+    },
+    currentSchema: {
+    },
+    builderSettings: Settings
+  }),
+  methods: {
+    schemaChanged: function (schema: any): void {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      this.currentSchema = schema;
+      //TODO update VS-Code here
 
-      onMounted(() => {
-         // Restore the state after the extension get the focus back
-         const state = vscode.getState();
-         if (state) {
-            viewType.value = state.viewType;
-            textEditor.value?.updateContent(state.text);
-         }
 
-         // Add event listener for receiving messages from the extension
-         window.addEventListener('message', getData);
-      })
+      this.$forceUpdate();
+    }
+  }
 
-      onUnmounted(() => {
-         window.removeEventListener('message', getData);
-      })
-
-      // Publish the VSCodeAPI to all components
-      provide('vscode', vscode);
-
-      return {
-         textEditor,
-         viewType
-      }
-   }
 });
 </script>
-
-<style>
-#app {
-   font-family: Avenir, Helvetica, Arial, sans-serif;
-   -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale;
-   text-align: center;
-   color: papayawhip;
-   margin-top: 20px;
-}
-</style>
