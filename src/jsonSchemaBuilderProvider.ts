@@ -8,7 +8,6 @@ import {getNonce} from './utils';
 export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvider {
 
     private static readonly viewType = 'jsonschema-builder';
-    private isValidJson = true;
 
     /**
      * Register the CustomTextEditorProvider
@@ -39,7 +38,6 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
         let isBuffer = false;
         let isUpdateFromWebview = false;
-        let jsonErrorMsg: vscode.Disposable;
 
         // Setup initial content for the webview
         webviewPanel.webview.options = {
@@ -119,17 +117,6 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                 case JsonSchemaBuilderProvider.viewType + '.updateFromWebview': {
                     isUpdateFromWebview = true;
                     this.setChangesToDocument(document, e.content);
-                    if (!this.isValidJson) {
-                        jsonErrorMsg.dispose();
-                        this.isValidJson = true;
-                    }
-                    break;
-                }
-                case JsonSchemaBuilderProvider.viewType + '.noValidJson': {
-                    if (this.isValidJson) {
-                        jsonErrorMsg = vscode.window.setStatusBarMessage('No valid JSON!');
-                        this.isValidJson = false;
-                    }
                     break;
                 }
             }
@@ -190,22 +177,24 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
      */
     private getHtmlForWebview(webview: vscode.Webview): string {
         const vueAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
-            this.context.extensionUri, 'dist-vue', 'js/app.js'
+            this.context.extensionUri, 'dist-vue', 'js', 'app.js'
         ));
 
         const vueVendorUri = webview.asWebviewUri(vscode.Uri.joinPath(
-            this.context.extensionUri, 'dist-vue', 'js/chunk-vendors.js'
+            this.context.extensionUri, 'dist-vue', 'js', 'chunk-vendors.js'
         ));
 
         const styleAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
-            this.context.extensionUri, 'dist-vue', 'css/chunk-vendors.css'
+            this.context.extensionUri, 'dist-vue', 'css', 'chunk-vendors.css'
         ));
 
         const styleResetUri = webview.asWebviewUri(vscode.Uri.joinPath(
-            this.context.extensionUri, 'src', 'css/reset.css'
+            this.context.extensionUri, 'src', 'css', 'reset.css'
         ));
 
         const nonce = getNonce();
+
+        //TODO Is there a better way to allow inline styling created by vuetify?
 
         return `
             <!DOCTYPE html>
@@ -214,7 +203,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                 <meta charset="utf-8" />
 
                 <meta http-equiv="Content-Security-Policy" content="default-src 'none';
-                    style-src ${webview.cspSource};
+                    style-src ${webview.cspSource} 'unsafe-inline';
                     font-src ${webview.cspSource};
                     img-src ${webview.cspSource};
                     script-src 'nonce-${nonce}';">
@@ -224,7 +213,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                 <link href="${styleResetUri}" rel="stylesheet" />
                 <link href="${styleAppUri}" rel="stylesheet" />
 
-                <title>Json Editor</title>
+                <title>Json Schema Builder</title>
             </head>
             <body>
                 <div id="app"></div>
@@ -244,7 +233,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
      * @param content The string which should be parsed to json
      * @returns an json object
      */
-    private getContentAsJson(content: string) {
+    protected getContentAsJson(content: string) {
         const text = content;
         if (text.trim().length === 0) {
             return '{}';
@@ -253,7 +242,6 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         try {
             return JSON.parse(text);
         } catch {
-            this.isValidJson = false;
             throw new Error('Could not get document as json. Content is not valid json');
         }
     }
@@ -264,9 +252,9 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
      * @param content The data which was sent from the webview
      * @returns
      */
-    private setChangesToDocument(document: vscode.TextDocument, content: string) {
+    private setChangesToDocument(document: vscode.TextDocument, content: JSON) {
         const edit = new vscode.WorkspaceEdit();
-        const text = JSON.stringify(this.getContentAsJson(content), undefined, 4);
+        const text = JSON.stringify(content, undefined, 4); //this.getContentAsJson(content), undefined, 4);
 
         edit.replace(
             document.uri,

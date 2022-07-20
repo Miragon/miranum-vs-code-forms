@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref, getCurrentInstance, onMounted, onUnmounted} from 'vue';
+import {defineComponent, ref, getCurrentInstance, onMounted, onUnmounted, Ref} from 'vue';
 import {VJsonRenderer} from "@muenchen/digiwf-form-renderer";
 import {VFormBuilder} from "@muenchen/digiwf-form-builder";
 import {Settings} from "./settings/Settings";
@@ -36,11 +36,7 @@ declare const vscode: VsCode;
 export default defineComponent({
    name: 'App',
    components: {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       VJsonRenderer,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       VFormBuilder
    },
    setup() {
@@ -121,14 +117,14 @@ export default defineComponent({
          }
       }
 
-      function sendDataToExtension(): void {
+      function sendDataToExtension(schema: any): void {
          vscode.setState({
             viewType: viewType.value,
-            text: schema
+            text: schema.value
          });
          vscode.postMessage({
             type: viewType.value + '.updateFromWebview',
-            content: schema
+            content: schema.value
          });
       }
 
@@ -138,12 +134,15 @@ export default defineComponent({
             text: text
          });
 
-         schema.value = text;
+         if (text.length > 0) {
+            schema.value = text;
+         }
       }
 
-      function schemaChanged(): void {
+      function schemaChanged(schema: any): void {
          currentSchema.value = schema;
-         sendDataToExtension();
+         console.log('Send data ...');
+         //sendDataToExtension(currentSchema.value);
 
          const instance = getCurrentInstance();
          instance?.proxy?.$forceUpdate();
