@@ -25,9 +25,10 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref, getCurrentInstance, onMounted, onUnmounted, Ref} from 'vue';
+import {defineComponent, ref, getCurrentInstance, onMounted, onUnmounted} from 'vue';
 import {VJsonRenderer} from "@muenchen/digiwf-form-renderer";
 import {VFormBuilder} from "@muenchen/digiwf-form-builder";
+import {Form} from "@muenchen/digiwf-form-builder/dist/types/src/types/Form";
 import {Settings} from "./settings/Settings";
 import {VsCode} from "@/types/VSCodeApi";
 
@@ -40,58 +41,8 @@ export default defineComponent({
       VFormBuilder
    },
    setup() {
-      const schema = ref(
-      {
-         "key": "MyStartForm", "type": "object", "allOf": [{
-            "key": "sectionKey1",
-            "title": "First Section",
-            "type": "object",
-            "x-options": {"sectionsTitlesClasses": ["d-none"]},
-            "allOf": [{
-               "key": "group1",
-               "title": "First Group",
-               "type": "object",
-               "x-options": {"childrenClass": "pl-0"},
-               "properties": {
-                  "stringProp1": {
-                     "fieldType": "text",
-                     "title": "I am a text",
-                     "type": "string",
-                     "x-options": {"fieldColProps": {"cols": 12, "sm": 6}},
-                     "x-props": {"outlined": true, "dense": true}
-                  },
-                  "numberProp1": {
-                     "fieldType": "integer",
-                     "type": "integer",
-                     "title": "I am a number",
-                     "x-options": {"fieldColProps": {"cols": 12, "sm": 6}},
-                     "x-props": {"outlined": true, "dense": true}
-                  },
-                  "textarea1": {
-                     "fieldType": "textarea",
-                     "type": "string",
-                     "x-display": "textarea",
-                     "title": "I am a textarea",
-                     "x-props": {"outlined": true, "dense": true}
-                  },
-                  "booleanprop": {
-                     "fieldType": "boolean",
-                     "type": "boolean",
-                     "title": "I am a checkbox",
-                     "x-props": {"outlined": true, "dense": true}
-                  },
-                  "dateprop": {
-                     "fieldType": "date",
-                     "type": "string",
-                     "format": "date",
-                     "title": "I am a date",
-                     "x-props": {"outlined": true, "dense": true}
-                  }
-               }
-            }]
-         }]
-      });
-      const currentSchema = ref({});
+      const schema = ref<Form>()
+      const currentSchema = ref<typeof schema.value>();
       const builderSettings = Settings;
       const viewType = ref('');
 
@@ -120,11 +71,11 @@ export default defineComponent({
       function sendDataToExtension(schema: any): void {
          vscode.setState({
             viewType: viewType.value,
-            text: schema.value
+            text: schema
          });
          vscode.postMessage({
             type: viewType.value + '.updateFromWebview',
-            content: schema.value
+            content: schema
          });
       }
 
@@ -134,15 +85,12 @@ export default defineComponent({
             text: text
          });
 
-         if (text.length > 0) {
-            schema.value = text;
-         }
+         schema.value = text;
       }
 
       function schemaChanged(schema: any): void {
          currentSchema.value = schema;
-         console.log('Send data ...');
-         //sendDataToExtension(currentSchema.value);
+         sendDataToExtension(currentSchema.value);
 
          const instance = getCurrentInstance();
          instance?.proxy?.$forceUpdate();
