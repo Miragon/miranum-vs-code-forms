@@ -42,7 +42,7 @@ export default defineComponent({
    },
    setup() {
       const schema = ref<Form>()
-      const currentSchema = ref<typeof schema.value>();
+      const currentSchema = ref<any>();
       const builderSettings = Settings;
       const viewType = ref('');
 
@@ -53,6 +53,7 @@ export default defineComponent({
             case 'initial.updateFromExtension': {
                viewType.value = message.viewType;
                updateContent(text);
+               currentSchema.value = schema.value;
                break;
             }
             case viewType.value + '.updateFromExtension': {

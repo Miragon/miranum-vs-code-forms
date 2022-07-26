@@ -180,8 +180,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                 <meta charset="utf-8" />
 
                 <meta http-equiv="Content-Security-Policy" content="default-src 'none';
-                    style-src ${webview.cspSource} 'unsafe-inline' https: http: data:;
-                    font-src ${webview.cspSource} 'unsafe-inline' https: http: data:;
+                    style-src ${webview.cspSource} 'unsafe-inline';
                     img-src ${webview.cspSource};
                     script-src 'nonce-${nonce}';">
 
