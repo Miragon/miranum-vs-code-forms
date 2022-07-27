@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import {closeStdEditor, getContentAsJson, getDefault, getNonce, openStdEditor} from './utils';
+import { debounce } from "ts-debounce";
 import * as path from "path";
 
 /**
@@ -37,6 +38,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         token: vscode.CancellationToken
     ): Promise<void> {
 
+        const writeData = debounce(this.writeChangesToDocument);
         let isBuffer = false;
         let isUpdateFromWebview = false;
 
@@ -64,7 +66,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             switch (e.type) {
                 case JsonSchemaBuilderProvider.viewType + '.updateFromWebview': {
                     isUpdateFromWebview = true;
-                    this.setChangesToDocument(document, e.content);
+                    writeData(document, e.content); //this.writeChangesToDocument(document, e.content);
                     break;
                 }
             }
@@ -116,6 +118,10 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                     case undefined: {
                         // If the initial update came from the webview then we don't need to update the webview.
                         if (!isUpdateFromWebview) {
+                            if (document.getText() === '') {
+                                //this.writeChangesToDocument(document, JSON.parse('{"key": "MyStartForm", "type": "object", "allOf": []}'));
+                                writeData(document, JSON.parse('{"key": "MyStartForm", "type": "object", "allOf": []}'));
+                            }
                             updateWebview(JsonSchemaBuilderProvider.viewType + '.updateFromExtension');
                         }
                         isUpdateFromWebview = false;
@@ -187,7 +193,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 
-                <base href="${vscode.Uri.file(path.join(this.context.extensionPath, 'dist-vue')).with({scheme: 'vscode-resource'})}">
+                <!--<base href="${vscode.Uri.file(path.join(this.context.extensionPath, 'dist-vue')).with({scheme: 'vscode-resource'})}">-->
 
                 <link href="${styleResetUri}" rel="stylesheet" type="text/css" />
                 <link href="${styleAppUri}" rel="stylesheet" type="text/css" />
@@ -213,19 +219,15 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
      * @param content The data which was sent from the webview
      * @returns
      */
-    protected setChangesToDocument(document: vscode.TextDocument, content: JSON) {
+    protected writeChangesToDocument(document: vscode.TextDocument, content: JSON): Thenable<boolean> {
         const edit = new vscode.WorkspaceEdit();
-        const text = JSON.stringify(content, undefined, 4);
+        let text = JSON.stringify(content, undefined, 4);
 
-        try {
-            edit.replace(
-                document.uri,
-                new vscode.Range(0, 0, document.lineCount, 0),
-                text
-            );
-        } catch {
-            throw new Error('Could not replace the content of the document.');
-        }
+        edit.replace(
+            document.uri,
+            new vscode.Range(0, 0, document.lineCount, 0),
+            text
+        );
 
         return vscode.workspace.applyEdit(edit);
     }

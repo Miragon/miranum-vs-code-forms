@@ -16,7 +16,7 @@
             </v-tab-item>
             <v-tab-item>
                <div style="background-color: white; padding: 10px">
-                  <VJsonRenderer :options="{}" :schema="currentSchema"></VJsonRenderer>
+                  <VJsonRenderer :options="{}" :schema="schema"></VJsonRenderer>
                </div>
             </v-tab-item>
          </v-tabs>
@@ -42,27 +42,27 @@ export default defineComponent({
    },
    setup() {
       const schema = ref<Form>()
-      const currentSchema = ref<any>();
+      //const currentSchema = ref<any>();
       const builderSettings = Settings;
       const viewType = ref('');
 
       function getDataFromExtension(event: MessageEvent): void {
          const message = event.data;
-         const text = message.text;
+         const newSchema = message.text;
          switch (message.type) {
             case 'initial.updateFromExtension': {
                viewType.value = message.viewType;
-               updateContent(text);
-               currentSchema.value = schema.value;
+               updateSchema(newSchema);
+               //currentSchema.value = schema.value;
                break;
             }
             case viewType.value + '.updateFromExtension': {
-               updateContent(text);
+               updateSchema(newSchema);
                break;
             }
             case viewType.value + '.undo':
             case viewType.value + '.redo': {
-               updateContent(text);
+               updateSchema(newSchema);
                break;
             }
             default: break;
@@ -80,18 +80,18 @@ export default defineComponent({
          });
       }
 
-      function updateContent(text: any): void {
+      function updateSchema(newSchema: any): void {
          vscode.setState({
             viewType: viewType.value,
-            text: text
+            text: newSchema
          });
 
-         schema.value = text;
+         schema.value = newSchema;
       }
 
       function schemaChanged(schema: any): void {
-         currentSchema.value = schema;
-         sendDataToExtension(currentSchema.value);
+         //currentSchema.value = schema;
+         sendDataToExtension(schema);
 
          const instance = getCurrentInstance();
          instance?.proxy?.$forceUpdate();
@@ -101,7 +101,7 @@ export default defineComponent({
          const state = vscode.getState();
          if (state) {
             viewType.value = state.viewType;
-            updateContent(state.text)
+            updateSchema(state.text)
          }
 
          window.addEventListener('message', getDataFromExtension);
@@ -113,7 +113,7 @@ export default defineComponent({
 
       return {
          schema,
-         currentSchema,
+         //currentSchema,
          builderSettings,
          schemaChanged
       }
