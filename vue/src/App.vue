@@ -1,84 +1,122 @@
 <template>
-   <div id="app">
-      <text-editor ref="textEditor" :viewType="viewType"></text-editor>
-   </div>
+   <v-app>
+      <v-main>
+         <v-tabs
+             dark
+             fixed-tabs
+         >
+            <v-tab>
+               Builder
+            </v-tab>
+            <v-tab>
+               Renderer
+            </v-tab>
+            <v-tab-item>
+               <VFormBuilder :builder-settings="builderSettings" :value="schema" @input="schemaChanged"></VFormBuilder>
+            </v-tab-item>
+            <v-tab-item>
+               <div style="background-color: white; padding: 10px">
+                  <VJsonRenderer :options="{}" :schema="schema"></VJsonRenderer>
+               </div>
+            </v-tab-item>
+         </v-tabs>
+      </v-main>
+   </v-app>
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted, onUnmounted, provide, ref} from "@vue/composition-api";
+import {defineComponent, ref, getCurrentInstance, onMounted, onUnmounted} from 'vue';
+import {VJsonRenderer} from "@muenchen/digiwf-form-renderer";
+import {VFormBuilder} from "@muenchen/digiwf-form-builder";
+import {Form} from "@muenchen/digiwf-form-builder/dist/types/src/types/Form";
+import {Settings} from "./settings/Settings";
 import {VsCode} from "@/types/VSCodeApi";
-import TextEditor from "@/components/TextEditor.vue";
 
 declare const vscode: VsCode;
 
 export default defineComponent({
    name: 'App',
-   components: {TextEditor},
+   components: {
+      VJsonRenderer,
+      VFormBuilder
+   },
    setup() {
-      const textEditor = ref<InstanceType<typeof TextEditor>>()
+      const schema = ref<Form>()
+      //const currentSchema = ref<any>();
+      const builderSettings = Settings;
       const viewType = ref('');
 
-      /**
-       * Receive and process the content of the message.
-       * @param event Message which was sent from the extension.
-       */
-      function getData(event: MessageEvent): void {
+      function getDataFromExtension(event: MessageEvent): void {
          const message = event.data;
-         const text = message.text;
-
+         const newSchema = message.text;
          switch (message.type) {
             case 'initial.updateFromExtension': {
                viewType.value = message.viewType;
-               textEditor.value?.updateContent(text);
+               updateSchema(newSchema);
+               //currentSchema.value = schema.value;
                break;
             }
             case viewType.value + '.updateFromExtension': {
-               textEditor.value?.updateContent(text);
+               updateSchema(newSchema);
                break;
             }
             case viewType.value + '.undo':
             case viewType.value + '.redo': {
-               textEditor.value?.updateContent(text, true);
+               updateSchema(newSchema);
                break;
             }
             default: break;
          }
       }
 
+      function sendDataToExtension(schema: any): void {
+         vscode.setState({
+            viewType: viewType.value,
+            text: schema
+         });
+         vscode.postMessage({
+            type: viewType.value + '.updateFromWebview',
+            content: schema
+         });
+      }
+
+      function updateSchema(newSchema: any): void {
+         vscode.setState({
+            viewType: viewType.value,
+            text: newSchema
+         });
+
+         schema.value = newSchema;
+      }
+
+      function schemaChanged(schema: any): void {
+         //currentSchema.value = schema;
+         sendDataToExtension(schema);
+
+         const instance = getCurrentInstance();
+         instance?.proxy?.$forceUpdate();
+      }
+
       onMounted(() => {
-         // Restore the state after the extension get the focus back
          const state = vscode.getState();
          if (state) {
             viewType.value = state.viewType;
-            textEditor.value?.updateContent(state.text);
+            updateSchema(state.text)
          }
 
-         // Add event listener for receiving messages from the extension
-         window.addEventListener('message', getData);
+         window.addEventListener('message', getDataFromExtension);
       })
 
       onUnmounted(() => {
-         window.removeEventListener('message', getData);
+         window.removeEventListener('message', getDataFromExtension);
       })
 
-      // Publish the VSCodeAPI to all components
-      provide('vscode', vscode);
-
       return {
-         textEditor,
-         viewType
+         schema,
+         //currentSchema,
+         builderSettings,
+         schemaChanged
       }
    }
 });
 </script>
-
-<style>
-#app {
-   font-family: Avenir, Helvetica, Arial, sans-serif;
-   -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale;
-   text-align: center;
-   color: papayawhip;
-   margin-top: 20px;
-}
-</style>

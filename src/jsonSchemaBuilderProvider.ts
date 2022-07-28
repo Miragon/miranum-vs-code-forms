@@ -1,5 +1,7 @@
 import * as vscode from 'vscode';
-import {getNonce} from './utils';
+import {closeStdEditor, getContentAsJson, getDefault, getNonce, openStdEditor} from './utils';
+import { debounce } from "ts-debounce";
+import * as path from "path";
 
 /**
  * Provider for a simple JSON-Editor
@@ -8,7 +10,6 @@ import {getNonce} from './utils';
 export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvider {
 
     private static readonly viewType = 'jsonschema-builder';
-    private isValidJson = true;
 
     /**
      * Register the CustomTextEditorProvider
@@ -37,9 +38,9 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         token: vscode.CancellationToken
     ): Promise<void> {
 
+        const writeData = debounce(this.writeChangesToDocument);
         let isBuffer = false;
         let isUpdateFromWebview = false;
-        let jsonErrorMsg: vscode.Disposable;
 
         // Setup initial content for the webview
         webviewPanel.webview.options = {
@@ -52,13 +53,38 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
         webviewPanel.webview.html = this.getHtmlForWebview(webviewPanel.webview);
 
-        // Send the content from the extension to the webview
+        // Send content from the extension to the webview
         function updateWebview(msgType: string) {
             webviewPanel.webview.postMessage({
                 type: msgType,
-                text: document.getText(),
+                text: getContentAsJson(document.getText()),
             });
         }
+
+        // Receive messages from the webview
+        const receivedMessage = webviewPanel.webview.onDidReceiveMessage(e => {
+            switch (e.type) {
+                case JsonSchemaBuilderProvider.viewType + '.updateFromWebview': {
+                    isUpdateFromWebview = true;
+                    writeData(document, e.content); //this.writeChangesToDocument(document, e.content);
+                    break;
+                }
+            }
+        });
+
+        // Initial message which sends the data to the webview
+        let text = getContentAsJson(document.getText());
+        if (Object.keys(text).length === 0) {
+            text = getDefault();
+        }
+        webviewPanel.webview.postMessage({
+            type: 'initial.updateFromExtension',
+            viewType: JsonSchemaBuilderProvider.viewType,
+            text: text
+        });
+
+        // Opens the default vscode text-editor besides our own custom text-editor
+        openStdEditor(document);
 
         /**
          * When changes are made inside the webview a message to the extension will be sent with the new data.
@@ -92,6 +118,10 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                     case undefined: {
                         // If the initial update came from the webview then we don't need to update the webview.
                         if (!isUpdateFromWebview) {
+                            if (document.getText() === '') {
+                                //this.writeChangesToDocument(document, JSON.parse('{"key": "MyStartForm", "type": "object", "allOf": []}'));
+                                writeData(document, JSON.parse('{"key": "MyStartForm", "type": "object", "allOf": []}'));
+                            }
                             updateWebview(JsonSchemaBuilderProvider.viewType + '.updateFromExtension');
                         }
                         isUpdateFromWebview = false;
@@ -105,82 +135,22 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             // If changes has been made while the webview was not visible no messages could have been sent to the
             // webview. So we have to update the webview if it gets its focus back.
             if (webviewPanel.visible && isBuffer) {
+                const text = getContentAsJson(document.getText());
                 webviewPanel.webview.postMessage({
                     type: JsonSchemaBuilderProvider.viewType + '.updateFromExtension',
-                    text: document.getText(),
+                    text: text,
                 });
                 isBuffer = false;
             }
         });
 
-        // Receive message from the webview
-        const receivedMessage = webviewPanel.webview.onDidReceiveMessage(e => {
-            switch (e.type) {
-                case JsonSchemaBuilderProvider.viewType + '.updateFromWebview': {
-                    isUpdateFromWebview = true;
-                    this.setChangesToDocument(document, e.content);
-                    if (!this.isValidJson) {
-                        jsonErrorMsg.dispose();
-                        this.isValidJson = true;
-                    }
-                    break;
-                }
-                case JsonSchemaBuilderProvider.viewType + '.noValidJson': {
-                    if (this.isValidJson) {
-                        jsonErrorMsg = vscode.window.setStatusBarMessage('No valid JSON!');
-                        this.isValidJson = false;
-                    }
-                    break;
-                }
-            }
-        });
-
-        // Make sure we get rid of the listeners when our editor is closed.
+        // CleanUp after Custom Editor was closed.
         webviewPanel.onDidDispose(() => {
-            // Close also every standard text editor with the same document.
-            if (vscode.workspace.getConfiguration('jsonSchemaBuilder').get('closeStandardEditor')) {
-                for (let tabGroup of vscode.window.tabGroups.all) {
-                    for (let tab of tabGroup.tabs) {
-                        if (tab.input instanceof vscode.TabInputText &&
-                            tab.input.uri.path === document.fileName) {
-
-                            vscode.window.tabGroups.close(tab);
-                        }
-                    }
-                }
-            }
-
+            closeStdEditor(document);
             changeViewState.dispose();
             receivedMessage.dispose();
             changeDocumentSubscription.dispose();
         });
-
-        // Initial message which sends the data to the webview
-        webviewPanel.webview.postMessage({
-            type: 'initial.updateFromExtension',
-            viewType: JsonSchemaBuilderProvider.viewType,
-            text: document.getText(),
-        });
-
-        // Opens the default vscode text-editor besides our own custom text-editor
-        if (vscode.workspace.getConfiguration('jsonSchemaBuilder').get('openStandardEditor')) {
-            let isAlreadyOpen = false;
-
-            loop1:
-                for (let tabGroup of vscode.window.tabGroups.all) {
-                    for (let tab of tabGroup.tabs) {
-                        if (tab.input instanceof vscode.TabInputText &&
-                            tab.input.uri.path === document.fileName) {
-                            isAlreadyOpen = true;
-                            break loop1;
-                        }
-                    }
-                }
-
-            if (!isAlreadyOpen) {
-                vscode.window.showTextDocument(document, vscode.ViewColumn.Beside, true);
-            }
-        }
     }
 
     /**
@@ -190,22 +160,24 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
      */
     private getHtmlForWebview(webview: vscode.Webview): string {
         const vueAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
-            this.context.extensionUri, 'dist-vue', 'js/app.js'
+            this.context.extensionUri, 'dist-vue', 'js', 'app.js'
         ));
 
         const vueVendorUri = webview.asWebviewUri(vscode.Uri.joinPath(
-            this.context.extensionUri, 'dist-vue', 'js/chunk-vendors.js'
-        ));
-
-        const styleAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
-            this.context.extensionUri, 'dist-vue', 'css/app.css'
+            this.context.extensionUri, 'dist-vue', 'js', 'chunk-vendors.js'
         ));
 
         const styleResetUri = webview.asWebviewUri(vscode.Uri.joinPath(
-            this.context.extensionUri, 'src', 'css/reset.css'
+            this.context.extensionUri, 'src', 'css', 'reset.css'
+        ));
+
+        const styleAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
+            this.context.extensionUri, 'dist-vue', 'css', 'chunk-vendors.css'
         ));
 
         const nonce = getNonce();
+
+        //TODO Is there a better way to allow inline styling created by vuetify?
 
         return `
             <!DOCTYPE html>
@@ -214,16 +186,19 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                 <meta charset="utf-8" />
 
                 <meta http-equiv="Content-Security-Policy" content="default-src 'none';
-                    style-src ${webview.cspSource};
+                    style-src ${webview.cspSource} 'unsafe-inline';
+                    font-src ${webview.cspSource};
                     img-src ${webview.cspSource};
                     script-src 'nonce-${nonce}';">
 
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                
+                <!--<base href="${vscode.Uri.file(path.join(this.context.extensionPath, 'dist-vue')).with({scheme: 'vscode-resource'})}">-->
 
-                <link href="${styleResetUri}" rel="stylesheet" />
-                <link href="${styleAppUri}" rel="stylesheet" />
+                <link href="${styleResetUri}" rel="stylesheet" type="text/css" />
+                <link href="${styleAppUri}" rel="stylesheet" type="text/css" />
 
-                <title>Json Editor</title>
+                <title>Json Schema Builder</title>
             </head>
             <body>
                 <div id="app"></div>
@@ -239,33 +214,14 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
     }
 
     /**
-     * Parse a string to json
-     * @param content The string which should be parsed to json
-     * @returns an json object
-     */
-    private getContentAsJson(content: string) {
-        const text = content;
-        if (text.trim().length === 0) {
-            return '{}';
-        }
-
-        try {
-            return JSON.parse(text);
-        } catch {
-            this.isValidJson = false;
-            throw new Error('Could not get document as json. Content is not valid json');
-        }
-    }
-
-    /**
      * Saves the changes to the source file
      * @param document The source file
      * @param content The data which was sent from the webview
      * @returns
      */
-    private setChangesToDocument(document: vscode.TextDocument, content: string) {
+    protected writeChangesToDocument(document: vscode.TextDocument, content: JSON): Thenable<boolean> {
         const edit = new vscode.WorkspaceEdit();
-        const text = JSON.stringify(this.getContentAsJson(content), undefined, 4);
+        let text = JSON.stringify(content, undefined, 4);
 
         edit.replace(
             document.uri,
