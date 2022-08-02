@@ -1,26 +1,9 @@
 <template>
    <v-app>
-      <v-main>
-         <v-tabs
-             dark
-             fixed-tabs
-         >
-            <v-tab>
-               Builder
-            </v-tab>
-            <v-tab>
-               Renderer
-            </v-tab>
-            <v-tab-item>
-               <VFormBuilder :builder-settings="builderSettings" :value="schema" @input="schemaChanged"></VFormBuilder>
-            </v-tab-item>
-            <v-tab-item>
-               <div style="background-color: white; padding: 10px">
-                  <VJsonRenderer :options="{}" :schema="schema"></VJsonRenderer>
-               </div>
-            </v-tab-item>
-         </v-tabs>
-      </v-main>
+      <VFormBuilder :builder-settings="builderSettings" :value="schema" @input="schemaChanged" v-if="builder"></VFormBuilder>
+      <div style="background-color: white; padding: 10px" v-if="renderer">
+         <VJsonRenderer :options="{}" :schema="schema"></VJsonRenderer>
+      </div>
    </v-app>
 </template>
 
@@ -42,26 +25,27 @@ export default defineComponent({
    },
    setup() {
       const schema = ref<Form>()
-      //const currentSchema = ref<any>();
       const builderSettings = Settings;
-      const viewType = ref('');
+      const builder = ref(false);
+      const renderer = ref(false);
 
       function getDataFromExtension(event: MessageEvent): void {
          const message = event.data;
          const newSchema = message.text;
+
          switch (message.type) {
-            case 'initial.updateFromExtension': {
-               viewType.value = message.viewType;
-               updateSchema(newSchema);
-               //currentSchema.value = schema.value;
-               break;
-            }
-            case viewType.value + '.updateFromExtension': {
+            case 'jsonschema-renderer.updateFromExtension': {
+               renderer.value = true;
                updateSchema(newSchema);
                break;
             }
-            case viewType.value + '.undo':
-            case viewType.value + '.redo': {
+            case 'jsonschema-builder.updateFromExtension': {
+               builder.value = true;
+               updateSchema(newSchema);
+               break;
+            }
+            case 'jsonschema-builder.undo':
+            case 'jsonschema-builder.redo': {
                updateSchema(newSchema);
                break;
             }
@@ -71,18 +55,16 @@ export default defineComponent({
 
       function sendDataToExtension(schema: any): void {
          vscode.setState({
-            viewType: viewType.value,
             text: schema
          });
          vscode.postMessage({
-            type: viewType.value + '.updateFromWebview',
+            type: 'jsonschema-builder.updateFromWebview',
             content: schema
          });
       }
 
       function updateSchema(newSchema: any): void {
          vscode.setState({
-            viewType: viewType.value,
             text: newSchema
          });
 
@@ -90,9 +72,7 @@ export default defineComponent({
       }
 
       function schemaChanged(schema: any): void {
-         //currentSchema.value = schema;
          sendDataToExtension(schema);
-
          const instance = getCurrentInstance();
          instance?.proxy?.$forceUpdate();
       }
@@ -100,7 +80,6 @@ export default defineComponent({
       onMounted(() => {
          const state = vscode.getState();
          if (state) {
-            viewType.value = state.viewType;
             updateSchema(state.text)
          }
 
@@ -113,8 +92,9 @@ export default defineComponent({
 
       return {
          schema,
-         //currentSchema,
          builderSettings,
+         builder,
+         renderer,
          schemaChanged
       }
    }

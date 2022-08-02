@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import path = require("path");
 
 export function getNonce(): string {
     let text: string = '';
@@ -130,4 +131,65 @@ export function closeStdEditor(document: vscode.TextDocument): void {
             }
         }
     }
+}
+
+/**
+ * Get the HTML-Document which display the webview
+ * @param webview Webview belonging to the panel
+ * @param context
+ * @returns a string which represents the html content
+ */
+export function getHtmlForWebview(webview: vscode.Webview, context: vscode.ExtensionContext): string {
+    const vueAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
+        context.extensionUri, 'dist-vue', 'js', 'app.js'
+    ));
+
+    const vueVendorUri = webview.asWebviewUri(vscode.Uri.joinPath(
+        context.extensionUri, 'dist-vue', 'js', 'chunk-vendors.js'
+    ));
+
+    const styleResetUri = webview.asWebviewUri(vscode.Uri.joinPath(
+        context.extensionUri, 'src', 'css', 'reset.css'
+    ));
+
+    const styleAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
+        context.extensionUri, 'dist-vue', 'css', 'chunk-vendors.css'
+    ));
+
+    const nonce = getNonce();
+
+    //TODO Is there a better way to allow inline styling created by vuetify?
+
+    return `
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="utf-8" />
+
+                <meta http-equiv="Content-Security-Policy" content="default-src 'none';
+                    style-src ${webview.cspSource} 'unsafe-inline';
+                    font-src ${webview.cspSource};
+                    img-src ${webview.cspSource};
+                    script-src 'nonce-${nonce}';">
+
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                
+                <!--<base href="${vscode.Uri.file(path.join(context.extensionPath, 'dist-vue')).with({scheme: 'vscode-resource'})}">-->
+
+                <link href="${styleResetUri}" rel="stylesheet" type="text/css" />
+                <link href="${styleAppUri}" rel="stylesheet" type="text/css" />
+
+                <title>Json Schema Builder</title>
+            </head>
+            <body>
+                <div id="app"></div>
+                <script nonce="${nonce}">
+                    <!-- Store the VsCodeAPI in a global variable -->
+                    const vscode = acquireVsCodeApi();
+                </script>
+                <script type="text/javascript" src="${vueVendorUri}" nonce="${nonce}"></script>
+                <script type="text/javascript" src="${vueAppUri}" nonce="${nonce}"></script>
+            </body>
+            </html>
+        `;
 }

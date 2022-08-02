@@ -18,7 +18,8 @@
     "Visualization"
   ],
   "activationEvents": [
-    "onCustomEditor:jsonschema-builder"
+    "onCustomEditor:jsonschema-builder",
+    "onView:jsonschema-renderer"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -50,6 +51,15 @@
           "order": 2
         }
       }
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "jsonschema-renderer",
+          "name": "JSON Schema Renderer",
+          "type": "webview"
+        }
+      ]
     }
   },
   "scripts": {
