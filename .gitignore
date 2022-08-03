@@ -7,3 +7,5 @@ dist-vue
 
 **/.idea
 **/.DS_Store
+
+./src/test/example/*
