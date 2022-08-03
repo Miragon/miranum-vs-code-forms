@@ -1,6 +1,6 @@
 {
   "name": "vs-code-vuetify-jsonschema-builder",
-  "displayName": "JSON Schema Builder",
+  "displayName": "DigiWF: JSON Schema Builder",
   "description": "Edit JSON Schema files with an modern easy to use editor.",
   "license": "Apache License 2.0",
   "version": "0.0.1",
@@ -8,6 +8,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/issues"
   },
   "engines": {
     "vscode": "^1.69.0"
@@ -19,7 +22,8 @@
   ],
   "activationEvents": [
     "onCustomEditor:jsonschema-builder",
-    "onView:jsonschema-renderer"
+    "onView:jsonschema-renderer",
+    "onCommand:jsonschema-renderer.update"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -57,7 +61,23 @@
         {
           "id": "jsonschema-renderer",
           "name": "JSON Schema Renderer",
-          "type": "webview"
+          "type": "webview",
+          "icon": "$(notebook-render-output)"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "jsonschema-renderer.update",
+        "title": "DigiWF: Update Renderer",
+        "icon": "$(extensions-sync-enabled)"
+      }
+    ],
+    "menus":{
+      "view/title": [
+        {
+          "command": "jsonschema-renderer.update",
+          "group": "navigation"
         }
       ]
     }

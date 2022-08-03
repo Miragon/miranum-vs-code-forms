@@ -17,10 +17,17 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.workspace.getConfiguration('files').update('associations', {'*.form': 'json'}, true);
 	}
 
-	// Create Webviews
+	// Create webviews
 	const renderer = new JsonSchemaRendererProvider(context);
 	const builder = new JsonSchemaBuilderProvider(context, renderer);
 
 	context.subscriptions.push(vscode.window.registerWebviewViewProvider(JsonSchemaRendererProvider.viewType, renderer));
 	context.subscriptions.push(vscode.window.registerCustomEditorProvider(JsonSchemaBuilderProvider.viewType, builder));
+
+	// Register commands
+	const command = 'jsonschema-renderer.update';
+	const commandHandler = () => {
+		renderer.updateRenderer();
+	};
+	context.subscriptions.push(vscode.commands.registerCommand(command, commandHandler));
 }
