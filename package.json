@@ -40,7 +40,7 @@
       }
     ],
     "configuration": {
-      "title": "JSON Schema Builder",
+      "title": "DigiWF",
       "properties": {
         "jsonSchemaBuilder.openStandardEditor": {
           "type": "boolean",

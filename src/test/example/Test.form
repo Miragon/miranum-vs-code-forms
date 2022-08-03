@@ -133,6 +133,21 @@
                                 "outlined": true,
                                 "dense": true
                             }
+                        },
+                        "7df639cc-a668-49a8-8c82-c20abefa7f1a": {
+                            "fieldType": "integer",
+                            "title": "Hausnummer",
+                            "type": "integer",
+                            "x-options": {
+                                "fieldColProps": {
+                                    "cols": 12,
+                                    "sm": 6
+                                }
+                            },
+                            "x-props": {
+                                "outlined": true,
+                                "dense": true
+                            }
                         }
                     },
                     "key": "8d7e99dc-810b-41fd-9757-87f855bec128"
