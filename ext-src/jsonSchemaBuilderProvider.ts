@@ -35,7 +35,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         webviewPanel.webview.options = {
             enableScripts: true,
             localResourceRoots: [
-                vscode.Uri.joinPath(this.context.extensionUri, 'src'),
+                vscode.Uri.joinPath(this.context.extensionUri, 'ext-src'),
                 vscode.Uri.joinPath(this.context.extensionUri, 'dist-vue'),
             ]
         };
@@ -141,7 +141,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
      */
     protected writeChangesToDocument(document: vscode.TextDocument, content: JSON): Thenable<boolean> {
         const edit = new vscode.WorkspaceEdit();
-        let text = JSON.stringify(content, undefined, 4);
+        const text = JSON.stringify(content, undefined, 4);
 
         edit.replace(
             document.uri,

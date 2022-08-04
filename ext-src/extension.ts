@@ -4,6 +4,7 @@ import { JsonSchemaRendererProvider } from "./jsonSchemaRendererProvider";
 
 export function activate(context: vscode.ExtensionContext) {
 	// To handle .form files as .json files we add or create a new config in the user settings (global).
+	// eslint-disable-next-line @typescript-eslint/ban-types
 	const associations = vscode.workspace.getConfiguration('files').inspect<Object>('associations');
 	if (associations?.globalValue) {
 		if (!('*.form' in associations.globalValue)) {

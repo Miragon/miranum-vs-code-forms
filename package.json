@@ -84,11 +84,21 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
+    "compile": "tsc -p tsconfig-extension.json",
+    "watch": "tsc -watch -p tsconfig-extension.json",
     "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "ext-lint": "eslint ext-src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build; node ./scripts/replaceRelativeFonts.js",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@koumoul/vjsf": "^2.17.0",
+    "@muenchen/digiwf-form-builder": "^0.10.0",
+    "core-js": "^3.8.3",
+    "vue": "^2.7.7",
+    "vuetify": "^2.6.0"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
@@ -102,6 +112,18 @@
     "glob": "^7.2.0",
     "mocha": "^9.2.2",
     "ts-debounce": "^4.0.0",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "@mdi/font": "^6.9.96",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-plugin-typescript": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "@vue/eslint-config-typescript": "^9.1.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "sass": "~1.32.0",
+    "sass-loader": "^10.0.0",
+    "vue-cli-plugin-vuetify": "~2.5.1",
+    "vue-template-compiler": "^2.7.7",
+    "vuetify-loader": "^1.7.0"
   }
 }

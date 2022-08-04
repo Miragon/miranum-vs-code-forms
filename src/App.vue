@@ -13,7 +13,7 @@ import {VJsonRenderer} from "@muenchen/digiwf-form-renderer";
 import {VFormBuilder} from "@muenchen/digiwf-form-builder";
 import {Form} from "@muenchen/digiwf-form-builder/dist/types/src/types/Form";
 import {Settings} from "./settings/Settings";
-import {VsCode} from "@/types/VSCodeApi";
+import {VsCode} from "src/types/VSCodeApi";
 
 declare const vscode: VsCode;
 

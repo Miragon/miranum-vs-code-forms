@@ -6,5 +6,5 @@ module.exports = {
     '@koumoul/vjsf'
   ],
   filenameHashing: false,
-  outputDir: path.resolve(__dirname, "../dist-vue"),
+  outputDir: path.resolve(__dirname, "./dist-vue"),
 };

@@ -1,9 +1,8 @@
 import * as vscode from "vscode";
-import path = require("path");
 
 export function getNonce(): string {
-    let text: string = '';
-    const possible: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let text = '';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     for (let i = 0; i < 32; i++) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
@@ -99,8 +98,8 @@ export function openStdEditor(document: vscode.TextDocument): void {
         let isAlreadyOpen = false;
 
         loop1:
-            for (let tabGroup of vscode.window.tabGroups.all) {
-                for (let tab of tabGroup.tabs) {
+            for (const tabGroup of vscode.window.tabGroups.all) {
+                for (const tab of tabGroup.tabs) {
                     if (tab.input instanceof vscode.TabInputText &&
                         tab.input.uri.path === document.fileName) {
                         isAlreadyOpen = true;
@@ -121,8 +120,8 @@ export function openStdEditor(document: vscode.TextDocument): void {
  */
 export function closeStdEditor(document: vscode.TextDocument): void {
     if (vscode.workspace.getConfiguration('jsonSchemaBuilder').get('closeStandardEditor')) {
-        for (let tabGroup of vscode.window.tabGroups.all) {
-            for (let tab of tabGroup.tabs) {
+        for (const tabGroup of vscode.window.tabGroups.all) {
+            for (const tab of tabGroup.tabs) {
                 if (tab.input instanceof vscode.TabInputText &&
                     tab.input.uri.path === document.fileName) {
 
@@ -149,7 +148,7 @@ export function getHtmlForWebview(webview: vscode.Webview, context: vscode.Exten
     ));
 
     const styleResetUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'src', 'css', 'reset.css'
+        context.extensionUri, 'ext-src', 'css', 'reset.css'
     ));
 
     const styleAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
@@ -174,8 +173,6 @@ export function getHtmlForWebview(webview: vscode.Webview, context: vscode.Exten
 
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 
-                <!--<base href="${vscode.Uri.file(path.join(context.extensionPath, 'dist-vue')).with({scheme: 'vscode-resource'})}">-->
-
                 <link href="${styleResetUri}" rel="stylesheet" type="text/css" />
                 <link href="${styleAppUri}" rel="stylesheet" type="text/css" />
 
