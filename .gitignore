@@ -8,12 +8,12 @@ dist-vue
 **/.idea
 **/.DS_Store
 
-ext-src/test/example
+src-ext/test/example
 
 # exclude typscript compiled files
 src/**/*.js
 src/**/*.js.map
-ext-src/**/*.js
-ext-src/**/*.js.map
+src-ext/**/*.js
+src-ext/**/*.js.map
 scripts/**/*.js
 scripts/**/*.js.map

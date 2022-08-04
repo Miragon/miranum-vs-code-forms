@@ -148,7 +148,7 @@ export function getHtmlForWebview(webview: vscode.Webview, context: vscode.Exten
     ));
 
     const styleResetUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'ext-src', 'css', 'reset.css'
+        context.extensionUri, 'media', 'css', 'reset.css'
     ));
 
     const styleAppUri = webview.asWebviewUri(vscode.Uri.joinPath(

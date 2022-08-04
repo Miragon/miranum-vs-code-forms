@@ -7,7 +7,7 @@
 			"ES2020"
 		],
 		"sourceMap": true,
-		"rootDir": "./ext-src",
+		"rootDir": "./src-ext",
 		"strict": true   /* enable all strict type-checking options */,
 		"types": [
 			"node"

@@ -87,7 +87,7 @@
     "compile": "tsc -p tsconfig-extension.json",
     "watch": "tsc -watch -p tsconfig-extension.json",
     "pretest": "npm run compile && npm run lint",
-    "ext-lint": "eslint ext-src --ext ts",
+    "ext-lint": "eslint src-ext --ext ts",
     "test": "node ./out/test/runTest.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build; node ./scripts/replaceRelativeFonts.js",
