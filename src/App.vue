@@ -24,7 +24,7 @@ export default defineComponent({
       VFormBuilder
    },
    setup() {
-      const schema = ref<Form>()
+      const schema = ref<Form>();
       const builderSettings = Settings;
       const builder = ref(false);
       const renderer = ref(false);
