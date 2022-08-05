@@ -73,7 +73,7 @@
         "icon": "$(extensions-sync-enabled)"
       }
     ],
-    "menus":{
+    "menus": {
       "view/title": [
         {
           "command": "jsonschema-renderer.update",
@@ -91,7 +91,8 @@
     "test": "node ./out/test/runTest.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build; node ./scripts/replaceRelativeFonts.js",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "watch-build": "nodemon --watch src --ext js,vue,ts --exec \"npm run build\""
   },
   "dependencies": {
     "@koumoul/vjsf": "^2.17.0",
@@ -101,6 +102,7 @@
     "vuetify": "^2.6.0"
   },
   "devDependencies": {
+    "@mdi/font": "^6.9.96",
     "@types/glob": "^7.2.0",
     "@types/mocha": "^9.1.0",
     "@types/node": "14.x",
@@ -108,20 +110,20 @@
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
     "@vscode/test-electron": "^2.1.3",
-    "eslint": "^8.19.0",
-    "glob": "^7.2.0",
-    "mocha": "^9.2.2",
-    "ts-debounce": "^4.0.0",
-    "typescript": "^4.5.5",
-    "@mdi/font": "^6.9.96",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-typescript": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "@vue/eslint-config-typescript": "^9.1.0",
+    "eslint": "^8.19.0",
     "eslint-plugin-vue": "^8.0.3",
+    "glob": "^7.2.0",
+    "mocha": "^9.2.2",
+    "nodemon": "^2.0.19",
     "sass": "~1.32.0",
     "sass-loader": "^10.0.0",
+    "ts-debounce": "^4.0.0",
+    "typescript": "^4.5.5",
     "vue-cli-plugin-vuetify": "~2.5.1",
     "vue-template-compiler": "^2.7.7",
     "vuetify-loader": "^1.7.0"
