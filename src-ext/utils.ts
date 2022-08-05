@@ -140,11 +140,11 @@ export function closeStdEditor(document: vscode.TextDocument): void {
  */
 export function getHtmlForWebview(webview: vscode.Webview, context: vscode.ExtensionContext): string {
     const vueAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'dist-vue', 'js', 'app.js'
+        context.extensionUri, 'dist', 'js', 'app.js'
     ));
 
     const vueVendorUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'dist-vue', 'js', 'chunk-vendors.js'
+        context.extensionUri, 'dist', 'js', 'chunk-vendors.js'
     ));
 
     const styleResetUri = webview.asWebviewUri(vscode.Uri.joinPath(
@@ -152,7 +152,7 @@ export function getHtmlForWebview(webview: vscode.Webview, context: vscode.Exten
     ));
 
     const styleAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'dist-vue', 'css', 'chunk-vendors.css'
+        context.extensionUri, 'dist', 'css', 'chunk-vendors.css'
     ));
 
     const nonce = getNonce();

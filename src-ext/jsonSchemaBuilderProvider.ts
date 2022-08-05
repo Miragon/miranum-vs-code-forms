@@ -36,7 +36,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             enableScripts: true,
             localResourceRoots: [
                 vscode.Uri.joinPath(this.context.extensionUri, 'media'),
-                vscode.Uri.joinPath(this.context.extensionUri, 'dist-vue'),
+                vscode.Uri.joinPath(this.context.extensionUri, 'dist'),
             ]
         };
 
