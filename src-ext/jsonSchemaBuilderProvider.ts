@@ -73,7 +73,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             type: JsonSchemaBuilderProvider.viewType + '.updateFromExtension',
             text: text
         });
-        vscode.commands.executeCommand("jsonschema-renderer.focus").then(() => {
+        vscode.commands.executeCommand('jsonschema-renderer.focus').then(() => {
             this.renderer.updateRenderer(text);
         });
 
@@ -130,6 +130,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             changeViewState.dispose();
             receivedMessage.dispose();
             changeDocumentSubscription.dispose();
+            vscode.commands.executeCommand('workbench.action.closeAuxiliaryBar');
         });
     }
 

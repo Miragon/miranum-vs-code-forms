@@ -5,8 +5,8 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
 
     public static readonly viewType = 'jsonschema-renderer';
 
-    private webviewView: vscode.WebviewView | undefined;
-    private state: JSON | undefined;
+    private view?: vscode.WebviewView;
+    private state?: JSON;
 
     constructor(
         private readonly context: vscode.ExtensionContext,
@@ -18,6 +18,8 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
         token: vscode.CancellationToken
     ): Thenable<void> | void
     {
+        this.view = webviewView;
+
         webviewView.webview.options = {
             enableScripts: true,
             localResourceRoots: [
@@ -41,17 +43,17 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
             type: JsonSchemaRendererProvider.viewType + '.updateFromExtension',
             text: this.state
         });
-
-        this.webviewView = webviewView;
     }
 
     public updateRenderer(schema?: JSON): void {
         if (schema) {
             this.state = schema;
         }
-        this.webviewView?.webview.postMessage({
-            type: JsonSchemaRendererProvider.viewType + '.updateFromExtension',
-            text: this.state
-        });
+        if (this.view) {
+            this.view.webview.postMessage({
+                type: JsonSchemaRendererProvider.viewType + '.updateFromExtension',
+                text: this.state
+            });
+        }
     }
 }

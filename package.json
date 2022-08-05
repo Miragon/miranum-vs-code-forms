@@ -77,7 +77,8 @@
       "view/title": [
         {
           "command": "jsonschema-renderer.update",
-          "group": "navigation"
+          "group": "navigation",
+          "when": "view == jsonschema-renderer"
         }
       ]
     }
