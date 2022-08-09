@@ -16,6 +16,4 @@ vsc-extension-quickstart.md
 **/vue.config.js
 **/*.map
 **/*.ts
-node_modules/
 scripts/
-public/

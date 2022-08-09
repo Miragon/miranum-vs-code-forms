@@ -9,8 +9,8 @@ export function getNonce(): string {
     return text;
 }
 
-export function getDefault(): any {
-    return {
+export function getDefault(): JSON {
+    return JSON.parse(JSON.stringify({
         "key": "MyStartForm", "type": "object", "allOf": [{
             "key": "sectionKey1",
             "title": "First Section",
@@ -69,7 +69,7 @@ export function getDefault(): any {
                 }
             }]
         }]
-    };
+    }));
 }
 
 /**

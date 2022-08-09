@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref, getCurrentInstance, onMounted, onUnmounted} from 'vue';
+import {defineComponent, ref, onMounted, onUnmounted} from 'vue';
 import {VJsonRenderer} from "@muenchen/digiwf-form-renderer";
 import {VFormBuilder} from "@muenchen/digiwf-form-builder";
 import {Form} from "@muenchen/digiwf-form-builder/dist/types/src/types/Form";
@@ -31,7 +31,7 @@ export default defineComponent({
 
       function getDataFromExtension(event: MessageEvent): void {
          const message = event.data;
-         const newSchema = message.text;
+         const newSchema: Form = message.text;
 
          switch (message.type) {
             case 'jsonschema-renderer.updateFromExtension': {
@@ -53,34 +53,35 @@ export default defineComponent({
          }
       }
 
-      function sendDataToExtension(schema: any): void {
+      function sendDataToExtension(schema: Form): void {
+         const schemaAsJson: JSON = JSON.parse(JSON.stringify(schema));
+
          vscode.setState({
-            text: schema
+            text: schemaAsJson
          });
          vscode.postMessage({
             type: 'jsonschema-builder.updateFromWebview',
-            content: schema
+            content: schemaAsJson
          });
       }
 
-      function updateSchema(newSchema: any): void {
+      function updateSchema(newSchema: Form): void {
          vscode.setState({
-            text: newSchema
+            text: JSON.parse(JSON.stringify(newSchema))
          });
 
          schema.value = newSchema;
       }
 
-      function schemaChanged(schema: any): void {
+      function schemaChanged(schema: Form): void {
          sendDataToExtension(schema);
-         const instance = getCurrentInstance();
-         instance?.proxy?.$forceUpdate();
       }
 
       onMounted(() => {
          const state = vscode.getState();
          if (state) {
-            updateSchema(state.text)
+            const schema: Form = JSON.parse(JSON.stringify(state.text));
+            updateSchema(schema);
          }
 
          window.addEventListener('message', getDataFromExtension);

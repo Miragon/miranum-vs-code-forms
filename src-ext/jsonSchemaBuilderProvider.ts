@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import {closeStdEditor, getContentAsJson, getDefault, openStdEditor, getHtmlForWebview} from './utils';
-import { debounce } from "ts-debounce";
+import { debounce } from "debounce";
 import {JsonSchemaRendererProvider} from "./jsonSchemaRendererProvider";
 
 /**
@@ -44,7 +44,10 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
         // Send content from the extension to the webview
         const updateWebview = (msgType: string) => {
-            const text = getContentAsJson(document.getText());
+            let text = getContentAsJson(document.getText());
+            if (Object.keys(text).length === 0) {
+                text = getDefault();
+            }
             this.renderer.updateRenderer(text);
             webviewPanel.webview.postMessage({
                 type: msgType,

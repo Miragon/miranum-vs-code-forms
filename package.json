@@ -88,11 +88,10 @@
     "compile": "tsc -p tsconfig-extension.json",
     "watch": "tsc -watch -p tsconfig-extension.json",
     "pretest": "npm run compile && npm run lint",
-    "ext-lint": "eslint src-ext --ext ts",
     "test": "node ./out/test/runTest.js",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build; node ./scripts/replaceRelativeFonts.js",
-    "lint": "vue-cli-service lint",
+    "build": "vue-cli-service build && node ./scripts/replaceRelativeFonts.js; npm run compile",
+    "lint": "vue-cli-service lint; eslint src-ext --ext ts",
     "watch-build": "nodemon --watch src --ext js,vue,ts --exec \"npm run build\""
   },
   "dependencies": {
@@ -104,6 +103,7 @@
   },
   "devDependencies": {
     "@mdi/font": "^6.9.96",
+    "@types/debounce": "^1.2.1",
     "@types/glob": "^7.2.0",
     "@types/mocha": "^9.1.0",
     "@types/node": "14.x",
@@ -116,6 +116,7 @@
     "@vue/cli-plugin-typescript": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "@vue/eslint-config-typescript": "^9.1.0",
+    "debounce": "^1.2.1",
     "eslint": "^8.19.0",
     "eslint-plugin-vue": "^8.0.3",
     "glob": "^7.2.0",
@@ -123,7 +124,6 @@
     "nodemon": "^2.0.19",
     "sass": "~1.32.0",
     "sass-loader": "^10.0.0",
-    "ts-debounce": "^4.0.0",
     "typescript": "^4.5.5",
     "vue-cli-plugin-vuetify": "~2.5.1",
     "vue-template-compiler": "^2.7.7",
