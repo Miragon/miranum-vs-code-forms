@@ -1,7 +1,8 @@
 import * as vscode from 'vscode';
-import {closeStdEditor, getContentAsJson, getDefault, openStdEditor, getHtmlForWebview} from './utils';
+import { getContentAsJson, getDefault, getHtmlForWebview } from './lib/utils';
+import { StdEditor } from "./lib/StdEditor";
 import { debounce } from "debounce";
-import {JsonSchemaRendererProvider} from "./jsonSchemaRendererProvider";
+import { JsonSchemaRendererProvider } from "./jsonSchemaRendererProvider";
 
 /**
  * Provider for a simple JSON-Editor
@@ -14,7 +15,13 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
     constructor(
         private readonly context: vscode.ExtensionContext,
         private readonly renderer: JsonSchemaRendererProvider
-    ) { }
+    ) {
+        this.context.subscriptions.push(StdEditor.register());
+        this.context.subscriptions.push(vscode.commands.registerCommand(
+            JsonSchemaBuilderProvider.viewType + '.toggleStdEditor',
+            () => { StdEditor.toggle() }
+        ));
+    }
 
     /**
      * Called when the custom editor is opened.
@@ -28,10 +35,23 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         token: vscode.CancellationToken
     ): Promise<void> {
 
+        // Initial call
         const writeData = debounce(this.writeChangesToDocument);
         let isUpdateFromWebview = false;
 
-        // Setup initial content for the webview
+        // Set the initial content to be sent to the webview
+        let text = getContentAsJson(document.getText());
+        if (Object.keys(text).length === 0) {
+            text = getDefault();
+        }
+
+        // Necessary set up for toggle command
+        // only enable the command if a custom editor is open
+        let numOfCustomEditors = this.getNumOfCustomEditors();
+        vscode.commands.executeCommand('setContext', 'jsonschema-builder.openCustomEditors', numOfCustomEditors);
+        StdEditor.document = document; // set the document of the active editor
+
+        // Setup webview options
         webviewPanel.webview.options = {
             enableScripts: true,
             localResourceRoots: [
@@ -41,6 +61,17 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         };
 
         webviewPanel.webview.html = getHtmlForWebview(webviewPanel.webview, this.context);
+
+        // Initial message to the webview
+        webviewPanel.webview.postMessage({
+            type: JsonSchemaBuilderProvider.viewType + '.updateFromExtension',
+            text: text
+        });
+
+        // Open the JsonSchema-Renderer
+        vscode.commands.executeCommand('jsonschema-renderer.focus').then(() => {
+            this.renderer.updateRenderer(text);
+        });
 
         // Send content from the extension to the webview
         const updateWebview = (msgType: string) => {
@@ -66,22 +97,6 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                 }
             }
         });
-
-        // Initial message which sends the data to the webview
-        let text = getContentAsJson(document.getText());
-        if (Object.keys(text).length === 0) {
-            text = getDefault();
-        }
-        webviewPanel.webview.postMessage({
-            type: JsonSchemaBuilderProvider.viewType + '.updateFromExtension',
-            text: text
-        });
-        vscode.commands.executeCommand('jsonschema-renderer.focus').then(() => {
-            this.renderer.updateRenderer(text);
-        });
-
-        // Opens the default vscode text-editor besides our own custom text-editor
-        openStdEditor(document);
 
         /**
          * When changes are made inside the webview a message to the extension will be sent with the new data.
@@ -125,11 +140,17 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             if (webviewPanel.visible) {
                 updateWebview(JsonSchemaBuilderProvider.viewType + '.updateFromExtension');
             }
+
+            if (webviewPanel.active) {
+                StdEditor.document = document;
+            }
         });
 
         // CleanUp after Custom Editor was closed.
         webviewPanel.onDidDispose(() => {
-            closeStdEditor(document);
+            numOfCustomEditors--;
+            vscode.commands.executeCommand('setContext', 'jsonschema-builder.openCustomEditors', numOfCustomEditors);
+
             changeViewState.dispose();
             receivedMessage.dispose();
             changeDocumentSubscription.dispose();
@@ -154,5 +175,19 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         );
 
         return vscode.workspace.applyEdit(edit);
+    }
+
+    private getNumOfCustomEditors(): number {
+        let counter = 0;
+        for (const tabGroup of vscode.window.tabGroups.all) {
+            for (const tab of tabGroup.tabs) {
+                if (tab.input instanceof vscode.TabInputCustom &&
+                    tab.input.viewType === 'jsonschema-builder') {
+
+                    counter++;
+                }
+            }
+        }
+        return counter;
     }
 }

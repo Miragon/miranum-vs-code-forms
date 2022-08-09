@@ -30,6 +30,7 @@
     "customEditors": [
       {
         "viewType": "jsonschema-builder",
+        "id": "jsonschema-builder",
         "displayName": "JSON Schema Builder",
         "selector": [
           {
@@ -42,17 +43,15 @@
     "configuration": {
       "title": "DigiWF",
       "properties": {
-        "jsonSchemaBuilder.openStandardEditor": {
-          "type": "boolean",
-          "default": false,
-          "description": "Open the Standard VS Code Text Editor besides the custom editor.",
-          "order": 1
-        },
-        "jsonSchemaBuilder.closeStandardEditor": {
-          "type": "boolean",
-          "default": false,
-          "description": "Close the Standard VS Code Text Editor when the Form Builder is closed.",
-          "order": 2
+        "jsonSchemaBuilder.toggleStandardEditor": {
+          "type": "string",
+          "default": "Group",
+          "description": "Choose where to open the standard text editor.",
+          "enum": ["Group", "Tab"],
+          "enumDescription": [
+            "Use Group to open the editor to the side of the currently active one.",
+            "Use Tab to open the editor in a new tab."
+          ]
         }
       }
     },
@@ -71,14 +70,36 @@
         "command": "jsonschema-renderer.update",
         "title": "DigiWF: Update Renderer",
         "icon": "$(extensions-sync-enabled)"
+      },
+      {
+        "command": "jsonschema-builder.toggleStdEditor",
+        "title": "DigiWF: Toggle Standard Editor",
+        "icon": "$(notebook-mimetype)"
       }
     ],
     "menus": {
+      "commandPalette": [
+        {
+          "command": "jsonschema-renderer.update",
+          "when": "view == jsonschema-renderer"
+        },
+        {
+          "command": "jsonschema-builder.toggleStdEditor",
+          "when": "resourceExtname == .form && jsonschema-builder.openCustomEditors > 0"
+        }
+      ],
       "view/title": [
         {
           "command": "jsonschema-renderer.update",
           "group": "navigation",
           "when": "view == jsonschema-renderer"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "jsonschema-builder.toggleStdEditor",
+          "group": "navigation",
+          "when": "resourceExtname == .form && jsonschema-builder.openCustomEditors > 0"
         }
       ]
     }

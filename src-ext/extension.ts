@@ -24,9 +24,8 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.window.registerCustomEditorProvider(JsonSchemaBuilderProvider.viewType, builder));
 
 	// Register commands
-	const command = 'jsonschema-renderer.update';
-	const commandHandler = () => {
-		renderer.updateRenderer();
-	};
-	context.subscriptions.push(vscode.commands.registerCommand(command, commandHandler));
+	context.subscriptions.push(vscode.commands.registerCommand(
+		'jsonschema-renderer.update',
+		() => { renderer.updateRenderer(); }
+	));
 }

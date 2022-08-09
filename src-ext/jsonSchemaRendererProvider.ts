@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import {getHtmlForWebview} from "./utils";
+import {getHtmlForWebview} from "./lib/utils";
 
 export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
 
