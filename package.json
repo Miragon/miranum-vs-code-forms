@@ -1,30 +1,36 @@
 {
   "name": "vs-code-vuetify-jsonschema-builder",
-  "displayName": "JSON Schema Builder",
+  "displayName": "DigiWF: JSON Schema Builder",
   "description": "Edit JSON Schema files with an modern easy to use editor.",
   "license": "Apache License 2.0",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "publisher": "Miragon GmbH",
   "repository": {
     "type": "git",
     "url": "https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder.git"
   },
+  "bugs": {
+    "url": "https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/issues"
+  },
   "engines": {
     "vscode": "^1.69.0"
   },
-  "icon": "images/logo-marketplace.png",
+  "icon": "images/logo_marketplace.png",
   "categories": [
     "Other",
     "Visualization"
   ],
   "activationEvents": [
-    "onCustomEditor:jsonschema-builder"
+    "onCustomEditor:jsonschema-builder",
+    "onView:jsonschema-renderer",
+    "onCommand:jsonschema-renderer.update"
   ],
-  "main": "./out/extension.js",
+  "main": "./dist/src-ext/extension.js",
   "contributes": {
     "customEditors": [
       {
         "viewType": "jsonschema-builder",
+        "id": "jsonschema-builder",
         "displayName": "JSON Schema Builder",
         "selector": [
           {
@@ -35,32 +41,90 @@
       }
     ],
     "configuration": {
-      "title": "JSON Schema Builder",
+      "title": "DigiWF",
       "properties": {
-        "jsonSchemaBuilder.openStandardEditor": {
-          "type": "boolean",
-          "default": false,
-          "description": "Open the Standard VS Code Text Editor besides the custom editor.",
-          "order": 1
-        },
-        "jsonSchemaBuilder.closeStandardEditor": {
-          "type": "boolean",
-          "default": false,
-          "description": "Close the Standard VS Code Text Editor when the Form Builder is closed.",
-          "order": 2
+        "jsonSchemaBuilder.toggleStandardEditor": {
+          "type": "string",
+          "default": "Group",
+          "description": "Choose where to open the standard text editor.",
+          "enum": ["Group", "Tab"],
+          "enumDescription": [
+            "Use Group to open the editor to the side of the currently active one.",
+            "Use Tab to open the editor in a new tab."
+          ]
         }
       }
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "jsonschema-renderer",
+          "name": "JSON Schema Renderer",
+          "type": "webview",
+          "icon": "$(notebook-render-output)"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "jsonschema-renderer.update",
+        "title": "DigiWF: Update Renderer",
+        "icon": "$(extensions-sync-enabled)"
+      },
+      {
+        "command": "jsonschema-builder.toggleStdEditor",
+        "title": "DigiWF: Toggle Standard Editor",
+        "icon": "$(notebook-mimetype)"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "jsonschema-renderer.update",
+          "when": "view == jsonschema-renderer"
+        },
+        {
+          "command": "jsonschema-builder.toggleStdEditor",
+          "when": "resourceExtname == .form && jsonschema-builder.openCustomEditors > 0"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "jsonschema-renderer.update",
+          "group": "navigation",
+          "when": "view == jsonschema-renderer"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "jsonschema-builder.toggleStdEditor",
+          "group": "navigation",
+          "when": "resourceExtname == .form && jsonschema-builder.openCustomEditors > 0"
+        }
+      ]
     }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
+    "compile": "tsc -p tsconfig-extension.json",
+    "watch": "tsc -watch -p tsconfig-extension.json",
     "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build && node ./scripts/replaceRelativeFonts.js; npm run compile",
+    "lint": "vue-cli-service lint; eslint src-ext --ext ts",
+    "watch-build": "nodemon --watch src --ext js,vue,ts --exec \"npm run build\""
+  },
+  "dependencies": {
+    "@koumoul/vjsf": "^2.17.0",
+    "@muenchen/digiwf-form-builder": "^0.10.0",
+    "core-js": "^3.8.3",
+    "vue": "^2.7.7",
+    "vuetify": "^2.6.0"
   },
   "devDependencies": {
+    "@mdi/font": "^6.9.96",
+    "@types/debounce": "^1.2.1",
     "@types/glob": "^7.2.0",
     "@types/mocha": "^9.1.0",
     "@types/node": "14.x",
@@ -68,10 +132,22 @@
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
     "@vscode/test-electron": "^2.1.3",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-plugin-typescript": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "@vue/eslint-config-typescript": "^9.1.0",
+    "debounce": "^1.2.1",
     "eslint": "^8.19.0",
+    "eslint-plugin-vue": "^8.0.3",
     "glob": "^7.2.0",
     "mocha": "^9.2.2",
-    "ts-debounce": "^4.0.0",
-    "typescript": "^4.5.5"
+    "nodemon": "^2.0.19",
+    "sass": "~1.32.0",
+    "sass-loader": "^10.0.0",
+    "typescript": "^4.5.5",
+    "vue-cli-plugin-vuetify": "~2.5.1",
+    "vue-template-compiler": "^2.7.7",
+    "vuetify-loader": "^1.7.0"
   }
 }

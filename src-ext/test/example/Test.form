@@ -1,0 +1,159 @@
+{
+    "key": "MyStartForm",
+    "type": "object",
+    "allOf": [
+        {
+            "title": "Personalbogen",
+            "description": "",
+            "type": "object",
+            "x-options": {
+                "sectionsTitlesClasses": [
+                    "d-none"
+                ]
+            },
+            "allOf": [
+                {
+                    "containerType": "group",
+                    "title": "ID",
+                    "description": "",
+                    "x-options": {
+                        "childrenClass": "pl-0"
+                    },
+                    "properties": {
+                        "95a90364-1cf6-48ae-92dc-fbeea5ed6476": {
+                            "fieldType": "text",
+                            "title": "Vorname",
+                            "type": "string",
+                            "key": "95a90364-1cf6-48ae-92dc-fbeea5ed6476",
+                            "x-options": {
+                                "fieldColProps": {
+                                    "cols": 12,
+                                    "messages": {},
+                                    "sm": 6
+                                }
+                            },
+                            "x-props": {
+                                "outlined": true,
+                                "dense": true
+                            },
+                            "x-rules": []
+                        },
+                        "7a00afc4-9cd2-4c66-ae19-9ea6c6e87492": {
+                            "fieldType": "text",
+                            "title": "Nachname",
+                            "type": "string",
+                            "key": "7a00afc4-9cd2-4c66-ae19-9ea6c6e87492",
+                            "x-options": {
+                                "fieldColProps": {
+                                    "cols": 12,
+                                    "sm": 6,
+                                    "messages": {}
+                                }
+                            },
+                            "x-props": {
+                                "outlined": true,
+                                "dense": true
+                            },
+                            "x-rules": []
+                        },
+                        "774f0ec2-48cb-40ca-bc6d-7458d6189870": {
+                            "fieldType": "date",
+                            "title": "Geburtsdatum",
+                            "type": "string",
+                            "format": "date",
+                            "x-options": {
+                                "fieldColProps": {
+                                    "cols": 12,
+                                    "sm": 12
+                                }
+                            },
+                            "x-props": {
+                                "outlined": true,
+                                "dense": true
+                            }
+                        }
+                    },
+                    "key": "29ec28ca-d24f-4dfc-a9d9-3c3fb537cc0f"
+                },
+                {
+                    "containerType": "group",
+                    "title": "Adresse",
+                    "description": "",
+                    "x-options": {
+                        "childrenClass": "pl-0"
+                    },
+                    "properties": {
+                        "efe1e725-2ce3-43c6-a776-8120515795ac": {
+                            "fieldType": "integer",
+                            "title": "Postleitzahl",
+                            "type": "integer",
+                            "key": "efe1e725-2ce3-43c6-a776-8120515795ac",
+                            "x-options": {
+                                "fieldColProps": {
+                                    "cols": 12,
+                                    "sm": 6,
+                                    "messages": {}
+                                }
+                            },
+                            "x-props": {
+                                "outlined": true,
+                                "dense": true
+                            },
+                            "x-rules": []
+                        },
+                        "c42ef1fb-ee97-43fe-8107-97d9d975003f": {
+                            "fieldType": "text",
+                            "title": "Stadt",
+                            "type": "string",
+                            "key": "c42ef1fb-ee97-43fe-8107-97d9d975003f",
+                            "x-options": {
+                                "fieldColProps": {
+                                    "cols": 12,
+                                    "sm": 6,
+                                    "messages": {}
+                                }
+                            },
+                            "x-props": {
+                                "outlined": true,
+                                "dense": true
+                            },
+                            "x-rules": []
+                        },
+                        "184bb4be-045c-4878-bcb4-8bf2cb8db52f": {
+                            "fieldType": "text",
+                            "title": "Straße",
+                            "type": "string",
+                            "x-options": {
+                                "fieldColProps": {
+                                    "cols": 12,
+                                    "sm": 6
+                                }
+                            },
+                            "x-props": {
+                                "outlined": true,
+                                "dense": true
+                            }
+                        },
+                        "7df639cc-a668-49a8-8c82-c20abefa7f1a": {
+                            "fieldType": "integer",
+                            "title": "Hausnummer",
+                            "type": "integer",
+                            "x-options": {
+                                "fieldColProps": {
+                                    "cols": 12,
+                                    "sm": 6
+                                }
+                            },
+                            "x-props": {
+                                "outlined": true,
+                                "dense": true
+                            }
+                        }
+                    },
+                    "key": "8d7e99dc-810b-41fd-9757-87f855bec128"
+                }
+            ],
+            "key": "7da2b08c-36ca-415a-84fe-0bd4220fcf32"
+        }
+    ]
+}
