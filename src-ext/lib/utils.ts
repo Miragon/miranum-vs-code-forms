@@ -1,4 +1,8 @@
 import * as vscode from "vscode";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const path = require("path");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const fs = require("fs");
 
 export function getDefault(): JSON {
     return JSON.parse(JSON.stringify({
@@ -103,9 +107,18 @@ export function getHtmlForWebview(webview: vscode.Webview, context: vscode.Exten
         context.extensionUri, 'dist', 'css', 'chunk-vendors.css'
     ));
 
+    const fontUri = webview.asWebviewUri(vscode.Uri.joinPath(
+        context.extensionUri, 'dist', 'fonts'
+    )).toString();  // Path to local fonts
+    const fontFacePath = vscode.Uri.joinPath(context.extensionUri, 'media', 'css', 'fontFace.generated.css'); // Path to generated css file
+    const styleFontPath = vscode.Uri.joinPath(context.extensionUri, 'media', 'css', 'fontFace.css');  // Path to css file with all local fonts
+    const styleFontUri = webview.asWebviewUri(styleFontPath);
+    generateFontFaceCss(fontFacePath.fsPath, styleFontPath.fsPath, fontUri);
+
     const nonce = getNonce();
 
-    //TODO Is there a better way to allow inline styling created by vuetify?
+    //TODO
+    // Is there a better way to allow inline styling created by vuetify?
 
     return `
             <!DOCTYPE html>
@@ -122,6 +135,7 @@ export function getHtmlForWebview(webview: vscode.Webview, context: vscode.Exten
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 
                 <link href="${styleResetUri}" rel="stylesheet" type="text/css" />
+                <link href="${styleFontUri}" rel="stylesheet" type="text/css" />
                 <link href="${styleAppUri}" rel="stylesheet" type="text/css" />
 
                 <title>Json Schema Builder</title>
@@ -148,3 +162,12 @@ function getNonce(): string {
     return text;
 }
 
+function generateFontFaceCss(readFilePath: string, writeFilePath: string, fontPath: string): void {
+    const regex = /[\\|/]fonts/g;
+    try {
+        const fontFaces = fs.readFileSync(readFilePath).toString();
+        fs.writeFileSync(writeFilePath, fontFaces.replace(regex, fontPath));
+    } catch (err) {
+        console.log('No custom fonts needed.');
+    }
+}

@@ -4,7 +4,7 @@
   "description": "Edit JSON Schema files with an modern easy to use editor.",
   "license": "Apache License 2.0",
   "version": "0.1.0",
-  "publisher": "Miragon GmbH",
+  "publisher": "Miragon",
   "repository": {
     "type": "git",
     "url": "https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder.git"
@@ -105,13 +105,13 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "vscode:prepublish": "npm run build",
     "compile": "tsc -p tsconfig-extension.json",
     "watch": "tsc -watch -p tsconfig-extension.json",
     "pretest": "npm run compile && npm run lint",
     "test": "node ./out/test/runTest.js",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build && node ./scripts/replaceRelativeFonts.js; npm run compile",
+    "build": "vue-cli-service build && node scripts/extractFontFace.js && npm run compile",
     "lint": "vue-cli-service lint; eslint src-ext --ext ts",
     "watch-build": "nodemon --watch src --ext js,vue,ts --exec \"npm run build\""
   },
