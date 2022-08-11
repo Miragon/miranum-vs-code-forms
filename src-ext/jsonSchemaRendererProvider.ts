@@ -23,7 +23,7 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
         webviewView.webview.options = {
             enableScripts: true,
             localResourceRoots: [
-                vscode.Uri.joinPath(this.context.extensionUri, 'media'),
+                vscode.Uri.joinPath(this.context.extensionUri, 'localResources'),
                 vscode.Uri.joinPath(this.context.extensionUri, 'dist'),
             ]
         };

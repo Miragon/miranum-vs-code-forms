@@ -19,7 +19,7 @@ const fs = require('fs');
 const regex = /@font-face(.*?)}/g;
 const fileString = fs.readFileSync('./dist/css/chunk-vendors.css').toString();
 const fontFace = fileString.match(regex);
-const writeStream = fs.createWriteStream('./media/css/vuetify.customFonts.css');
+const writeStream = fs.createWriteStream('./localResources/css/vuetify.customFonts.css');
 
 writeStream.on('error', (err: Error) => {
     console.log('vuetify.customFonts.css could not be written.', err);

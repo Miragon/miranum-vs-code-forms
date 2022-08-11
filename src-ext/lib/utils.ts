@@ -98,16 +98,16 @@ export function getHtmlForWebview(webview: vscode.Webview, context: vscode.Exten
     ));
 
     const styleResetUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'media', 'css', 'reset.css'
+        context.extensionUri, 'localResources', 'css', 'reset.css'
     ));
 
     const styleAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
         context.extensionUri, 'dist', 'css', 'chunk-vendors.css'
     ));
 
-    const fontFacePath = vscode.Uri.joinPath(context.extensionUri, 'media', 'css', 'vuetify.customFonts.css').fsPath; // Path to source file with custom fonts
+    const fontFacePath = vscode.Uri.joinPath(context.extensionUri, 'localResources', 'css', 'vuetify.customFonts.css').fsPath; // Path to source file with custom fonts
     const styleFontUri = webview.asWebviewUri(vscode.Uri.joinPath(  // URI to destination file with correct path to local fonts
-        context.extensionUri, 'media', 'css', 'fonts.css'
+        context.extensionUri, 'localResources', 'css', 'fonts.css'
     ));
 
     const fontUri = webview.asWebviewUri(vscode.Uri.joinPath(  // URI for local fonts

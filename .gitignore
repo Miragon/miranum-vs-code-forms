@@ -16,4 +16,4 @@ src-ext/**/*.js.map
 scripts/**/*.js
 scripts/**/*.js.map
 
-media/css/fonts.css
+localResources/css/fonts.css

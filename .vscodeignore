@@ -1,14 +1,15 @@
 .vscode/**
 .vscode-test/**
-out/**
-src/**
-src-ext/**
-.browserslistrc
 .github
 .gitignore
 .idea
-.yarnrc
-vsc-extension-quickstart.md
+.browserslistrc
+
+media/css/fonts.css
+scripts/
+src/**
+src-ext/**
+
 **/tsconfig*.json
 **/.eslintrc.json
 **/.eslintrc.js
@@ -16,4 +17,3 @@ vsc-extension-quickstart.md
 **/vue.config.js
 **/*.map
 **/*.ts
-scripts/
