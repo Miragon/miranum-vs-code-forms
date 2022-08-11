@@ -56,4 +56,17 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
             });
         }
     }
+
+    public show(preserveFocus = false): void {
+        if (this.view) {
+            this.view.show(preserveFocus);
+        }
+    }
+
+    public isVisible(): boolean {
+        if (this.view) {
+            return this.view.visible;
+        }
+        return false;
+    }
 }

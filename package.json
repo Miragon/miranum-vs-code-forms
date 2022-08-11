@@ -61,7 +61,8 @@
           "id": "jsonschema-renderer",
           "name": "JSON Schema Renderer",
           "type": "webview",
-          "icon": "$(notebook-render-output)"
+          "icon": "$(notebook-render-output)",
+          "when": "resourceExtname == .form && jsonschema-builder.openCustomEditors > 0"
         }
       ]
     },

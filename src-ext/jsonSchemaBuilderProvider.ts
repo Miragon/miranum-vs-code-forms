@@ -154,7 +154,6 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             changeViewState.dispose();
             receivedMessage.dispose();
             changeDocumentSubscription.dispose();
-            vscode.commands.executeCommand('workbench.action.closeAuxiliaryBar');
         });
     }
 

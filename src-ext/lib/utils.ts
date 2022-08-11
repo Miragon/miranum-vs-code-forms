@@ -1,7 +1,5 @@
 import * as vscode from "vscode";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const path = require("path");
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const fs = require("fs");
 
 export function getDefault(): JSON {
@@ -107,13 +105,15 @@ export function getHtmlForWebview(webview: vscode.Webview, context: vscode.Exten
         context.extensionUri, 'dist', 'css', 'chunk-vendors.css'
     ));
 
-    const fontUri = webview.asWebviewUri(vscode.Uri.joinPath(
+    const fontFacePath = vscode.Uri.joinPath(context.extensionUri, 'media', 'css', 'vuetify.customFonts.css').fsPath; // Path to source file with custom fonts
+    const styleFontUri = webview.asWebviewUri(vscode.Uri.joinPath(  // URI to destination file with correct path to local fonts
+        context.extensionUri, 'media', 'css', 'fonts.css'
+    ));
+
+    const fontUri = webview.asWebviewUri(vscode.Uri.joinPath(  // URI for local fonts
         context.extensionUri, 'dist', 'fonts'
-    )).toString();  // Path to local fonts
-    const fontFacePath = vscode.Uri.joinPath(context.extensionUri, 'media', 'css', 'fontFace.generated.css'); // Path to generated css file
-    const styleFontPath = vscode.Uri.joinPath(context.extensionUri, 'media', 'css', 'fontFace.css');  // Path to css file with all local fonts
-    const styleFontUri = webview.asWebviewUri(styleFontPath);
-    generateFontFaceCss(fontFacePath.fsPath, styleFontPath.fsPath, fontUri);
+    )).toString();
+    generateFontFaceCss(fontFacePath, styleFontUri.fsPath, fontUri);
 
     const nonce = getNonce();
 
@@ -162,11 +162,11 @@ function getNonce(): string {
     return text;
 }
 
-function generateFontFaceCss(readFilePath: string, writeFilePath: string, fontPath: string): void {
+function generateFontFaceCss(readFilePath: string, writeFilePath: string, fontUriPath: string): void {
     const regex = /[\\|/]fonts/g;
     try {
         const fontFaces = fs.readFileSync(readFilePath).toString();
-        fs.writeFileSync(writeFilePath, fontFaces.replace(regex, fontPath));
+        fs.writeFileSync(writeFilePath, fontFaces.replace(regex, fontUriPath));
     } catch (err) {
         console.log('No custom fonts needed.');
     }

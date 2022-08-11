@@ -1,6 +1,5 @@
 out
 dist
-dist-vue
 **/node_modules
 .vscode-test/
 
@@ -16,3 +15,5 @@ src-ext/**/*.js
 src-ext/**/*.js.map
 scripts/**/*.js
 scripts/**/*.js.map
+
+media/css/fonts.css
