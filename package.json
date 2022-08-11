@@ -114,7 +114,10 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build && node scripts/extractFontFace.js && npm run compile",
     "lint": "vue-cli-service lint; eslint src-ext --ext ts",
-    "watch-build": "nodemon --watch src --ext js,vue,ts --exec \"npm run build\""
+    "watch-build": "nodemon --watch src --ext js,vue,ts --exec \"npm run build\"",
+    "webpack": "webpack --mode development",
+    "webpack-dev": "webpack --mode development --watch",
+    "package": "webpack --mode production --devtool hidden-source-map"
   },
   "dependencies": {
     "@koumoul/vjsf": "^2.17.0",
@@ -146,9 +149,12 @@
     "nodemon": "^2.0.19",
     "sass": "~1.32.0",
     "sass-loader": "^10.0.0",
+    "ts-loader": "^9.3.1",
     "typescript": "^4.5.5",
     "vue-cli-plugin-vuetify": "~2.5.1",
     "vue-template-compiler": "^2.7.7",
-    "vuetify-loader": "^1.7.0"
+    "vuetify-loader": "^1.7.0",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
   }
 }

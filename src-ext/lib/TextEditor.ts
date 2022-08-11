@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 
-export abstract class StdEditor {
+export abstract class TextEditor {
 
     private static _document: vscode.TextDocument;
     private static isAlreadyOpen = false;

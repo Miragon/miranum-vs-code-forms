@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
+import {TextDecoder, TextEncoder} from "util";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const fs = require("fs");
+//const fs = require("fs");
 
 export function getDefault(): JSON {
     return JSON.parse(JSON.stringify({
@@ -105,15 +106,17 @@ export function getHtmlForWebview(webview: vscode.Webview, context: vscode.Exten
         context.extensionUri, 'dist', 'css', 'chunk-vendors.css'
     ));
 
-    const fontFacePath = vscode.Uri.joinPath(context.extensionUri, 'localResources', 'css', 'vuetify.customFonts.css').fsPath; // Path to source file with custom fonts
-    const styleFontUri = webview.asWebviewUri(vscode.Uri.joinPath(  // URI to destination file with correct path to local fonts
+    const readFileUri = vscode.Uri.joinPath(context.extensionUri, 'localResources', 'css', 'vuetify.customFonts.css'); // Path to source file with custom fonts
+    const writeFileUri = vscode.Uri.joinPath(  // URI to destination file with correct path to local fonts
         context.extensionUri, 'localResources', 'css', 'fonts.css'
-    ));
+    );
 
+    const styleFontUri = webview.asWebviewUri(writeFileUri);
     const fontUri = webview.asWebviewUri(vscode.Uri.joinPath(  // URI for local fonts
         context.extensionUri, 'dist', 'fonts'
     )).toString();
-    generateFontFaceCss(fontFacePath, styleFontUri.fsPath, fontUri);
+
+    generateFontCss(readFileUri, writeFileUri, fontUri);
 
     const nonce = getNonce();
 
@@ -162,12 +165,17 @@ function getNonce(): string {
     return text;
 }
 
-function generateFontFaceCss(readFilePath: string, writeFilePath: string, fontUriPath: string): void {
+function generateFontCss(readFileUri: vscode.Uri, writeFileUri: vscode.Uri, fontUriPath: string): Thenable<void> {
     const regex = /[\\|/]fonts/g;
-    try {
-        const fontFaces = fs.readFileSync(readFilePath).toString();
-        fs.writeFileSync(writeFilePath, fontFaces.replace(regex, fontUriPath));
-    } catch (err) {
-        console.log('No custom fonts needed.');
-    }
+    return vscode.workspace.fs.readFile(readFileUri).then((uint8Array) => {
+        const readData = new TextDecoder().decode(uint8Array);
+        const writeData = new TextEncoder().encode(readData.replace(regex, fontUriPath));
+        return vscode.workspace.fs.writeFile(writeFileUri, writeData);
+    }, (err: vscode.FileSystemError) => {
+        console.error('Could not read File', '\n', err);
+    }).then(() => {
+        console.log('File was written successfully.')
+    }, (err: vscode.FileSystemError) => {
+        console.error('Could not write fonts.css', '\n', err);
+    });
 }
