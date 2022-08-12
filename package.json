@@ -25,7 +25,7 @@
     "onView:jsonschema-renderer",
     "onCommand:jsonschema-renderer.update"
   ],
-  "main": "./dist/src-ext/extension.js",
+  "main": "./dist/js/extension.js",
   "contributes": {
     "customEditors": [
       {
@@ -47,7 +47,10 @@
           "type": "string",
           "default": "Group",
           "description": "Choose where to open the standard text editor.",
-          "enum": ["Group", "Tab"],
+          "enum": [
+            "Group",
+            "Tab"
+          ],
           "enumDescription": [
             "Use Group to open the editor to the side of the currently active one.",
             "Use Tab to open the editor in a new tab."
@@ -106,18 +109,18 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run build",
+    "vscode:prepublish": "npm run package",
+    "package": "npm run vue-build && webpack --mode production --devtool hidden-source-map",
     "compile": "tsc -p tsconfig-extension.json",
-    "watch": "tsc -watch -p tsconfig-extension.json",
+    "watch": "webpack --mode development",
+    "lint": "vue-cli-service lint; eslint src-ext --ext ts",
     "pretest": "npm run compile && npm run lint",
     "test": "node ./out/test/runTest.js",
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build && node scripts/extractFontFace.js && npm run compile",
-    "lint": "vue-cli-service lint; eslint src-ext --ext ts",
-    "watch-build": "nodemon --watch src --ext js,vue,ts --exec \"npm run build\"",
-    "webpack": "webpack --mode development",
-    "webpack-dev": "webpack --mode development --watch",
-    "package": "webpack --mode production --devtool hidden-source-map"
+    "ext-build": "webpack --mode development",
+    "ext-watch": "webpack --mode development --watch",
+    "vue-serve": "vue-cli-service serve",
+    "vue-build": "vue-cli-service build && node scripts/extractFontFace.js",
+    "watch-build": "nodemon --watch src --ext js,vue,ts --exec \"npm run vue-build\""
   },
   "dependencies": {
     "@koumoul/vjsf": "^2.17.0",
@@ -151,6 +154,7 @@
     "sass-loader": "^10.0.0",
     "ts-loader": "^9.3.1",
     "typescript": "^4.5.5",
+    "util": "^0.12.4",
     "vue-cli-plugin-vuetify": "~2.5.1",
     "vue-template-compiler": "^2.7.7",
     "vuetify-loader": "^1.7.0",

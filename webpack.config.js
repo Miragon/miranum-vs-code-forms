@@ -23,8 +23,8 @@ const config = {
     resolve: {
         mainFields: ['browser', 'module', 'main'],
         extensions: ['.ts', '.js'],
-        alias: {
-            lib: path.resolve(__dirname, 'src-ext', 'lib')
+        fallback: {
+            util: require.resolve('util')
         }
     },
     module: {

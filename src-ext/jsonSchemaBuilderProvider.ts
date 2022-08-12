@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { getContentAsJson, getDefault, getHtmlForWebview } from './lib/utils';
+import {generateFontCss, getContentAsJson, getDefault, getHtmlForWebview} from './lib/utils';
 import { TextEditor } from "./lib/TextEditor";
 import { debounce } from "debounce";
 import { JsonSchemaRendererProvider } from "./jsonSchemaRendererProvider";
@@ -60,7 +60,14 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             ]
         };
 
-        webviewPanel.webview.html = getHtmlForWebview(webviewPanel.webview, this.context);
+        // Setup webview html content
+        generateFontCss(
+            vscode.Uri.joinPath(this.context.extensionUri, 'localResources', 'css', 'vuetify.customFonts.css'),
+            vscode.Uri.joinPath(this.context.extensionUri, 'localResources', 'css', 'fonts.css'),
+            webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'fonts')).toString()
+        ).then(() => {
+            webviewPanel.webview.html = getHtmlForWebview(webviewPanel.webview, this.context);
+        });
 
         // Initial message to the webview
         webviewPanel.webview.postMessage({
