@@ -4,15 +4,15 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const { VueLoaderPlugin } = require("vue-loader");
 
 /**@type {import('webpack').Configuration}*/
 const config = {
     target: 'webworker',
-    context: path.resolve(__dirname, 'src-ext'),
-    entry: './extension.ts',
+    entry: ['./src-ext/extension.ts', './src/main.ts'],
     output: {
         path: path.resolve(__dirname, 'dist', 'js'),
-        filename: 'extension.js',
+        filename: '[name].bundle.js',
         libraryTarget: 'commonjs2',
         devtoolModuleFilenameTemplate: '../[resource-path]'
     },
@@ -27,16 +27,36 @@ const config = {
             util: require.resolve('util')
         }
     },
+    plugins: [
+        new VueLoaderPlugin(),
+    ],
     module: {
         rules: [
             {
-                test: /\.ts$/,
-                exclude: /node_modules/,
+                test: /\.vue$/,
+                loader: "vue-loader",
+            },
+            {
+                test: /\.s(c|a)ss$/,
                 use: [
+                    'vue-style-loader',
+                    'css-loader',
                     {
-                        loader: 'ts-loader'
-                    }
-                ]
+                        loader: 'sass-loader',
+                        // Requires sass-loader@^7.0.0
+                        options: {
+                            implementation: require('sass'),
+                            indentedSyntax: true // optional
+                        },
+                        // Requires >= sass-loader@^8.0.0
+                        options: {
+                            implementation: require('sass'),
+                            sassOptions: {
+                                indentedSyntax: true // optional
+                            },
+                        },
+                    },
+                ],
             }
         ]
     }
