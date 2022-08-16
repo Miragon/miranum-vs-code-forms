@@ -1,9 +1,4 @@
 import * as vscode from "vscode";
-//import {TextDecoder, TextEncoder} from 'util';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const TextDecoder = require('util').TextDecoder;
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const TextEncoder = require('util').TextEncoder;
 
 export function getDefault(): JSON {
     return JSON.parse(JSON.stringify({
@@ -85,6 +80,7 @@ export function getContentAsJson(text: string): JSON {
     }
 }
 
+/*
 export function generateFontCss(readFileUri: vscode.Uri, writeFileUri: vscode.Uri, fontUriPath: string): Thenable<void> {
     const regex = /[\\|/]fonts/g;
     return vscode.workspace.fs.readFile(readFileUri).then((uint8Array) => {
@@ -99,6 +95,7 @@ export function generateFontCss(readFileUri: vscode.Uri, writeFileUri: vscode.Ur
         console.error('Could not write fonts.css', '\n', err);
     });
 }
+*/
 
 /**
  * Get the HTML-Document which display the webview
@@ -108,11 +105,7 @@ export function generateFontCss(readFileUri: vscode.Uri, writeFileUri: vscode.Ur
  */
 export function getHtmlForWebview(webview: vscode.Webview, context: vscode.ExtensionContext): string {
     const vueAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'dist', 'js', 'app.js'
-    ));
-
-    const vueVendorUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'dist', 'js', 'chunk-vendors.js'
+        context.extensionUri, 'dist', 'client', 'client.mjs'
     ));
 
     const styleResetUri = webview.asWebviewUri(vscode.Uri.joinPath(
@@ -120,12 +113,18 @@ export function getHtmlForWebview(webview: vscode.Webview, context: vscode.Exten
     ));
 
     const styleAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'dist', 'css', 'chunk-vendors.css'
+        context.extensionUri, 'dist', 'client', 'style.css'
+    ));
+
+    /*
+    const vueVendorUri = webview.asWebviewUri(vscode.Uri.joinPath(
+        context.extensionUri, 'dist', 'js', 'chunk-vendors.js'
     ));
 
     const styleFontUri = webview.asWebviewUri(vscode.Uri.joinPath(
         context.extensionUri, 'localResources', 'css', 'fonts.css'
     ));
+    */
 
     const nonce = getNonce();
 
@@ -140,14 +139,13 @@ export function getHtmlForWebview(webview: vscode.Webview, context: vscode.Exten
 
                 <meta http-equiv="Content-Security-Policy" content="default-src 'none';
                     style-src ${webview.cspSource} 'unsafe-inline';
-                    font-src ${webview.cspSource};
+                    font-src ${webview.cspSource} 'unsafe-inline';
                     img-src ${webview.cspSource};
                     script-src 'nonce-${nonce}';">
 
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 
                 <link href="${styleResetUri}" rel="stylesheet" type="text/css" />
-                <link href="${styleFontUri}" rel="stylesheet" type="text/css" />
                 <link href="${styleAppUri}" rel="stylesheet" type="text/css" />
 
                 <title>Json Schema Builder</title>
@@ -158,7 +156,6 @@ export function getHtmlForWebview(webview: vscode.Webview, context: vscode.Exten
                     <!-- Store the VsCodeAPI in a global variable -->
                     const vscode = acquireVsCodeApi();
                 </script>
-                <script type="text/javascript" src="${vueVendorUri}" nonce="${nonce}"></script>
                 <script type="text/javascript" src="${vueAppUri}" nonce="${nonce}"></script>
             </body>
             </html>
