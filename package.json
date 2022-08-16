@@ -110,12 +110,11 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
-    "package": "npm run vue-build && webpack --mode production --devtool hidden-source-map",
-    "build": "vite build --config ./src-ext/vite.config.js && vite build --config ./src/vite.config.js",
-    "watch-client": "vite build --config ./src/vite.config.js --watch",
+    "build": "tsup src-ext/extension.ts --dts --external=vscode && vite build --config ./src/vite.config.js",
+    "dev-client": "vite build --config ./src/vite.config.js --watch",
+    "dev-ext": "tsup src-ext/extension.ts --dts --external=vscode --watch",
     "compile": "tsc -p tsconfig-extension.json",
     "watch": "webpack --mode development --watch",
-    "lint": "vue-cli-service lint; eslint src-ext --ext ts",
     "pretest": "npm run compile && npm run lint",
     "test": "node ./out/test/runTest.js",
     "watch-build": "nodemon --watch src --ext js,vue,ts --exec \"npm run vue-build\""
@@ -152,6 +151,7 @@
     "sass": "~1.32",
     "sass-loader": "^10.3.1",
     "ts-loader": "^9.3.1",
+    "tsup": "^6.2.2",
     "typescript": "^4.5.5",
     "util": "^0.12.4",
     "vite": "^3.0.8",
