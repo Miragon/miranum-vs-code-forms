@@ -8,12 +8,4 @@ dist
 
 src-ext/test/example
 
-# exclude typscript compiled files
-src/**/*.js
-src/**/*.js.map
-src-ext/**/*.js
-src-ext/**/*.js.map
-scripts/**/*.js
-scripts/**/*.js.map
-
 localResources/css/fonts.css

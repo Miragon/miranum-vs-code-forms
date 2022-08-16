@@ -118,10 +118,6 @@
     "lint": "vue-cli-service lint; eslint src-ext --ext ts",
     "pretest": "npm run compile && npm run lint",
     "test": "node ./out/test/runTest.js",
-    "ext-build": "webpack --mode development",
-    "ext-watch": "webpack --mode development --watch",
-    "vue-serve": "vue-cli-service serve",
-    "vue-build": "vue-cli-service build",
     "watch-build": "nodemon --watch src --ext js,vue,ts --exec \"npm run vue-build\""
   },
   "dependencies": {
