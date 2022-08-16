@@ -5,9 +5,9 @@ import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Vuetify);
 
-const opts : ThemeOptions = {
+const opts: ThemeOptions = {
     themes: {
-        light : {
+        light: {
             primary: '#82B1FF',
             secondary: '#424242',
             accent: '#82B1FF',

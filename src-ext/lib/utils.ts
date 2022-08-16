@@ -116,6 +116,10 @@ export function getHtmlForWebview(webview: vscode.Webview, context: vscode.Exten
         context.extensionUri, 'dist', 'client', 'style.css'
     ));
 
+    const fontAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
+        context.extensionUri, 'dist', 'client', 'assets', 'css', 'materialdesignicons.min.css'
+    ));
+
     /*
     const vueVendorUri = webview.asWebviewUri(vscode.Uri.joinPath(
         context.extensionUri, 'dist', 'js', 'chunk-vendors.js'
@@ -147,6 +151,7 @@ export function getHtmlForWebview(webview: vscode.Webview, context: vscode.Exten
                 
                 <link href="${styleResetUri}" rel="stylesheet" type="text/css" />
                 <link href="${styleAppUri}" rel="stylesheet" type="text/css" />
+                <link href="${fontAppUri}" rel="stylesheet" type="text/css" />
 
                 <title>Json Schema Builder</title>
             </head>
