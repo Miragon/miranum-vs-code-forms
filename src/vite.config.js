@@ -1,7 +1,9 @@
 import {createVuePlugin} from "vite-plugin-vue2";
 
-export default {
-    plugins : [
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+     plugins : [
         createVuePlugin()
     ],
     build: {
@@ -12,5 +14,9 @@ export default {
             fileName: 'client',
         },
         outDir: 'dist/client'
+    },
+    define: {
+        "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
     }
-}
+})
+

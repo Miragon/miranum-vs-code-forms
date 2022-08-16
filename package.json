@@ -25,7 +25,7 @@
     "onView:jsonschema-renderer",
     "onCommand:jsonschema-renderer.update"
   ],
-  "main": "./dist/js/extension.js",
+  "main": "./dist/extension.js",
   "contributes": {
     "customEditors": [
       {
@@ -112,9 +112,7 @@
     "vscode:prepublish": "npm run package",
     "build": "tsup src-ext/extension.ts --dts --external=vscode && vite build --config ./src/vite.config.js",
     "dev-client": "vite build --config ./src/vite.config.js --watch",
-    "dev-ext": "tsup src-ext/extension.ts --dts --external=vscode --watch",
-    "compile": "tsc -p tsconfig-extension.json",
-    "watch": "webpack --mode development --watch",
+    "watch": "tsup src-ext/extension.ts --dts --external=vscode --watch",
     "pretest": "npm run compile && npm run lint",
     "test": "node ./out/test/runTest.js",
     "watch-build": "nodemon --watch src --ext js,vue,ts --exec \"npm run vue-build\""
