@@ -111,6 +111,7 @@
   "scripts": {
     "vscode:prepublish": "npm run package",
     "package": "npm run vue-build && webpack --mode production --devtool hidden-source-map",
+    "build": "npm run vue-build && npm run ext-build",
     "compile": "tsc -p tsconfig-extension.json",
     "watch": "webpack --mode development",
     "lint": "vue-cli-service lint; eslint src-ext --ext ts",

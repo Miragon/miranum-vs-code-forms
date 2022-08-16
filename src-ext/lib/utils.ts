@@ -1,5 +1,9 @@
 import * as vscode from "vscode";
-import {TextDecoder, TextEncoder} from 'util';
+//import {TextDecoder, TextEncoder} from 'util';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const TextDecoder = require('util').TextDecoder;
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const TextEncoder = require('util').TextEncoder;
 
 export function getDefault(): JSON {
     return JSON.parse(JSON.stringify({
