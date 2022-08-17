@@ -23,7 +23,7 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
         webviewView.webview.options = {
             enableScripts: true,
             localResourceRoots: [
-                vscode.Uri.joinPath(this.context.extensionUri, 'media'),
+                vscode.Uri.joinPath(this.context.extensionUri, 'localResources'),
                 vscode.Uri.joinPath(this.context.extensionUri, 'dist'),
             ]
         };
@@ -55,5 +55,18 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
                 text: this.state
             });
         }
+    }
+
+    public show(preserveFocus = false): void {
+        if (this.view) {
+            this.view.show(preserveFocus);
+        }
+    }
+
+    public isVisible(): boolean {
+        if (this.view) {
+            return this.view.visible;
+        }
+        return false;
     }
 }

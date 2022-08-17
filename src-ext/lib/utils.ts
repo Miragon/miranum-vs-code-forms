@@ -88,24 +88,25 @@ export function getContentAsJson(text: string): JSON {
  */
 export function getHtmlForWebview(webview: vscode.Webview, context: vscode.ExtensionContext): string {
     const vueAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'dist', 'js', 'app.js'
-    ));
-
-    const vueVendorUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'dist', 'js', 'chunk-vendors.js'
+        context.extensionUri, 'dist', 'client', 'client.mjs'
     ));
 
     const styleResetUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'media', 'css', 'reset.css'
+        context.extensionUri, 'localResources', 'css', 'reset.css'
     ));
 
     const styleAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'dist', 'css', 'chunk-vendors.css'
+        context.extensionUri, 'dist', 'client', 'style.css'
+    ));
+
+    const fontAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
+        context.extensionUri, 'dist', 'client', 'assets', 'css', 'materialdesignicons.min.css'
     ));
 
     const nonce = getNonce();
 
-    //TODO Is there a better way to allow inline styling created by vuetify?
+    //TODO
+    // Is there a better way to allow inline styling created by vuetify?
 
     return `
             <!DOCTYPE html>
@@ -122,6 +123,7 @@ export function getHtmlForWebview(webview: vscode.Webview, context: vscode.Exten
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 
                 <link href="${styleResetUri}" rel="stylesheet" type="text/css" />
+                <link href="${fontAppUri}" rel="stylesheet" type="text/css" />
                 <link href="${styleAppUri}" rel="stylesheet" type="text/css" />
 
                 <title>Json Schema Builder</title>
@@ -132,7 +134,6 @@ export function getHtmlForWebview(webview: vscode.Webview, context: vscode.Exten
                     <!-- Store the VsCodeAPI in a global variable -->
                     const vscode = acquireVsCodeApi();
                 </script>
-                <script type="text/javascript" src="${vueVendorUri}" nonce="${nonce}"></script>
                 <script type="text/javascript" src="${vueAppUri}" nonce="${nonce}"></script>
             </body>
             </html>
@@ -147,4 +148,3 @@ function getNonce(): string {
     }
     return text;
 }
-

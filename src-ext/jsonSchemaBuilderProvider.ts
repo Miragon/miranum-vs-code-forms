@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { getContentAsJson, getDefault, getHtmlForWebview } from './lib/utils';
-import { StdEditor } from "./lib/StdEditor";
+import {getContentAsJson, getDefault, getHtmlForWebview} from './lib/utils';
+import { TextEditor } from "./lib/TextEditor";
 import { debounce } from "debounce";
 import { JsonSchemaRendererProvider } from "./jsonSchemaRendererProvider";
 
@@ -16,10 +16,10 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         private readonly context: vscode.ExtensionContext,
         private readonly renderer: JsonSchemaRendererProvider
     ) {
-        this.context.subscriptions.push(StdEditor.register());
+        this.context.subscriptions.push(TextEditor.register());
         this.context.subscriptions.push(vscode.commands.registerCommand(
             JsonSchemaBuilderProvider.viewType + '.toggleStdEditor',
-            () => { StdEditor.toggle() }
+            () => { TextEditor.toggle() }
         ));
     }
 
@@ -49,17 +49,18 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         // only enable the command if a custom editor is open
         let numOfCustomEditors = this.getNumOfCustomEditors();
         vscode.commands.executeCommand('setContext', 'jsonschema-builder.openCustomEditors', numOfCustomEditors);
-        StdEditor.document = document; // set the document of the active editor
+        TextEditor.document = document; // set the document of the active editor
 
         // Setup webview options
         webviewPanel.webview.options = {
             enableScripts: true,
             localResourceRoots: [
-                vscode.Uri.joinPath(this.context.extensionUri, 'media'),
-                vscode.Uri.joinPath(this.context.extensionUri, 'dist'),
+                vscode.Uri.joinPath(this.context.extensionUri, 'localResources'),
+                vscode.Uri.joinPath(this.context.extensionUri, 'dist')
             ]
         };
 
+        // Setup webview html content
         webviewPanel.webview.html = getHtmlForWebview(webviewPanel.webview, this.context);
 
         // Initial message to the webview
@@ -142,7 +143,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             }
 
             if (webviewPanel.active) {
-                StdEditor.document = document;
+                TextEditor.document = document;
             }
         });
 
@@ -154,7 +155,6 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             changeViewState.dispose();
             receivedMessage.dispose();
             changeDocumentSubscription.dispose();
-            vscode.commands.executeCommand('workbench.action.closeAuxiliaryBar');
         });
     }
 
