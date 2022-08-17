@@ -5,15 +5,10 @@
 .idea
 .browserslistrc
 
-media/css/fonts.css
-scripts/
 src/**
 src-ext/**
+node_modules/
 
 **/tsconfig*.json
-**/.eslintrc.json
 **/.eslintrc.js
 **/babel.config.js
-**/vue.config.js
-**/*.map
-**/*.ts

@@ -109,7 +109,7 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run package",
+    "vscode:prepublish": "npm run build",
     "build": "tsup src-ext/extension.ts --dts --external=vscode && vite build --config ./src/vite.config.js",
     "dev-client": "vite build --config ./src/vite.config.js --watch",
     "watch": "tsup src-ext/extension.ts --dts --external=vscode",
