@@ -80,23 +80,6 @@ export function getContentAsJson(text: string): JSON {
     }
 }
 
-/*
-export function generateFontCss(readFileUri: vscode.Uri, writeFileUri: vscode.Uri, fontUriPath: string): Thenable<void> {
-    const regex = /[\\|/]fonts/g;
-    return vscode.workspace.fs.readFile(readFileUri).then((uint8Array) => {
-        const readData = new TextDecoder().decode(uint8Array);
-        const writeData = new TextEncoder().encode(readData.replace(regex, fontUriPath));
-        return vscode.workspace.fs.writeFile(writeFileUri, writeData);
-    }, (err: vscode.FileSystemError) => {
-        console.error('Could not read File', '\n', err);
-    }).then(() => {
-        console.log('File was written successfully.')
-    }, (err: vscode.FileSystemError) => {
-        console.error('Could not write fonts.css', '\n', err);
-    });
-}
-*/
-
 /**
  * Get the HTML-Document which display the webview
  * @param webview Webview belonging to the panel
@@ -120,16 +103,6 @@ export function getHtmlForWebview(webview: vscode.Webview, context: vscode.Exten
         context.extensionUri, 'dist', 'client', 'assets', 'css', 'materialdesignicons.min.css'
     ));
 
-    /*
-    const vueVendorUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'dist', 'js', 'chunk-vendors.js'
-    ));
-
-    const styleFontUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'localResources', 'css', 'fonts.css'
-    ));
-    */
-
     const nonce = getNonce();
 
     //TODO
@@ -143,15 +116,15 @@ export function getHtmlForWebview(webview: vscode.Webview, context: vscode.Exten
 
                 <meta http-equiv="Content-Security-Policy" content="default-src 'none';
                     style-src ${webview.cspSource} 'unsafe-inline';
-                    font-src ${webview.cspSource} 'unsafe-inline';
+                    font-src ${webview.cspSource};
                     img-src ${webview.cspSource};
                     script-src 'nonce-${nonce}';">
 
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 
                 <link href="${styleResetUri}" rel="stylesheet" type="text/css" />
-                <link href="${styleAppUri}" rel="stylesheet" type="text/css" />
                 <link href="${fontAppUri}" rel="stylesheet" type="text/css" />
+                <link href="${styleAppUri}" rel="stylesheet" type="text/css" />
 
                 <title>Json Schema Builder</title>
             </head>

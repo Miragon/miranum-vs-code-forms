@@ -62,14 +62,6 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
         // Setup webview html content
         webviewPanel.webview.html = getHtmlForWebview(webviewPanel.webview, this.context);
-        /*
-        generateFontCss(
-            vscode.Uri.joinPath(this.context.extensionUri, 'localResources', 'css', 'vuetify.customFonts.css'),
-            vscode.Uri.joinPath(this.context.extensionUri, 'localResources', 'css', 'fonts.css'),
-            webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'fonts')).toString()
-        ).then(() => {
-        });
-        */
 
         // Initial message to the webview
         webviewPanel.webview.postMessage({

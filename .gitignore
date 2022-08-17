@@ -7,5 +7,3 @@ dist
 **/.DS_Store
 
 src-ext/test/example
-
-localResources/css/fonts.css
