@@ -17,6 +17,8 @@ import {Settings} from "./settings/Settings";
 import {VsCode} from "src/types/VSCodeApi";
 
 declare const vscode: VsCode;
+declare const content: JSON;
+declare const mode: "builder" | "renderer";
 
 export default defineComponent({
   name: 'App',
@@ -68,6 +70,7 @@ export default defineComponent({
     }
 
     function updateSchema(newSchema: Form): void {
+      console.log(newSchema);
       vscode.setState({
         text: JSON.parse(JSON.stringify(newSchema))
       });
@@ -80,12 +83,11 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      const state = vscode.getState();
-      if (state) {
-        const schema: Form = JSON.parse(JSON.stringify(state.text));
-        updateSchema(schema);
-      }
 
+      const newSchema: Form = JSON.parse(content);
+      updateSchema(newSchema);
+      builder.value = mode === "builder";
+      renderer.value = mode === "renderer";
       window.addEventListener('message', getDataFromExtension);
     })
 

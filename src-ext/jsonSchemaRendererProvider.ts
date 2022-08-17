@@ -10,14 +10,15 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
 
     constructor(
         private readonly context: vscode.ExtensionContext,
-    ) { }
+        private initialContent: JSON
+    ) {
+    }
 
     public resolveWebviewView(
         webviewView: vscode.WebviewView,
         context: vscode.WebviewViewResolveContext,
         token: vscode.CancellationToken
-    ): Thenable<void> | void
-    {
+    ): Thenable<void> | void {
         this.view = webviewView;
 
         webviewView.webview.options = {
@@ -28,7 +29,7 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
             ]
         };
 
-        webviewView.webview.html = getHtmlForWebview(webviewView.webview, this.context);
+        webviewView.webview.html = getHtmlForWebview(webviewView.webview, this.context, this.initialContent, "renderer");
 
         webviewView.onDidChangeVisibility(() => {
             if (webviewView.visible) {
@@ -43,6 +44,7 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
             type: JsonSchemaRendererProvider.viewType + '.updateFromExtension',
             text: this.state
         });
+
     }
 
     public updateRenderer(schema?: JSON): void {

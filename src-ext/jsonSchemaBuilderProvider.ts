@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
 import {getContentAsJson, getDefault, getHtmlForWebview} from './lib/utils';
-import { TextEditor } from "./lib/TextEditor";
-import { debounce } from "debounce";
-import { JsonSchemaRendererProvider } from "./jsonSchemaRendererProvider";
+import {TextEditor} from "./lib/TextEditor";
+import {debounce} from "debounce";
+import {JsonSchemaRendererProvider} from "./jsonSchemaRendererProvider";
 
 /**
  * Provider for a simple JSON-Editor
@@ -12,14 +12,17 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
     public static readonly viewType = 'jsonschema-builder';
 
+    private renderer: JsonSchemaRendererProvider | undefined;
+
     constructor(
-        private readonly context: vscode.ExtensionContext,
-        private readonly renderer: JsonSchemaRendererProvider
+        private readonly context: vscode.ExtensionContext
     ) {
         this.context.subscriptions.push(TextEditor.register());
         this.context.subscriptions.push(vscode.commands.registerCommand(
             JsonSchemaBuilderProvider.viewType + '.toggleStdEditor',
-            () => { TextEditor.toggle() }
+            () => {
+                TextEditor.toggle()
+            }
         ));
     }
 
@@ -45,6 +48,9 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             text = getDefault();
         }
 
+        this.renderer = new JsonSchemaRendererProvider(this.context, text);
+        this.context.subscriptions.push(vscode.window.registerWebviewViewProvider(JsonSchemaRendererProvider.viewType, this.renderer));
+
         // Necessary set up for toggle command
         // only enable the command if a custom editor is open
         let numOfCustomEditors = this.getNumOfCustomEditors();
@@ -61,7 +67,15 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         };
 
         // Setup webview html content
-        webviewPanel.webview.html = getHtmlForWebview(webviewPanel.webview, this.context);
+        webviewPanel.webview.html = getHtmlForWebview(webviewPanel.webview, this.context, text, "builder");
+        /*
+        generateFontCss(
+            vscode.Uri.joinPath(this.context.extensionUri, 'localResources', 'css', 'vuetify.customFonts.css'),
+            vscode.Uri.joinPath(this.context.extensionUri, 'localResources', 'css', 'fonts.css'),
+            webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'dist', 'fonts')).toString()
+        ).then(() => {
+        });
+        */
 
         // Initial message to the webview
         webviewPanel.webview.postMessage({
@@ -71,7 +85,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
         // Open the JsonSchema-Renderer
         vscode.commands.executeCommand('jsonschema-renderer.focus').then(() => {
-            this.renderer.updateRenderer(text);
+            this.renderer!.updateRenderer(text);
         });
 
         // Send content from the extension to the webview
@@ -80,7 +94,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             if (Object.keys(text).length === 0) {
                 text = getDefault();
             }
-            this.renderer.updateRenderer(text);
+            this.renderer!.updateRenderer(text);
             webviewPanel.webview.postMessage({
                 type: msgType,
                 text: text,
@@ -92,7 +106,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             switch (e.type) {
                 case JsonSchemaBuilderProvider.viewType + '.updateFromWebview': {
                     isUpdateFromWebview = true;
-                    this.renderer.updateRenderer(e.content);
+                    this.renderer!.updateRenderer(e.content);
                     writeData(document, e.content);
                     break;
                 }
@@ -189,5 +203,9 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             }
         }
         return counter;
+    }
+
+    public getRenderer(): JsonSchemaRendererProvider {
+        return this.renderer!;
     }
 }

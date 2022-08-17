@@ -35,6 +35,21 @@
                                 "dense": true
                             }
                         },
+                        "85dcc018-49e3-4232-9935-81a99bbc20d9": {
+                            "fieldType": "text",
+                            "title": "Textfield",
+                            "type": "string",
+                            "x-options": {
+                                "fieldColProps": {
+                                    "cols": 12,
+                                    "sm": 12
+                                }
+                            },
+                            "x-props": {
+                                "outlined": true,
+                                "dense": true
+                            }
+                        },
                         "stringProp1": {
                             "fieldType": "text",
                             "title": "I am a text",
@@ -43,6 +58,21 @@
                                 "fieldColProps": {
                                     "cols": 12,
                                     "sm": 6
+                                }
+                            },
+                            "x-props": {
+                                "outlined": true,
+                                "dense": true
+                            }
+                        },
+                        "e1066a3e-ec52-4c78-afea-5729ce4b7747": {
+                            "fieldType": "text",
+                            "title": "Textfield",
+                            "type": "string",
+                            "x-options": {
+                                "fieldColProps": {
+                                    "cols": 12,
+                                    "sm": 12
                                 }
                             },
                             "x-props": {
