@@ -20,21 +20,6 @@
                         "childrenClass": "pl-0"
                     },
                     "properties": {
-                        "a35dc63e-da63-4d71-9613-aec8b97d3965": {
-                            "fieldType": "text",
-                            "title": "Textfield",
-                            "type": "string",
-                            "x-options": {
-                                "fieldColProps": {
-                                    "cols": 12,
-                                    "sm": 12
-                                }
-                            },
-                            "x-props": {
-                                "outlined": true,
-                                "dense": true
-                            }
-                        },
                         "85dcc018-49e3-4232-9935-81a99bbc20d9": {
                             "fieldType": "text",
                             "title": "Textfield",
@@ -58,6 +43,36 @@
                                 "fieldColProps": {
                                     "cols": 12,
                                     "sm": 6
+                                }
+                            },
+                            "x-props": {
+                                "outlined": true,
+                                "dense": true
+                            }
+                        },
+                        "caa8f234-10b7-4b83-b537-ccdf35c7711a": {
+                            "fieldType": "text",
+                            "title": "Textfield",
+                            "type": "string",
+                            "x-options": {
+                                "fieldColProps": {
+                                    "cols": 12,
+                                    "sm": 12
+                                }
+                            },
+                            "x-props": {
+                                "outlined": true,
+                                "dense": true
+                            }
+                        },
+                        "a35dc63e-da63-4d71-9613-aec8b97d3965": {
+                            "fieldType": "text",
+                            "title": "Textfield",
+                            "type": "string",
+                            "x-options": {
+                                "fieldColProps": {
+                                    "cols": 12,
+                                    "sm": 12
                                 }
                             },
                             "x-props": {

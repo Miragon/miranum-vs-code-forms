@@ -70,7 +70,6 @@ export default defineComponent({
     }
 
     function updateSchema(newSchema: Form): void {
-      console.log(newSchema);
       vscode.setState({
         text: JSON.parse(JSON.stringify(newSchema))
       });
