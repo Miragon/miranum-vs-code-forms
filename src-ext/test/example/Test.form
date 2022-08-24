@@ -22,7 +22,7 @@
                     "properties": {
                         "85dcc018-49e3-4232-9935-81a99bbc20d9": {
                             "fieldType": "text",
-                            "title": "Textfield",
+                            "title": "Hello",
                             "type": "string",
                             "x-options": {
                                 "fieldColProps": {

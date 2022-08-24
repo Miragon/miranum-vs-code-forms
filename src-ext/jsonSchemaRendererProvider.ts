@@ -8,10 +8,11 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
     private view?: vscode.WebviewView;
     private state?: JSON;
 
-    constructor(
-        private readonly context: vscode.ExtensionContext,
-        private initialContent: JSON
-    ) {
+    constructor(private readonly context: vscode.ExtensionContext) {
+        this.context.subscriptions.push(vscode.commands.registerCommand(
+            'jsonschema-renderer.update',
+            () => { this.updateRenderer(); }
+        ));
     }
 
     public resolveWebviewView(
@@ -19,6 +20,7 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
         context: vscode.WebviewViewResolveContext,
         token: vscode.CancellationToken
     ): Thenable<void> | void {
+
         this.view = webviewView;
 
         webviewView.webview.options = {
@@ -29,9 +31,9 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
             ]
         };
 
-        webviewView.webview.html = getHtmlForWebview(webviewView.webview, this.context, this.initialContent, "renderer");
+        webviewView.webview.html = getHtmlForWebview(webviewView.webview, this.context, this.state!, "renderer");
 
-        webviewView.onDidChangeVisibility(() => {
+        const changeViewState = webviewView.onDidChangeVisibility(() => {
             if (webviewView.visible) {
                 webviewView.webview.postMessage({
                     type: JsonSchemaRendererProvider.viewType + '.updateFromExtension',
@@ -40,23 +42,41 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
             }
         });
 
-        webviewView.webview.postMessage({
-            type: JsonSchemaRendererProvider.viewType + '.updateFromExtension',
-            text: this.state
+        webviewView.onDidDispose(() => {
+            changeViewState.dispose();
+            delete this.view;
         });
-
     }
 
     public updateRenderer(schema?: JSON): void {
-        if (schema) {
-            this.state = schema;
+        if (!this.view) {
+            console.error('(JsonSchema Renderer) Webview is undefined!');
+            return;
         }
-        if (this.view) {
-            this.view.webview.postMessage({
-                type: JsonSchemaRendererProvider.viewType + '.updateFromExtension',
-                text: this.state
-            });
+
+        switch (true) {
+            case schema === undefined: {
+                // A simple update with the current state
+                this.view.webview.postMessage({
+                    type: JsonSchemaRendererProvider.viewType + '.updateFromExtension',
+                    text: this.state
+                });
+                break;
+            }
+            case schema !== this.state: {
+                // Set new state and update webview
+                this.state = schema;
+                this.view.webview.postMessage({
+                    type: JsonSchemaRendererProvider.viewType + '.updateFromExtension',
+                    text: this.state
+                });
+                break;
+            }
         }
+    }
+
+    public setInitialContent(schema: JSON): void {
+        this.state = schema;
     }
 
     public show(preserveFocus = false): void {

@@ -16,17 +16,9 @@ export function activate(context: vscode.ExtensionContext) {
     }
 
     // Create webviews
-
     const builder = new JsonSchemaBuilderProvider(context);
-
-    context.subscriptions.push(vscode.window.registerCustomEditorProvider(JsonSchemaBuilderProvider.viewType, builder));
-
-    // Register commands
-    context.subscriptions.push(vscode.commands.registerCommand(
-        'jsonschema-renderer.update',
-        () => {
-
-            builder.getRenderer().updateRenderer();
-        }
-    ));
+    context.subscriptions.push(vscode.window.registerCustomEditorProvider(
+        JsonSchemaBuilderProvider.viewType,
+        builder,
+        { webviewOptions: { retainContextWhenHidden: true } }));
 }
