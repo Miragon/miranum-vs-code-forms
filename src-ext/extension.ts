@@ -20,5 +20,20 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.window.registerCustomEditorProvider(
         JsonSchemaBuilderProvider.viewType,
         builder,
-        { webviewOptions: { retainContextWhenHidden: true } }));
+        { webviewOptions: { retainContextWhenHidden: true } }
+    ));
 }
+
+/*function getNumOfCustomEditors(viewType: string): number {
+    let counter = 0;
+    for (const tabGroup of vscode.window.tabGroups.all) {
+        for (const tab of tabGroup.tabs) {
+            if (tab.input instanceof vscode.TabInputCustom &&
+                tab.input.viewType === viewType) {
+
+                counter++;
+            }
+        }
+    }
+    return counter;
+}*/

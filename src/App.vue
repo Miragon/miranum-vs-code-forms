@@ -70,6 +70,11 @@ export default defineComponent({
       }
 
       function updateSchema(newSchema: Form): void {
+         if (!newSchema.key || !newSchema.type || !newSchema.allOf ) {
+            console.log(mode.value, 'setMinimum');
+            newSchema = JSON.parse('{"key": "MyStartForm", "type": "object", "allOf": []}');
+         }
+
          vscode.setState({
             text: JSON.stringify(newSchema),
             mode: mode.value
@@ -89,7 +94,6 @@ export default defineComponent({
             mode.value = state.mode;
             //builder.value = state.mode === "builder";
             //renderer.value = state.mode === "renderer";
-            console.log('onMounted()', mode.value);
          }
          /*const newSchema: Form = JSON.parse(content);
          updateSchema(newSchema);*/
@@ -97,7 +101,6 @@ export default defineComponent({
       })
 
       onUnmounted(() => {
-         console.log(mode.value, 'onUnmounted');
          window.removeEventListener('message', getDataFromExtension);
       })
 

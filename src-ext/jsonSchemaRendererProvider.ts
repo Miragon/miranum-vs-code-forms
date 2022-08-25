@@ -11,7 +11,9 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
     constructor(private readonly context: vscode.ExtensionContext) {
         this.context.subscriptions.push(vscode.commands.registerCommand(
             'jsonschema-renderer.update',
-            () => { this.updateRenderer(); }
+            () => {
+                this.updateRenderer();
+            }
         ));
     }
 
@@ -49,30 +51,33 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
     }
 
     public updateRenderer(schema?: JSON): void {
+        if (schema && schema !== this.state) {
+            // The state of the provider have to change whether a view exists or not.
+            // This is because when the user switches from a 'JsonSchema Builder' to another file without a .form extension
+            // the Renderer will dispose. If the user focus than a different 'JsonSchema Builder' the Renderer is
+            // still disposed, but we set the state and when the Renderer resolves the correct state is used.
+            this.state = schema;
+        }
+
         if (!this.view) {
-            console.error('(JsonSchema Renderer) Webview is undefined!');
             return;
         }
 
-        switch (true) {
-            case schema === undefined: {
-                // A simple update with the current state
-                this.view.webview.postMessage({
-                    type: JsonSchemaRendererProvider.viewType + '.updateFromExtension',
-                    text: this.state
-                });
-                break;
-            }
-            case schema !== this.state: {
-                // Set new state and update webview
-                this.state = schema;
-                this.view.webview.postMessage({
-                    type: JsonSchemaRendererProvider.viewType + '.updateFromExtension',
-                    text: this.state
-                });
-                break;
-            }
+        this.view.webview.postMessage({
+            type: JsonSchemaRendererProvider.viewType + '.updateFromExtension',
+            text: this.state
+        });
+    }
+
+    public dispose() {
+        delete this.view;
+    }
+
+    public isVisible(): boolean {
+        if (this.view) {
+            return this.view.visible;
         }
+        return false;
     }
 
     public setInitialContent(schema: JSON): void {
@@ -85,10 +90,4 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
         }
     }
 
-    public isVisible(): boolean {
-        if (this.view) {
-            return this.view.visible;
-        }
-        return false;
-    }
 }
