@@ -148,8 +148,8 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                     if (isBuffer) {
                         updateWebview(JsonSchemaBuilderProvider.viewType + '.updateFromExtension');
                         isBuffer = false;
-                    } else {
-                        this.renderer.updateRenderer(getContentAsJson(document.getText()));  // only needed because of retainContextWhenHidden
+                    } else if (webviewPanel.options.retainContextWhenHidden) {
+                        this.renderer.updateRenderer(getContentAsJson(document.getText()));
                     }
                     /* falls through */
                 }

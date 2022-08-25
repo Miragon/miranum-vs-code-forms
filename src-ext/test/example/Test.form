@@ -140,6 +140,32 @@
                             }
                         }
                     }
+                },
+                {
+                    "containerType": "group",
+                    "title": "Group",
+                    "description": "",
+                    "x-options": {
+                        "childrenClass": "pl-0"
+                    },
+                    "properties": {
+                        "3a019b41-612a-464b-9078-b5233cdfa4e7": {
+                            "fieldType": "text",
+                            "title": "Textfield",
+                            "type": "string",
+                            "x-options": {
+                                "fieldColProps": {
+                                    "cols": 12,
+                                    "sm": 12
+                                }
+                            },
+                            "x-props": {
+                                "outlined": true,
+                                "dense": true
+                            }
+                        }
+                    },
+                    "key": "b1e88768-9b9d-48f6-9a61-62f82d7d0e94"
                 }
             ]
         }
