@@ -5,10 +5,11 @@ export type VsCode = {
 };
 
 type VscMessage = {
-    type: string,
-    content: JSON
+    type: string;
+    content: JSON;
 }
 
 type VscState = {
-    text: JSON
+    text: string;
+    mode: string;
 }
