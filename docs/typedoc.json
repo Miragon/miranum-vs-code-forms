@@ -18,6 +18,11 @@
     "static-first"
   ],
   "plugin": [
-    "typedoc-plugin-markdown"
-  ]
+    "typedoc-umlclass"
+  ],
+  "umlClassDiagram": {
+    "type": "detailed",
+    "location": "local",
+    "format": "svg"
+  }
 }

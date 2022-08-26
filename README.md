@@ -50,7 +50,7 @@ For an explanation on how to get started, please refer to the [quickstart doc](d
 
 ## Documentation
 
-For all further documentation, please refer to the [documentations doc](docs/extension/README.md).
+For all further documentation, please refer to the [documentations doc](docs/extension/index.html).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
