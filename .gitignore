@@ -6,4 +6,5 @@ dist
 **/.idea
 **/.DS_Store
 
+docs/documentation.template.md
 src-ext/test/example

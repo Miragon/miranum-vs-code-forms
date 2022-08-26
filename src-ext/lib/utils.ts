@@ -83,26 +83,26 @@ export function getContentAsJson(text: string): JSON {
 /**
  * Get the HTML-Document which display the webview
  * @param webview Webview belonging to the panel
- * @param context
+ * @param extensionUri
  * @param initialContent
  * @param mode Says which part of the Vue-App should be displayed
  * @returns a string which represents the html content
  */
-export function getHtmlForWebview(webview: vscode.Webview, context: vscode.ExtensionContext, initialContent: JSON, mode: string): string {
+export function getHtmlForWebview(webview: vscode.Webview, extensionUri: vscode.Uri, initialContent: JSON, mode: string): string {
     const vueAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'dist', 'client', 'client.mjs'
+        extensionUri, 'dist', 'client', 'client.mjs'
     ));
 
     const styleResetUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'localResources', 'css', 'reset.css'
+        extensionUri, 'localResources', 'css', 'reset.css'
     ));
 
     const styleAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'dist', 'client', 'style.css'
+        extensionUri, 'dist', 'client', 'style.css'
     ));
 
     const fontAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        context.extensionUri, 'dist', 'client', 'assets', 'css', 'materialdesignicons.min.css'
+        extensionUri, 'dist', 'client', 'assets', 'css', 'materialdesignicons.min.css'
     ));
 
     const nonce = getNonce();
