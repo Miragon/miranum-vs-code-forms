@@ -28,6 +28,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+Display and edit forms in VS Code using [DigiWF Form Builder](https://github.com/it-at-m/digiwf-form-builder) and
+[DigiWF Form Renderer](https://github.com/it-at-m/digiwf-form-renderer).
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -38,7 +40,20 @@
 
 The documentation project is built with technologies we use in our projects:
 
-* *write here the list of used technologies*
+* [TypeScript](https://www.typescriptlang.org/)
+* [VS Code API](https://code.visualstudio.com/api/references/vscode-api)
+* [Vue.js](https://vuejs.org/)
+* [Vuetify.js](https://vuetifyjs.com/en/)
+* [Vite.js](https://vitejs.dev/)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Features
+
+* Modify `.form`-Files in a Modeler using Drag and Drop
+  * if necessary use the `VS Code` standard text editor to apply changes
+* View your changes live in a separate preview
+* Save your changes to a local file
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
