@@ -1,0 +1,23 @@
+{
+  "entryPoints": [
+    "../src-ext"
+  ],
+  "entryPointStrategy": "expand",
+  "externalPattern": [
+    "../src-ext/lib/**/*.ts"
+  ],
+  "exclude": [
+    "../src-ext/test/**/*"
+  ],
+  "out": "extension",
+  "includeVersion": true,
+  "tsconfig": "../tsconfig-extension.json",
+  "readme": "documentation.template.md",
+  "sort": [
+    "visibility",
+    "static-first"
+  ],
+  "plugin": [
+    "typedoc-plugin-markdown"
+  ]
+}

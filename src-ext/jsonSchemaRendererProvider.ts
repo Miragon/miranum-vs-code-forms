@@ -1,6 +1,10 @@
 import * as vscode from 'vscode';
 import {getHtmlForWebview} from "./lib/utils";
 
+/**
+ * The [WebviewView](https://code.visualstudio.com/api/extension-guides/webview) renders the content of the current active
+ * custom text editor.
+ */
 export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
 
     public static readonly viewType = 'jsonschema-renderer';
@@ -17,6 +21,12 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
         ));
     }
 
+    /**
+     * Called when the WebviewView is opened.
+     * @param webviewView A webview based view
+     * @param context Additional information the webview view being resolved.
+     * @param token A token to request cancellation of a asynchronous or long running operation
+     */
     public resolveWebviewView(
         webviewView: vscode.WebviewView,
         context: vscode.WebviewViewResolveContext,
@@ -33,7 +43,7 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
             ]
         };
 
-        webviewView.webview.html = getHtmlForWebview(webviewView.webview, this.context, this.state!, "renderer");
+        webviewView.webview.html = getHtmlForWebview(webviewView.webview, this.context.extensionUri, this.state!, "renderer");
 
         const changeViewState = webviewView.onDidChangeVisibility(() => {
             if (webviewView.visible) {
@@ -50,6 +60,10 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
         });
     }
 
+    /**
+     * Function which is called by the custom text editor to update the content of the webview view.
+     * @param schema The new content for rendering
+     */
     public updateRenderer(schema?: JSON): void {
         if (schema && schema !== this.state) {
             // The state of the provider have to change whether a view exists or not.
@@ -69,10 +83,16 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
         });
     }
 
+    /**
+     * Function which is called by the custom text editor to dispose the webview view.
+     */
     public dispose() {
         delete this.view;
     }
 
+    /**
+     * Function which is called by the custom text editor to get the current view state.
+     */
     public isVisible(): boolean {
         if (this.view) {
             return this.view.visible;
@@ -80,14 +100,10 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
         return false;
     }
 
+    /**
+     * Function which is called by the custom text editor to set the initial content of the data model.
+     */
     public setInitialContent(schema: JSON): void {
         this.state = schema;
     }
-
-    public show(preserveFocus = false): void {
-        if (this.view) {
-            this.view.show(preserveFocus);
-        }
-    }
-
 }
