@@ -23,7 +23,8 @@
   "activationEvents": [
     "onCustomEditor:jsonschema-builder",
     "onView:jsonschema-renderer",
-    "onCommand:jsonschema-renderer.update"
+    "onCommand:jsonschema-renderer.update",
+    "onCommand:jsonschema-builder.toggleTextEditor"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -43,7 +44,7 @@
     "configuration": {
       "title": "DigiWF",
       "properties": {
-        "jsonSchemaBuilder.toggleStandardEditor": {
+        "jsonSchemaBuilder.toggleTextEditor": {
           "type": "string",
           "default": "Group",
           "description": "Choose where to open the standard text editor.",
@@ -58,8 +59,17 @@
         }
       }
     },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "jsonschema-preview",
+          "title": "JsonSchema Preview",
+          "icon": "$(notebook-render-output)"
+        }
+      ]
+    },
     "views": {
-      "explorer": [
+      "jsonschema-preview": [
         {
           "id": "jsonschema-renderer",
           "name": "JSON Schema Renderer",
@@ -76,8 +86,8 @@
         "icon": "$(extensions-sync-enabled)"
       },
       {
-        "command": "jsonschema-builder.toggleStdEditor",
-        "title": "DigiWF: Toggle Standard Editor",
+        "command": "jsonschema-builder.toggleTextEditor",
+        "title": "DigiWF: Toggle Standard Text Editor",
         "icon": "$(notebook-mimetype)"
       }
     ],
@@ -88,7 +98,7 @@
           "when": "view == jsonschema-renderer"
         },
         {
-          "command": "jsonschema-builder.toggleStdEditor",
+          "command": "jsonschema-builder.toggleTextEditor",
           "when": "resourceExtname == .form && jsonschema-builder.openCustomEditors > 0"
         }
       ],
@@ -101,7 +111,7 @@
       ],
       "editor/title": [
         {
-          "command": "jsonschema-builder.toggleStdEditor",
+          "command": "jsonschema-builder.toggleTextEditor",
           "group": "navigation",
           "when": "resourceExtname == .form && jsonschema-builder.openCustomEditors > 0"
         }
