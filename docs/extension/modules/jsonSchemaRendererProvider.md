@@ -1,4 +1,4 @@
-[vs-code-vuetify-jsonschema-builder - v0.1.0](../README.md) / [Exports](../modules.md) / jsonSchemaRendererProvider
+[VS Code JsonSchema Builder - v0.1.0](../README.md) / jsonSchemaRendererProvider
 
 # Module: jsonSchemaRendererProvider
 

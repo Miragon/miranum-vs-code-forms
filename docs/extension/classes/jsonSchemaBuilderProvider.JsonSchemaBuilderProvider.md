@@ -1,4 +1,4 @@
-[vs-code-vuetify-jsonschema-builder - v0.1.0](../README.md) / [Exports](../modules.md) / [jsonSchemaBuilderProvider](../modules/jsonSchemaBuilderProvider.md) / JsonSchemaBuilderProvider
+[VS Code JsonSchema Builder - v0.1.0](../README.md) / [jsonSchemaBuilderProvider](../modules/jsonSchemaBuilderProvider.md) / JsonSchemaBuilderProvider
 
 # Class: JsonSchemaBuilderProvider
 
@@ -44,7 +44,7 @@ for rendering [Json Schema](https://json-schema.org/).
 
 #### Defined in
 
-[src-ext/jsonSchemaBuilderProvider.ts:17](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaBuilderProvider.ts#L17)
+[src-ext/jsonSchemaBuilderProvider.ts:17](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaBuilderProvider.ts#L17)
 
 ___
 
@@ -56,7 +56,7 @@ Number of currently open custom text editors with the view type `jsonschema-buil
 
 #### Defined in
 
-[src-ext/jsonSchemaBuilderProvider.ts:20](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaBuilderProvider.ts#L20)
+[src-ext/jsonSchemaBuilderProvider.ts:20](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaBuilderProvider.ts#L20)
 
 ___
 
@@ -68,7 +68,7 @@ Function to apply changes to the data model.
 
 #### Defined in
 
-[src-ext/jsonSchemaBuilderProvider.ts:22](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaBuilderProvider.ts#L22)
+[src-ext/jsonSchemaBuilderProvider.ts:22](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaBuilderProvider.ts#L22)
 
 ___
 
@@ -80,7 +80,7 @@ The content of the current active custom text editor.
 
 #### Defined in
 
-[src-ext/jsonSchemaBuilderProvider.ts:24](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaBuilderProvider.ts#L24)
+[src-ext/jsonSchemaBuilderProvider.ts:24](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaBuilderProvider.ts#L24)
 
 ___
 
@@ -92,7 +92,7 @@ The WebviewView (JsonSchemaRendererProvider) which renders the content of the ac
 
 #### Defined in
 
-[src-ext/jsonSchemaBuilderProvider.ts:26](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaBuilderProvider.ts#L26)
+[src-ext/jsonSchemaBuilderProvider.ts:26](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaBuilderProvider.ts#L26)
 
 ## Constructors
 
@@ -108,7 +108,7 @@ The WebviewView (JsonSchemaRendererProvider) which renders the content of the ac
 
 #### Defined in
 
-[src-ext/jsonSchemaBuilderProvider.ts:28](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaBuilderProvider.ts#L28)
+[src-ext/jsonSchemaBuilderProvider.ts:28](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaBuilderProvider.ts#L28)
 
 ## Methods
 
@@ -136,7 +136,7 @@ vscode.CustomTextEditorProvider.resolveCustomTextEditor
 
 #### Defined in
 
-[src-ext/jsonSchemaBuilderProvider.ts:54](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaBuilderProvider.ts#L54)
+[src-ext/jsonSchemaBuilderProvider.ts:54](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaBuilderProvider.ts#L54)
 
 ___
 
@@ -161,7 +161,7 @@ Thenable
 
 #### Defined in
 
-[src-ext/jsonSchemaBuilderProvider.ts:195](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaBuilderProvider.ts#L195)
+[src-ext/jsonSchemaBuilderProvider.ts:195](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaBuilderProvider.ts#L195)
 
 ___
 
@@ -181,7 +181,7 @@ ___
 
 #### Defined in
 
-[src-ext/jsonSchemaBuilderProvider.ts:214](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaBuilderProvider.ts#L214)
+[src-ext/jsonSchemaBuilderProvider.ts:214](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaBuilderProvider.ts#L214)
 
 ___
 
@@ -201,4 +201,4 @@ ___
 
 #### Defined in
 
-[src-ext/jsonSchemaBuilderProvider.ts:233](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaBuilderProvider.ts#L233)
+[src-ext/jsonSchemaBuilderProvider.ts:233](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaBuilderProvider.ts#L233)

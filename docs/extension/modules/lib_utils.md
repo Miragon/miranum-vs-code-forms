@@ -1,4 +1,4 @@
-[vs-code-vuetify-jsonschema-builder - v0.1.0](../README.md) / [Exports](../modules.md) / lib/utils
+[VS Code JsonSchema Builder - v0.1.0](../README.md) / lib/utils
 
 # Module: lib/utils
 
@@ -22,7 +22,7 @@
 
 #### Defined in
 
-[src-ext/lib/utils.ts:3](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/lib/utils.ts#L3)
+[src-ext/lib/utils.ts:3](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/lib/utils.ts#L3)
 
 ___
 
@@ -46,7 +46,7 @@ an json object
 
 #### Defined in
 
-[src-ext/lib/utils.ts:71](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/lib/utils.ts#L71)
+[src-ext/lib/utils.ts:71](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/lib/utils.ts#L71)
 
 ___
 
@@ -73,4 +73,4 @@ a string which represents the html content
 
 #### Defined in
 
-[src-ext/lib/utils.ts:91](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/lib/utils.ts#L91)
+[src-ext/lib/utils.ts:91](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/lib/utils.ts#L91)

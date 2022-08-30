@@ -1,4 +1,4 @@
-[vs-code-vuetify-jsonschema-builder - v0.1.0](../README.md) / [Exports](../modules.md) / extension
+[VS Code JsonSchema Builder - v0.1.0](../README.md) / extension
 
 # Module: extension
 
@@ -28,4 +28,4 @@ Function called by vscode when the user opens a .form-file and no JsonSchemaBuil
 
 #### Defined in
 
-[src-ext/extension.ts:8](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/extension.ts#L8)
+[src-ext/extension.ts:8](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/extension.ts#L8)

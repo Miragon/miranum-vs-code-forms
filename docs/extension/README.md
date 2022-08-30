@@ -1,7 +1,13 @@
-vs-code-vuetify-jsonschema-builder - v0.1.0 / [Exports](modules.md)
+VS Code JsonSchema Builder - v0.1.0
 
-# Documentation
+# VS Code JsonSchema Builder - v0.1.0
 
-The diagram below gives a first overview of the extension. 
+## Table of contents
 
-For more detailed information click [here](modules.md).
+### Modules
+
+- [extension](modules/extension.md)
+- [jsonSchemaBuilderProvider](modules/jsonSchemaBuilderProvider.md)
+- [jsonSchemaRendererProvider](modules/jsonSchemaRendererProvider.md)
+- [lib/TextEditor](modules/lib_TextEditor.md)
+- [lib/utils](modules/lib_utils.md)

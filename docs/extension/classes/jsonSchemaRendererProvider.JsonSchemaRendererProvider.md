@@ -1,4 +1,4 @@
-[vs-code-vuetify-jsonschema-builder - v0.1.0](../README.md) / [Exports](../modules.md) / [jsonSchemaRendererProvider](../modules/jsonSchemaRendererProvider.md) / JsonSchemaRendererProvider
+[VS Code JsonSchema Builder - v0.1.0](../README.md) / [jsonSchemaRendererProvider](../modules/jsonSchemaRendererProvider.md) / JsonSchemaRendererProvider
 
 # Class: JsonSchemaRendererProvider
 
@@ -39,7 +39,7 @@ custom text editor.
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:10](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaRendererProvider.ts#L10)
+[src-ext/jsonSchemaRendererProvider.ts:10](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaRendererProvider.ts#L10)
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:12](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaRendererProvider.ts#L12)
+[src-ext/jsonSchemaRendererProvider.ts:12](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaRendererProvider.ts#L12)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:13](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaRendererProvider.ts#L13)
+[src-ext/jsonSchemaRendererProvider.ts:13](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaRendererProvider.ts#L13)
 
 ## Constructors
 
@@ -75,7 +75,7 @@ ___
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:15](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaRendererProvider.ts#L15)
+[src-ext/jsonSchemaRendererProvider.ts:15](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaRendererProvider.ts#L15)
 
 ## Methods
 
@@ -103,7 +103,7 @@ vscode.WebviewViewProvider.resolveWebviewView
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:30](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaRendererProvider.ts#L30)
+[src-ext/jsonSchemaRendererProvider.ts:30](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaRendererProvider.ts#L30)
 
 ___
 
@@ -125,7 +125,7 @@ Function which is called by the custom text editor to update the content of the 
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:67](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaRendererProvider.ts#L67)
+[src-ext/jsonSchemaRendererProvider.ts:67](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaRendererProvider.ts#L67)
 
 ___
 
@@ -141,7 +141,7 @@ Function which is called by the custom text editor to dispose the webview view.
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:89](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaRendererProvider.ts#L89)
+[src-ext/jsonSchemaRendererProvider.ts:89](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaRendererProvider.ts#L89)
 
 ___
 
@@ -157,7 +157,7 @@ Function which is called by the custom text editor to get the current view state
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:96](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaRendererProvider.ts#L96)
+[src-ext/jsonSchemaRendererProvider.ts:96](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaRendererProvider.ts#L96)
 
 ___
 
@@ -179,4 +179,4 @@ Function which is called by the custom text editor to set the initial content of
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:106](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/jsonSchemaRendererProvider.ts#L106)
+[src-ext/jsonSchemaRendererProvider.ts:106](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaRendererProvider.ts#L106)

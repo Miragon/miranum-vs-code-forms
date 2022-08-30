@@ -1,4 +1,4 @@
-[vs-code-vuetify-jsonschema-builder - v0.1.0](../README.md) / [Exports](../modules.md) / [lib/TextEditor](../modules/lib_TextEditor.md) / TextEditor
+[VS Code JsonSchema Builder - v0.1.0](../README.md) / [lib/TextEditor](../modules/lib_TextEditor.md) / TextEditor
 
 # Class: TextEditor
 
@@ -43,7 +43,7 @@ Get the user settings and subscribe to the `Change-Event` which triggers when th
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:15](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/lib/TextEditor.ts#L15)
+[src-ext/lib/TextEditor.ts:15](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/lib/TextEditor.ts#L15)
 
 ___
 
@@ -59,7 +59,7 @@ Function which is called by the custom text editor to toggle the standard text e
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:36](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/lib/TextEditor.ts#L36)
+[src-ext/lib/TextEditor.ts:36](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/lib/TextEditor.ts#L36)
 
 ___
 
@@ -75,7 +75,7 @@ Checks for open standard text editors with the same data model.
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:61](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/lib/TextEditor.ts#L61)
+[src-ext/lib/TextEditor.ts:61](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/lib/TextEditor.ts#L61)
 
 ___
 
@@ -91,7 +91,7 @@ Dependent on the user settings returns the right options where the standard text
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:77](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/lib/TextEditor.ts#L77)
+[src-ext/lib/TextEditor.ts:77](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/lib/TextEditor.ts#L77)
 
 ## Accessors
 
@@ -113,7 +113,7 @@ Function which is called by the custom text editor to set the data model of the 
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:28](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/lib/TextEditor.ts#L28)
+[src-ext/lib/TextEditor.ts:28](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/lib/TextEditor.ts#L28)
 
 ## Constructors
 
@@ -129,7 +129,7 @@ Function which is called by the custom text editor to set the data model of the 
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:8](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/lib/TextEditor.ts#L8)
+[src-ext/lib/TextEditor.ts:8](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/lib/TextEditor.ts#L8)
 
 ___
 
@@ -139,7 +139,7 @@ ___
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:9](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/lib/TextEditor.ts#L9)
+[src-ext/lib/TextEditor.ts:9](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/lib/TextEditor.ts#L9)
 
 ___
 
@@ -149,4 +149,4 @@ ___
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:10](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/lib/TextEditor.ts#L10)
+[src-ext/lib/TextEditor.ts:10](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/lib/TextEditor.ts#L10)
