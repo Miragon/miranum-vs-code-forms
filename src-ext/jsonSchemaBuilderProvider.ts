@@ -217,7 +217,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
         // Necessary set up for toggle command
         // only enable the command if a custom editor is open
-        JsonSchemaBuilderProvider.counter++ // = this.getNumOfCustomEditors();
+        JsonSchemaBuilderProvider.counter++;
         vscode.commands.executeCommand('setContext', 'jsonschema-builder.openCustomEditors', JsonSchemaBuilderProvider.counter);
         TextEditor.document = document; // set the document of the active editor
 
