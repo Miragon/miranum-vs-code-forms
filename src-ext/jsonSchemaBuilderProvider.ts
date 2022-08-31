@@ -1,3 +1,10 @@
+/**
+ * This module contains the CustomTextEditorProvider for the `JsonSchema Builder`.
+ * It handles the webview and synchronizes the webview with the data model.
+ * Furthermore, it registers the {@link JsonSchemaRendererProvider} and {@link TextEditor}.
+ * @module JsonSchemaBuilderProvider
+ */
+
 import * as vscode from 'vscode';
 import {getContentAsJson, getDefault, getHtmlForWebview} from './lib/utils';
 import {TextEditor} from "./lib/TextEditor";
@@ -14,6 +21,7 @@ import {JsonSchemaRendererProvider} from "./jsonSchemaRendererProvider";
  */
 export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvider {
 
+    /** Unique identifier for the custom editor provider. */
     public static readonly viewType = 'jsonschema-builder';
 
     /** Number of currently open custom text editors with the view type `jsonschema-builder`. */
@@ -25,11 +33,14 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
     /** The WebviewView ({@link JsonSchemaRendererProvider}) which renders the content of the active custom text editor. */
     private readonly renderer: JsonSchemaRendererProvider;
 
+    /**
+     * Register the standard vscode text editor ({@link TextEditor}) and the WebviewView ({@link JsonSchemaRendererProvider}).
+     * @param context The context of the extension
+     */
     constructor(
         private readonly context: vscode.ExtensionContext
     ) {
         // Register the command for toggling the standard vscode text editor.
-        //this.context.subscriptions.push(TextEditor.register());
         TextEditor.register(this.context);
         this.context.subscriptions.push(vscode.commands.registerCommand(
             JsonSchemaBuilderProvider.viewType + '.toggleTextEditor',
@@ -47,8 +58,8 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
     }
 
     /**
-     * Called when the custom editor is opened.
-     * @param document Represents the data model (.form)
+     * Called when a new custom editor is opened.
+     * @param document Represents the data model (.form-file)
      * @param webviewPanel The panel which contains the webview
      * @param token A cancellation token that indicates that the result is no longer needed
      */
@@ -213,6 +224,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             });
     }
 
+    /** @hidden */
     private init(document: vscode.TextDocument): void {
         // Set the initial content to be sent to the webview
         this.content = this.getContent(document.getText());
@@ -232,6 +244,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         }
     }
 
+    /** @hidden */
     private getContent(text: string): JSON {
         let content: JSON;
         if (text.length === 0) {

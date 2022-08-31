@@ -1,8 +1,8 @@
-[VS Code JsonSchema Builder - v0.1.0](../README.md) / [jsonSchemaRendererProvider](../modules/jsonSchemaRendererProvider.md) / JsonSchemaRendererProvider
+[VS Code JsonSchema Builder - v0.1.0](../documentation.md) / [JsonSchemaRendererProvider](../modules/JsonSchemaRendererProvider.md) / JsonSchemaRendererProvider
 
 # Class: JsonSchemaRendererProvider
 
-[jsonSchemaRendererProvider](../modules/jsonSchemaRendererProvider.md).JsonSchemaRendererProvider
+[JsonSchemaRendererProvider](../modules/JsonSchemaRendererProvider.md).JsonSchemaRendererProvider
 
 The [WebviewView](https://code.visualstudio.com/api/extension-guides/webview) renders the content of the current active
 custom text editor.
@@ -15,21 +15,21 @@ custom text editor.
 
 ### Properties
 
-- [viewType](jsonSchemaRendererProvider.JsonSchemaRendererProvider.md#viewtype)
-- [view](jsonSchemaRendererProvider.JsonSchemaRendererProvider.md#view)
-- [state](jsonSchemaRendererProvider.JsonSchemaRendererProvider.md#state)
+- [viewType](JsonSchemaRendererProvider.JsonSchemaRendererProvider.md#viewtype)
+- [view](JsonSchemaRendererProvider.JsonSchemaRendererProvider.md#view)
+- [content](JsonSchemaRendererProvider.JsonSchemaRendererProvider.md#content)
 
 ### Constructors
 
-- [constructor](jsonSchemaRendererProvider.JsonSchemaRendererProvider.md#constructor)
+- [constructor](JsonSchemaRendererProvider.JsonSchemaRendererProvider.md#constructor)
 
 ### Methods
 
-- [resolveWebviewView](jsonSchemaRendererProvider.JsonSchemaRendererProvider.md#resolvewebviewview)
-- [updateRenderer](jsonSchemaRendererProvider.JsonSchemaRendererProvider.md#updaterenderer)
-- [dispose](jsonSchemaRendererProvider.JsonSchemaRendererProvider.md#dispose)
-- [isVisible](jsonSchemaRendererProvider.JsonSchemaRendererProvider.md#isvisible)
-- [setInitialContent](jsonSchemaRendererProvider.JsonSchemaRendererProvider.md#setinitialcontent)
+- [resolveWebviewView](JsonSchemaRendererProvider.JsonSchemaRendererProvider.md#resolvewebviewview)
+- [updateRenderer](JsonSchemaRendererProvider.JsonSchemaRendererProvider.md#updaterenderer)
+- [dispose](JsonSchemaRendererProvider.JsonSchemaRendererProvider.md#dispose)
+- [isVisible](JsonSchemaRendererProvider.JsonSchemaRendererProvider.md#isvisible)
+- [setInitialContent](JsonSchemaRendererProvider.JsonSchemaRendererProvider.md#setinitialcontent)
 
 ## Properties
 
@@ -37,9 +37,11 @@ custom text editor.
 
 ▪ `Static` `Readonly` **viewType**: ``"jsonschema-renderer"``
 
+Unique identifier for the webview view provider.
+
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:10](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaRendererProvider.ts#L10)
+[src-ext/jsonSchemaRendererProvider.ts:17](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/0ba898a/src-ext/jsonSchemaRendererProvider.ts#L17)
 
 ___
 
@@ -47,19 +49,23 @@ ___
 
 • `Private` `Optional` **view**: `WebviewView`
 
+The webview which is displayed as a view inside a view container.
+
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:12](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaRendererProvider.ts#L12)
+[src-ext/jsonSchemaRendererProvider.ts:20](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/0ba898a/src-ext/jsonSchemaRendererProvider.ts#L20)
 
 ___
 
-### state
+### content
 
-• `Private` `Optional` **state**: `JSON`
+• `Private` `Optional` **content**: `JSON`
+
+The current content which is displayed.
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:13](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaRendererProvider.ts#L13)
+[src-ext/jsonSchemaRendererProvider.ts:22](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/0ba898a/src-ext/jsonSchemaRendererProvider.ts#L22)
 
 ## Constructors
 
@@ -67,15 +73,17 @@ ___
 
 • **new JsonSchemaRendererProvider**(`context`)
 
+Register the update-command.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `context` | `ExtensionContext` |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `context` | `ExtensionContext` | The context of the extension |
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:15](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaRendererProvider.ts#L15)
+[src-ext/jsonSchemaRendererProvider.ts:28](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/0ba898a/src-ext/jsonSchemaRendererProvider.ts#L28)
 
 ## Methods
 
@@ -83,15 +91,15 @@ ___
 
 ▸ **resolveWebviewView**(`webviewView`, `context`, `token`): `void` \| `Thenable`<`void`\>
 
-Called when the WebviewView is opened.
+Called when a new WebviewView is opened.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `webviewView` | `WebviewView` | A webview based view |
-| `context` | `WebviewViewResolveContext`<`unknown`\> | Additional information the webview view being resolved. |
-| `token` | `CancellationToken` | A token to request cancellation of a asynchronous or long running operation |
+| `context` | `WebviewViewResolveContext`<`unknown`\> | Additional information when the webview view is being resolved. |
+| `token` | `CancellationToken` | A token to request cancellation of an asynchronous or long-running operation |
 
 #### Returns
 
@@ -103,7 +111,7 @@ vscode.WebviewViewProvider.resolveWebviewView
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:30](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaRendererProvider.ts#L30)
+[src-ext/jsonSchemaRendererProvider.ts:43](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/0ba898a/src-ext/jsonSchemaRendererProvider.ts#L43)
 
 ___
 
@@ -125,7 +133,7 @@ Function which is called by the custom text editor to update the content of the 
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:67](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaRendererProvider.ts#L67)
+[src-ext/jsonSchemaRendererProvider.ts:80](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/0ba898a/src-ext/jsonSchemaRendererProvider.ts#L80)
 
 ___
 
@@ -141,7 +149,7 @@ Function which is called by the custom text editor to dispose the webview view.
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:89](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaRendererProvider.ts#L89)
+[src-ext/jsonSchemaRendererProvider.ts:102](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/0ba898a/src-ext/jsonSchemaRendererProvider.ts#L102)
 
 ___
 
@@ -157,7 +165,7 @@ Function which is called by the custom text editor to get the current view state
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:96](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaRendererProvider.ts#L96)
+[src-ext/jsonSchemaRendererProvider.ts:109](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/0ba898a/src-ext/jsonSchemaRendererProvider.ts#L109)
 
 ___
 
@@ -179,4 +187,4 @@ Function which is called by the custom text editor to set the initial content of
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:106](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/dae9909/src-ext/jsonSchemaRendererProvider.ts#L106)
+[src-ext/jsonSchemaRendererProvider.ts:119](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/0ba898a/src-ext/jsonSchemaRendererProvider.ts#L119)

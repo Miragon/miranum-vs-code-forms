@@ -11,6 +11,7 @@
   ],
   "out": "extension",
   "name": "VS Code JsonSchema Builder",
+  "entryDocument": "documentation.md",
   "includeVersion": true,
   "tsconfig": "../tsconfig-extension.json",
   "readme": "none",

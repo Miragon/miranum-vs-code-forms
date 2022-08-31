@@ -55,6 +55,10 @@ The documentation project is built with technologies we use in our projects:
 * View your changes live in a separate preview
 * Save your changes to a local file
 
+![JsonSchemaBuilder_1](./images/JsonSchemaBuilder_1.gif)
+
+![JsonSchemaBuilder_2](./images/JsonSchemaBuilder_2.gif)
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Getting started
@@ -65,7 +69,7 @@ For an explanation on how to get started, please refer to the [quickstart doc](d
 
 ## Documentation
 
-For all further documentation, please refer to the [documentations doc](docs/extension/README.md).
+For all further documentation, please refer to the [documentations doc](docs/extension/documentation.md).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
