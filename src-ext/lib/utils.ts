@@ -1,5 +1,13 @@
+/**
+ * This module includes helper-functions and functions which are used by the `JsonSchema Builder` and `JsonSchema Renderer`.
+ * @module Utils
+ */
+
 import * as vscode from "vscode";
 
+/**
+ * Get the default content which is displayed when the data model is empty.
+ */
 export function getDefault(): JSON {
     return JSON.parse(JSON.stringify({
         "key": "MyStartForm", "type": "object", "allOf": [{

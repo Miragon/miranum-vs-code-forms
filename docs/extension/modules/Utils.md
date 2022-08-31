@@ -1,14 +1,16 @@
-[vs-code-vuetify-jsonschema-builder - v0.1.0](../README.md) / [Exports](../modules.md) / lib/utils
+[VS Code JsonSchema Builder - v0.1.0](../documentation.md) / Utils
 
-# Module: lib/utils
+# Module: Utils
+
+This module includes helper-functions and functions which are used by the `JsonSchema Builder` and `JsonSchema Renderer`.
 
 ## Table of contents
 
 ### Functions
 
-- [getDefault](lib_utils.md#getdefault)
-- [getContentAsJson](lib_utils.md#getcontentasjson)
-- [getHtmlForWebview](lib_utils.md#gethtmlforwebview)
+- [getDefault](Utils.md#getdefault)
+- [getContentAsJson](Utils.md#getcontentasjson)
+- [getHtmlForWebview](Utils.md#gethtmlforwebview)
 
 ## Functions
 
@@ -16,13 +18,15 @@
 
 ▸ **getDefault**(): `JSON`
 
+Get the default content which is displayed when the data model is empty.
+
 #### Returns
 
 `JSON`
 
 #### Defined in
 
-[src-ext/lib/utils.ts:3](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/lib/utils.ts#L3)
+[src-ext/lib/utils.ts:11](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/c906668/src-ext/lib/utils.ts#L11)
 
 ___
 
@@ -46,7 +50,7 @@ an json object
 
 #### Defined in
 
-[src-ext/lib/utils.ts:71](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/lib/utils.ts#L71)
+[src-ext/lib/utils.ts:79](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/c906668/src-ext/lib/utils.ts#L79)
 
 ___
 
@@ -73,4 +77,4 @@ a string which represents the html content
 
 #### Defined in
 
-[src-ext/lib/utils.ts:91](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/b7ab68e/src-ext/lib/utils.ts#L91)
+[src-ext/lib/utils.ts:99](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/c906668/src-ext/lib/utils.ts#L99)

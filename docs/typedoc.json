@@ -10,9 +10,11 @@
     "../src-ext/test/**/*"
   ],
   "out": "extension",
+  "name": "VS Code JsonSchema Builder",
+  "entryDocument": "documentation.md",
   "includeVersion": true,
   "tsconfig": "../tsconfig-extension.json",
-  "readme": "documentation.template.md",
+  "readme": "none",
   "sort": [
     "visibility",
     "static-first"

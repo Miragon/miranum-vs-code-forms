@@ -1,16 +1,25 @@
+/**
+ * This module contains the class which handles the standard vscode text editor.
+ * It includes the function for the toggle-command and handles the open and closing behaviour.
+ * @module TextEditor
+ */
+
 import * as vscode from "vscode";
 
 /**
- * Class which handles the toggle command registered in the custom text editor.
+ * Class which handles the standard vscode text editor.
  */
 export abstract class TextEditor {
 
+    /** The document associated with this text editor. */
     private static _document: vscode.TextDocument;
+    /** Boolean if set to `true` means that a text editor is already open. */
     private static isOpen = false;
+    /** The current configuration. */
     private static config: string;
 
     /**
-     * Register all necessary events for the vs code standard text editor.
+     * Register ConfigChange-Event and CloseTab-Event.
      */
     public static register(context: vscode.ExtensionContext): void {
         this.config = vscode.workspace.getConfiguration('jsonSchemaBuilder').get<string>('toggleTextEditor', 'Group');

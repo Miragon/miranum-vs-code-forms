@@ -1,8 +1,14 @@
+/**
+ * This module contains the activate-Function which is called when the user opens a `.form`-File.
+ * @module Extension
+ */
+
 import * as vscode from 'vscode';
 import {JsonSchemaBuilderProvider} from './jsonSchemaBuilderProvider';
 
 /**
  * Function called by vscode when the user opens a .form-file and no JsonSchemaBuilderProvider is registered.
+ * It registers a [Custom Text Editor](https://code.visualstudio.com/api/extension-guides/custom-editors).
  * @param context The context of the extension
  */
 export function activate(context: vscode.ExtensionContext) {

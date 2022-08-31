@@ -1,3 +1,9 @@
+/**
+ * This module contains the WebviewViewProvider for the `JsonSchema Renderer`.
+ * It provides functions for the `JsonSchema Builder` to update and dispose the WebviewView.
+ * @module JsonSchemaRendererProvider
+ */
+
 import * as vscode from 'vscode';
 import {getHtmlForWebview} from "./lib/utils";
 
@@ -7,11 +13,18 @@ import {getHtmlForWebview} from "./lib/utils";
  */
 export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
 
+    /** Unique identifier for the webview view provider. */
     public static readonly viewType = 'jsonschema-renderer';
 
+    /** The webview which is displayed as a view inside a view container. */
     private view?: vscode.WebviewView;
-    private state?: JSON;
+    /** The current content which is displayed. */
+    private content?: JSON;
 
+    /**
+     * Register the update-command.
+     * @param context The context of the extension
+     */
     constructor(private readonly context: vscode.ExtensionContext) {
         this.context.subscriptions.push(vscode.commands.registerCommand(
             JsonSchemaRendererProvider.viewType + '.update',
@@ -22,10 +35,10 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
     }
 
     /**
-     * Called when the WebviewView is opened.
+     * Called when a new WebviewView is opened.
      * @param webviewView A webview based view
-     * @param context Additional information the webview view being resolved.
-     * @param token A token to request cancellation of a asynchronous or long running operation
+     * @param context Additional information when the webview view is being resolved.
+     * @param token A token to request cancellation of an asynchronous or long-running operation
      */
     public resolveWebviewView(
         webviewView: vscode.WebviewView,
@@ -43,13 +56,13 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
             ]
         };
 
-        webviewView.webview.html = getHtmlForWebview(webviewView.webview, this.context.extensionUri, this.state!, "renderer");
+        webviewView.webview.html = getHtmlForWebview(webviewView.webview, this.context.extensionUri, this.content!, "renderer");
 
         const changeViewState = webviewView.onDidChangeVisibility(() => {
             if (webviewView.visible) {
                 webviewView.webview.postMessage({
                     type: JsonSchemaRendererProvider.viewType + '.updateFromExtension',
-                    text: this.state
+                    text: this.content
                 });
             }
         });
@@ -65,12 +78,12 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
      * @param schema The new content for rendering
      */
     public updateRenderer(schema?: JSON): void {
-        if (schema && schema !== this.state) {
-            // The state of the provider have to change whether a view exists or not.
+        if (schema && schema !== this.content) {
+            // The content of the provider have to change whether a view exists or not.
             // This is because when the user switches from a 'JsonSchema Builder' to another file without a .form extension
             // the Renderer will dispose. If the user focus than a different 'JsonSchema Builder' the Renderer is
-            // still disposed, but we set the state and when the Renderer resolves the correct state is used.
-            this.state = schema;
+            // still disposed, but we set the content and when the Renderer resolves the correct content is used.
+            this.content = schema;
         }
 
         if (!this.view) {
@@ -79,7 +92,7 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
 
         this.view.webview.postMessage({
             type: JsonSchemaRendererProvider.viewType + '.updateFromExtension',
-            text: this.state
+            text: this.content
         });
     }
 
@@ -104,6 +117,6 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
      * Function which is called by the custom text editor to set the initial content of the data model.
      */
     public setInitialContent(schema: JSON): void {
-        this.state = schema;
+        this.content = schema;
     }
 }
