@@ -14,7 +14,7 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
 
     constructor(private readonly context: vscode.ExtensionContext) {
         this.context.subscriptions.push(vscode.commands.registerCommand(
-            'jsonschema-renderer.update',
+            JsonSchemaRendererProvider.viewType + '.update',
             () => {
                 this.updateRenderer();
             }

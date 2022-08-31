@@ -29,9 +29,10 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         private readonly context: vscode.ExtensionContext
     ) {
         // Register the command for toggling the standard vscode text editor.
-        this.context.subscriptions.push(TextEditor.register());
+        //this.context.subscriptions.push(TextEditor.register());
+        TextEditor.register(this.context);
         this.context.subscriptions.push(vscode.commands.registerCommand(
-            JsonSchemaBuilderProvider.viewType + '.toggleStdEditor',
+            JsonSchemaBuilderProvider.viewType + '.toggleTextEditor',
             () => {
                 TextEditor.toggle()
             }
@@ -180,6 +181,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             receivedMessage.dispose();
             changeDocumentSubscription.dispose();
 
+            TextEditor.close();
             if (JsonSchemaBuilderProvider.counter <= 0) {
                 this.renderer.dispose();
             }
@@ -217,7 +219,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
         // Necessary set up for toggle command
         // only enable the command if a custom editor is open
-        JsonSchemaBuilderProvider.counter++ // = this.getNumOfCustomEditors();
+        JsonSchemaBuilderProvider.counter++;
         vscode.commands.executeCommand('setContext', 'jsonschema-builder.openCustomEditors', JsonSchemaBuilderProvider.counter);
         TextEditor.document = document; // set the document of the active editor
 
