@@ -41,7 +41,7 @@ Unique identifier for the webview view provider.
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:17](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/jsonSchemaRendererProvider.ts#L17)
+[src-ext/jsonSchemaRendererProvider.ts:17](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/jsonSchemaRendererProvider.ts#L17)
 
 ___
 
@@ -53,7 +53,7 @@ The webview which is displayed as a view inside a view container.
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:20](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/jsonSchemaRendererProvider.ts#L20)
+[src-ext/jsonSchemaRendererProvider.ts:20](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/jsonSchemaRendererProvider.ts#L20)
 
 ___
 
@@ -65,7 +65,7 @@ The current content which is displayed.
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:22](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/jsonSchemaRendererProvider.ts#L22)
+[src-ext/jsonSchemaRendererProvider.ts:22](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/jsonSchemaRendererProvider.ts#L22)
 
 ## Constructors
 
@@ -83,7 +83,7 @@ Register the update-command.
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:28](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/jsonSchemaRendererProvider.ts#L28)
+[src-ext/jsonSchemaRendererProvider.ts:28](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/jsonSchemaRendererProvider.ts#L28)
 
 ## Methods
 
@@ -111,7 +111,7 @@ vscode.WebviewViewProvider.resolveWebviewView
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:43](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/jsonSchemaRendererProvider.ts#L43)
+[src-ext/jsonSchemaRendererProvider.ts:43](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/jsonSchemaRendererProvider.ts#L43)
 
 ___
 
@@ -133,7 +133,7 @@ Function which is called by the custom text editor to update the content of the 
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:80](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/jsonSchemaRendererProvider.ts#L80)
+[src-ext/jsonSchemaRendererProvider.ts:80](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/jsonSchemaRendererProvider.ts#L80)
 
 ___
 
@@ -149,7 +149,7 @@ Function which is called by the custom text editor to dispose the webview view.
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:102](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/jsonSchemaRendererProvider.ts#L102)
+[src-ext/jsonSchemaRendererProvider.ts:102](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/jsonSchemaRendererProvider.ts#L102)
 
 ___
 
@@ -165,7 +165,7 @@ Function which is called by the custom text editor to get the current view state
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:109](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/jsonSchemaRendererProvider.ts#L109)
+[src-ext/jsonSchemaRendererProvider.ts:109](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/jsonSchemaRendererProvider.ts#L109)
 
 ___
 
@@ -187,4 +187,4 @@ Function which is called by the custom text editor to set the initial content of
 
 #### Defined in
 
-[src-ext/jsonSchemaRendererProvider.ts:119](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/jsonSchemaRendererProvider.ts#L119)
+[src-ext/jsonSchemaRendererProvider.ts:119](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/jsonSchemaRendererProvider.ts#L119)

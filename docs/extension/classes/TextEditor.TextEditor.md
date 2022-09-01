@@ -52,7 +52,7 @@ Register ConfigChange-Event and CloseTab-Event.
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:24](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/lib/TextEditor.ts#L24)
+[src-ext/lib/TextEditor.ts:24](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/lib/TextEditor.ts#L24)
 
 ___
 
@@ -68,7 +68,7 @@ Function which is called by the custom text editor to toggle the standard text e
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:75](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/lib/TextEditor.ts#L75)
+[src-ext/lib/TextEditor.ts:75](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/lib/TextEditor.ts#L75)
 
 ___
 
@@ -84,7 +84,7 @@ Close text editor when the corresponding builder is closed.
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:89](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/lib/TextEditor.ts#L89)
+[src-ext/lib/TextEditor.ts:89](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/lib/TextEditor.ts#L89)
 
 ___
 
@@ -100,7 +100,7 @@ Get the tab with the correct text editor.
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:102](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/lib/TextEditor.ts#L102)
+[src-ext/lib/TextEditor.ts:102](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/lib/TextEditor.ts#L102)
 
 ___
 
@@ -122,7 +122,7 @@ Close the current text editor.
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:119](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/lib/TextEditor.ts#L119)
+[src-ext/lib/TextEditor.ts:119](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/lib/TextEditor.ts#L119)
 
 ___
 
@@ -144,7 +144,7 @@ Open a new text editor with the current document.
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:133](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/lib/TextEditor.ts#L133)
+[src-ext/lib/TextEditor.ts:133](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/lib/TextEditor.ts#L133)
 
 ___
 
@@ -160,7 +160,7 @@ Dependent on the user settings returns the right options where the standard text
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:145](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/lib/TextEditor.ts#L145)
+[src-ext/lib/TextEditor.ts:145](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/lib/TextEditor.ts#L145)
 
 ## Accessors
 
@@ -182,7 +182,7 @@ Function which is called by the custom text editor to set the data model of the 
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:51](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/lib/TextEditor.ts#L51)
+[src-ext/lib/TextEditor.ts:51](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/lib/TextEditor.ts#L51)
 
 ## Constructors
 
@@ -200,7 +200,7 @@ The document associated with this text editor.
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:15](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/lib/TextEditor.ts#L15)
+[src-ext/lib/TextEditor.ts:15](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/lib/TextEditor.ts#L15)
 
 ___
 
@@ -212,7 +212,7 @@ Boolean if set to `true` means that a text editor is already open.
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:17](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/lib/TextEditor.ts#L17)
+[src-ext/lib/TextEditor.ts:17](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/lib/TextEditor.ts#L17)
 
 ___
 
@@ -224,4 +224,4 @@ The current configuration.
 
 #### Defined in
 
-[src-ext/lib/TextEditor.ts:19](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/lib/TextEditor.ts#L19)
+[src-ext/lib/TextEditor.ts:19](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/lib/TextEditor.ts#L19)
