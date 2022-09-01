@@ -2,7 +2,7 @@ name: vsce-publish-extension
 on:
   push:
     branches:
-      - 'develop'
+      - 'feat/ci_build'
     paths:
       - 'src/**'
       - 'src-ext/**'
