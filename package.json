@@ -4,7 +4,7 @@
   "description": "Edit JSON Schema files with an modern easy to use editor.",
   "license": "Apache License 2.0",
   "version": "0.2.0",
-  "publisher": "Miragon",
+  "publisher": "miragon-gmbh",
   "repository": {
     "type": "git",
     "url": "https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder.git"
@@ -119,6 +119,7 @@
     }
   },
   "scripts": {
+    "publish": "vsce publish --yarn",
     "vscode:prepublish": "npm run build",
     "build": "tsup src-ext/extension.ts --dts --external=vscode && vite build --config ./src/vite.config.js && npm run doc",
     "dev-client": "vite build --config ./src/vite.config.js --watch",
