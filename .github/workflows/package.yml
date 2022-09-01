@@ -25,7 +25,7 @@ jobs:
           node-version: '16'
       - name: Delete old VSIX-File
         run: |
-          rm *.vsix
+          rm -f *.vsix || true
       - run: npm install
       - run: npm install -g vsce
       - run: vsce package
