@@ -3,7 +3,7 @@
   "displayName": "DigiWF: JSON Schema Builder",
   "description": "Edit JSON Schema files with an modern easy to use editor.",
   "license": "Apache License 2.0",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "publisher": "Miragon",
   "repository": {
     "type": "git",
