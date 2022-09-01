@@ -1,0 +1,36 @@
+name: vsce-package-extension
+on:
+  push:
+    branches:
+      - 'feat/github_actions'
+    paths:
+      - 'src/**'
+      - 'src-ext/**'
+      - '!src-ext/test/**'
+      - 'package.json'
+      - '.vscodeignore'
+jobs:
+  package-extension:
+    runs-on: ubuntu-latest
+    env:
+      CI_BRANCH: feat/github_actions
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: FlowSquad/vs-code-vuetify-jsonschema-builder
+          ref: ${{ env.CI_BRANCH }}
+          token: ${{ secrets.ACCESS_TOKEN }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Delete old VSIX-File
+        run: |
+          rm *.vsix
+      - run: npm install
+      - run: npm install -g vsce
+      - run: vsce package
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Continous Integration Build Artifacts
+          branch: ${{ env.CI_BRANCH }}
+          create_branch: false
