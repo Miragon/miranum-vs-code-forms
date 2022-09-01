@@ -1,0 +1,24 @@
+name: vsce-publish-extension
+on:
+  push:
+    branches:
+      - 'develop'
+    paths:
+      - 'src/**'
+      - 'src-ext/**'
+      - '!src-ext/test/**'
+      - 'package.json'
+jobs:
+  publish-extension:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - run: npm install
+      - run: npm install -g vsce
+      - name: Publish
+        run: npm run publish
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
