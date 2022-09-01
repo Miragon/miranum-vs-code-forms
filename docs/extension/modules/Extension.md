@@ -31,4 +31,4 @@ It registers a [Custom Text Editor](https://code.visualstudio.com/api/extension-
 
 #### Defined in
 
-[src-ext/extension.ts:14](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/extension.ts#L14)
+[src-ext/extension.ts:14](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/extension.ts#L14)

@@ -26,7 +26,7 @@ Get the default content which is displayed when the data model is empty.
 
 #### Defined in
 
-[src-ext/lib/utils.ts:11](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/lib/utils.ts#L11)
+[src-ext/lib/utils.ts:11](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/lib/utils.ts#L11)
 
 ___
 
@@ -50,7 +50,7 @@ an json object
 
 #### Defined in
 
-[src-ext/lib/utils.ts:79](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/lib/utils.ts#L79)
+[src-ext/lib/utils.ts:79](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/lib/utils.ts#L79)
 
 ___
 
@@ -77,4 +77,4 @@ a string which represents the html content
 
 #### Defined in
 
-[src-ext/lib/utils.ts:99](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/3b2a10f/src-ext/lib/utils.ts#L99)
+[src-ext/lib/utils.ts:99](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/de13d56/src-ext/lib/utils.ts#L99)
