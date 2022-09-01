@@ -2,7 +2,7 @@ name: vsce-package-extension
 on:
   push:
     branches:
-      - 'feat/github_actions'
+      - 'feat/ci_build'
     paths:
       - 'src/**'
       - 'src-ext/**'
@@ -13,7 +13,7 @@ jobs:
   package-extension:
     runs-on: ubuntu-latest
     env:
-      CI_BRANCH: feat/github_actions
+      CI_BRANCH: feat/ci_build
     steps:
       - uses: actions/checkout@v3
         with:
