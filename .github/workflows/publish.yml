@@ -25,3 +25,7 @@ jobs:
           asset_name: vs-code-vuetify-builder.vsix
           tag: ${{ github.ref }}
           overwrite: true
+      - name: Publish extension
+        run: npm run publish
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
