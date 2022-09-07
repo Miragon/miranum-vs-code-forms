@@ -130,7 +130,7 @@
   "dependencies": {
     "@koumoul/vjsf": "^2.18.0",
     "@muenchen/digiwf-form-builder": "^0.10.0",
-    "core-js": "^3.8.3",
+    "core-js": "^3.25.0",
     "vue": "^2.7.7",
     "vuetify": "^2.6.0"
   },
