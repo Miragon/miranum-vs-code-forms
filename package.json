@@ -131,7 +131,7 @@
     "@koumoul/vjsf": "^2.18.0",
     "@muenchen/digiwf-form-builder": "^0.10.0",
     "core-js": "^3.8.3",
-    "vue": "^2.7.7",
+    "vue": "^2.7.10",
     "vuetify": "^2.6.0"
   },
   "devDependencies": {
@@ -164,7 +164,7 @@
     "vite": "^3.0.8",
     "vite-plugin-static-copy": "^0.7.0",
     "vite-plugin-vue2": "^2.0.2",
-    "vue-template-compiler": "^2.7.7",
+    "vue-template-compiler": "^2.7.10",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"
   }
