@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.1.0](../documentation.md) / Extension
+[VS Code JsonSchema Builder - v0.2.0](../documentation.md) / Extension
 
 # Module: Extension
 
@@ -31,4 +31,4 @@ It registers a [Custom Text Editor](https://code.visualstudio.com/api/extension-
 
 #### Defined in
 
-[src-ext/extension.ts:14](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/c906668/src-ext/extension.ts#L14)
+[src-ext/extension.ts:14](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/fc602c3/src-ext/extension.ts#L14)
