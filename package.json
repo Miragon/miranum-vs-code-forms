@@ -132,7 +132,7 @@
     "@muenchen/digiwf-form-builder": "^0.18.8",
     "@muenchen/digiwf-form-builder-settings": "^0.18.8",
     "@muenchen/digiwf-form-renderer": "^0.18.8",
-    "core-js": "^3.8.3",
+    "core-js": "^3.25.2",
     "vue": "^2.7.10",
     "vuetify": "^2.6.0"
   },
