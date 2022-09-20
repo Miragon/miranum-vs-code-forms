@@ -1,5 +1,10 @@
+## Download from Marketplace
+1. Visit the official vscode [marketplace](https://marketplace.visualstudio.com/items?itemName=miragon-gmbh.vs-code-vuetify-jsonschema-builder)
+2. Click on `Install`
+
+## Manual Installation
 ### First Option
-1. Download the VSIX file
+1. Download the VSIX file from the latest [release](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/releases)
 2. Install the extension manually
     ```shell
     code --install-extension vs-code-vuetify-jsonschema-builder-0.1.0.vsix
