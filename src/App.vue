@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <DwfFormBuilder :builder-settings="builderSettings" :value="schema" @input="schemaChanged"
+    <DwfFormBuilder :builder-settings="builderSettings" :value="schema.schema" @input="schemaChanged"
                     v-if="mode === 'builder'"></DwfFormBuilder>
     <div style="background-color: white; padding: 10px" v-if="mode === 'renderer'">
-      <DwfFormRenderer :options="{}" :schema="schema"></DwfFormRenderer>
+      <DwfFormRenderer :options="{}" :schema="schema.schema" :value="{}"></DwfFormRenderer>
       </div>
   </v-app>
 </template>
@@ -24,13 +24,13 @@ export default defineComponent({
     DwfFormBuilder
   },
   setup() {
-    const schema = ref<Form>();
+    const form = ref<{schema: Form, key: string}>();
     const builderSettings = SettingsEN;
     const mode = ref('');
 
     function getDataFromExtension(event: MessageEvent): void {
       const message = event.data;
-      const newSchema: Form = message.text;
+      const newSchema: {schema: Form, key: string} = message.text;
 
       switch (message.type) {
         case 'jsonschema-renderer.updateFromExtension': {
@@ -51,7 +51,7 @@ export default defineComponent({
       }
     }
 
-    function sendDataToExtension(schema: Form): void {
+    function sendDataToExtension(schema: {schema: Form, key: string}): void {
       const schemaAsJson: JSON = JSON.parse(JSON.stringify(schema));
 
       vscode.setState({
@@ -64,8 +64,8 @@ export default defineComponent({
       });
     }
 
-    function updateSchema(newSchema: Form): void {
-      if (!newSchema.key || !newSchema.type || !newSchema.allOf) {
+    function updateSchema(newSchema: {schema: Form, key: string}): void {
+      if (!newSchema.schema.key) {
         console.log(mode.value, 'setMinimum');
         newSchema = JSON.parse('{"key": "form1", "schema": {"key": "MyStartForm", "type": "object", "allOf": []}}');
       }
@@ -75,17 +75,17 @@ export default defineComponent({
         mode: mode.value
       });
 
-      schema.value = newSchema;
+      form.value = newSchema;
     }
 
-    function schemaChanged(schema: Form): void {
-      sendDataToExtension(schema);
+    function schemaChanged(update: Form): void {
+      sendDataToExtension({schema: update, key: form.value!.key});
     }
 
     onMounted(() => {
       const state = vscode.getState();
       if (state) {
-        schema.value = JSON.parse(state.text);
+        form.value = JSON.parse(state.text);
         mode.value = state.mode;
       }
       window.addEventListener('message', getDataFromExtension);
@@ -96,7 +96,7 @@ export default defineComponent({
     })
 
     return {
-      schema,
+      schema: form,
       builderSettings,
       mode,
       schemaChanged

@@ -89,7 +89,7 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
         if (!this.view) {
             return;
         }
-
+        //JSON.stringify(this.content) is correcter json
         this.view.webview.postMessage({
             type: JsonSchemaRendererProvider.viewType + '.updateFromExtension',
             text: this.content
