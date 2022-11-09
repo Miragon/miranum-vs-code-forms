@@ -22,7 +22,7 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
     private content?: JSON;
 
     /**
-     * Register the update-command.
+     * Register the update-command.ƒ
      * @param context The context of the extension
      */
     constructor(private readonly context: vscode.ExtensionContext) {

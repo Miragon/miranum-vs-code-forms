@@ -10,64 +10,66 @@ import * as vscode from "vscode";
  */
 export function getDefault(): JSON {
     return JSON.parse(JSON.stringify({
-        "key": "MyStartForm", "type": "object", "allOf": [{
-            "key": "sectionKey1",
-            "title": "First Section",
-            "type": "object",
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            "x-options": {"sectionsTitlesClasses": ["d-none"]},
-            "allOf": [{
-                "key": "group1",
-                "title": "First Group",
+        "key": "example1", "schema": {
+            "key": "MyStartForm", "type": "object", "allOf": [{
+                "key": "sectionKey1",
+                "title": "First Section",
                 "type": "object",
                 // eslint-disable-next-line @typescript-eslint/naming-convention
-                "x-options": {"childrenClass": "pl-0"},
-                "properties": {
-                    "stringProp1": {
-                        "fieldType": "text",
-                        "title": "I am a text",
-                        "type": "string",
-                        // eslint-disable-next-line @typescript-eslint/naming-convention
-                        "x-options": {"fieldColProps": {"cols": 12, "sm": 6}},
-                        // eslint-disable-next-line @typescript-eslint/naming-convention
-                        "x-props": {"outlined": true, "dense": true}
-                    },
-                    "numberProp1": {
-                        "fieldType": "integer",
-                        "type": "integer",
-                        "title": "I am a number",
-                        // eslint-disable-next-line @typescript-eslint/naming-convention
-                        "x-options": {"fieldColProps": {"cols": 12, "sm": 6}},
-                        // eslint-disable-next-line @typescript-eslint/naming-convention
-                        "x-props": {"outlined": true, "dense": true}
-                    },
-                    "textarea1": {
-                        "fieldType": "textarea",
-                        "type": "string",
-                        // eslint-disable-next-line @typescript-eslint/naming-convention
-                        "x-display": "textarea",
-                        "title": "I am a textarea",
-                        // eslint-disable-next-line @typescript-eslint/naming-convention
-                        "x-props": {"outlined": true, "dense": true}
-                    },
-                    "booleanprop": {
-                        "fieldType": "boolean",
-                        "type": "boolean",
-                        "title": "I am a checkbox",
-                        // eslint-disable-next-line @typescript-eslint/naming-convention
-                        "x-props": {"outlined": true, "dense": true}
-                    },
-                    "dateprop": {
-                        "fieldType": "date",
-                        "type": "string",
-                        "format": "date",
-                        "title": "I am a date",
-                        // eslint-disable-next-line @typescript-eslint/naming-convention
-                        "x-props": {"outlined": true, "dense": true}
+                "x-options": {"sectionsTitlesClasses": ["d-none"]},
+                "allOf": [{
+                    "key": "group1",
+                    "title": "First Group",
+                    "type": "object",
+                    // eslint-disable-next-line @typescript-eslint/naming-convention
+                    "x-options": {"childrenClass": "pl-0"},
+                    "properties": {
+                        "stringProp1": {
+                            "fieldType": "text",
+                            "title": "I am a text",
+                            "type": "string",
+                            // eslint-disable-next-line @typescript-eslint/naming-convention
+                            "x-options": {"fieldColProps": {"cols": 12, "sm": 6}},
+                            // eslint-disable-next-line @typescript-eslint/naming-convention
+                            "x-props": {"outlined": true, "dense": true}
+                        },
+                        "numberProp1": {
+                            "fieldType": "integer",
+                            "type": "integer",
+                            "title": "I am a number",
+                            // eslint-disable-next-line @typescript-eslint/naming-convention
+                            "x-options": {"fieldColProps": {"cols": 12, "sm": 6}},
+                            // eslint-disable-next-line @typescript-eslint/naming-convention
+                            "x-props": {"outlined": true, "dense": true}
+                        },
+                        "textarea1": {
+                            "fieldType": "textarea",
+                            "type": "string",
+                            // eslint-disable-next-line @typescript-eslint/naming-convention
+                            "x-display": "textarea",
+                            "title": "I am a textarea",
+                            // eslint-disable-next-line @typescript-eslint/naming-convention
+                            "x-props": {"outlined": true, "dense": true}
+                        },
+                        "booleanprop": {
+                            "fieldType": "boolean",
+                            "type": "boolean",
+                            "title": "I am a checkbox",
+                            // eslint-disable-next-line @typescript-eslint/naming-convention
+                            "x-props": {"outlined": true, "dense": true}
+                        },
+                        "dateprop": {
+                            "fieldType": "date",
+                            "type": "string",
+                            "format": "date",
+                            "title": "I am a date",
+                            // eslint-disable-next-line @typescript-eslint/naming-convention
+                            "x-props": {"outlined": true, "dense": true}
+                        }
                     }
-                }
+                }]
             }]
-        }]
+        }
     }));
 }
 

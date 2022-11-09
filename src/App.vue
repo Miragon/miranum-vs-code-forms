@@ -67,7 +67,7 @@ export default defineComponent({
     function updateSchema(newSchema: Form): void {
       if (!newSchema.key || !newSchema.type || !newSchema.allOf) {
         console.log(mode.value, 'setMinimum');
-        newSchema = JSON.parse('{"key": "MyStartForm", "type": "object", "allOf": []}');
+        newSchema = JSON.parse('{"key": "form1", "schema": {"key": "MyStartForm", "type": "object", "allOf": []}}');
       }
 
       vscode.setState({
