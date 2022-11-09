@@ -1,6 +1,6 @@
-VS Code JsonSchema Builder - v0.3.0
+VS Code JsonSchema Builder - v0.2.1
 
-# VS Code JsonSchema Builder - v0.3.0
+# VS Code JsonSchema Builder - v0.2.1
 
 ## Table of contents
 

@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.3.0](../documentation.md) / JsonSchemaBuilderProvider
+[VS Code JsonSchema Builder - v0.2.1](../documentation.md) / JsonSchemaBuilderProvider
 
 # Module: JsonSchemaBuilderProvider
 
