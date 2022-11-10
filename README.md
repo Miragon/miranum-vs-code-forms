@@ -28,8 +28,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Display and edit forms in VS Code using [DigiWF Form Builder](https://github.com/it-at-m/digiwf-form-builder) and
-[DigiWF Form Renderer](https://github.com/it-at-m/digiwf-form-renderer).
+Display and edit forms in VS Code using [DigiWF Form Builder](https://github.com/it-at-m/digiwf-core/tree/dev/digiwf-apps/packages/components/digiwf-form-builder) and
+[DigiWF Form Renderer](https://github.com/it-at-m/digiwf-core/tree/dev/digiwf-apps/packages/components/digiwf-form-renderer).
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>

@@ -8,5 +8,6 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     VApp: typeof import('vuetify/lib')['VApp']
+    VTextField: typeof import('vuetify/lib')['VTextField']
   }
 }

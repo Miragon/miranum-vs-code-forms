@@ -1,10 +1,12 @@
 <template>
   <v-app>
+    <v-text-field rounded label="form-key" :value="form.key" @change="keyChanged"
+                  :rules="nameRules" v-if="mode === 'builder'" required></v-text-field>
     <DwfFormBuilder :builder-settings="builderSettings" :value="form.schema" @input="schemaChanged"
                     v-if="mode === 'builder'"></DwfFormBuilder>
     <div style="background-color: white; padding: 10px" v-if="mode === 'renderer'">
       <DwfFormRenderer :options="{}" :value="{}" :schema="form.schema"></DwfFormRenderer>
-      </div>
+    </div>
   </v-app>
 </template>
 
@@ -24,6 +26,7 @@ export default defineComponent({
     DwfFormBuilder
   },
   setup() {
+    //schema is type Form, since that's what DigiWF called their interface
     const form = ref<{key: string, schema: Form}>();
     const builderSettings = SettingsEN;
     const mode = ref('');
@@ -51,8 +54,8 @@ export default defineComponent({
       }
     }
 
-    function sendDataToExtension(schema: {key: string, schema: Form}): void {
-      const formAsJson: JSON = JSON.parse(JSON.stringify(schema));
+    function sendDataToExtension(form: {key: string, schema: Form}): void {
+      const formAsJson: JSON = JSON.parse(JSON.stringify(form));
 
       vscode.setState({
         text: JSON.stringify(formAsJson),
@@ -81,6 +84,9 @@ export default defineComponent({
     function schemaChanged(update: Form): void {
       sendDataToExtension({schema: update, key: form.value!.key});
     }
+    function keyChanged(update: string): void {
+      sendDataToExtension({key: update, schema: form.value!.schema});
+    }
 
     onMounted(() => {
       const state = vscode.getState();
@@ -95,11 +101,13 @@ export default defineComponent({
       window.removeEventListener('message', getDataFromExtension);
     })
 
+    //nameRules: v => !!v || 'Required.',
     return {
       form: form,
       builderSettings,
       mode,
-      schemaChanged
+      schemaChanged,
+      keyChanged
     }
   }
 });
