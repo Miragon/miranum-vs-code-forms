@@ -1,19 +1,20 @@
 {
   "entryPoints": [
-    "../src-ext"
+    "../src"
   ],
   "entryPointStrategy": "expand",
   "externalPattern": [
-    "../src-ext/lib/**/*.ts"
+    "../src/utils/**/*.ts",
+    "./types.ts"
   ],
   "exclude": [
-    "../src-ext/test/**/*"
+    "../src/test/**/*"
   ],
   "out": "extension",
   "name": "VS Code JsonSchema Builder",
   "entryDocument": "documentation.md",
   "includeVersion": true,
-  "tsconfig": "../tsconfig-extension.json",
+  "tsconfig": "../tsconfig.json",
   "readme": "none",
   "sort": [
     "visibility",

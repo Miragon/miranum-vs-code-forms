@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.2.1](../documentation.md) / Utils
+[VS Code JsonSchema Builder - v0.3.1](../documentation.md) / Utils
 
 # Module: Utils
 
@@ -9,30 +9,31 @@ This module includes helper-functions and functions which are used by the `JsonS
 ### Functions
 
 - [getDefault](Utils.md#getdefault)
-- [getContentAsJson](Utils.md#getcontentasjson)
+- [getContentAsSchema](Utils.md#getcontentasschema)
 - [getHtmlForWebview](Utils.md#gethtmlforwebview)
+- [getNonce](Utils.md#getnonce)
 
 ## Functions
 
 ### getDefault
 
-▸ **getDefault**(): `JSON`
+▸ **getDefault**(): `Schema`
 
 Get the default content which is displayed when the data model is empty.
 
 #### Returns
 
-`JSON`
+`Schema`
 
 #### Defined in
 
-[src-ext/lib/utils.ts:11](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/0419be2/src-ext/lib/utils.ts#L11)
+[src/utils/utils.ts:12](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/utils/utils.ts#L12)
 
 ___
 
-### getContentAsJson
+### getContentAsSchema
 
-▸ **getContentAsJson**(`text`): `JSON`
+▸ **getContentAsSchema**(`text`): `Schema`
 
 Parse a string to json
 
@@ -44,13 +45,13 @@ Parse a string to json
 
 #### Returns
 
-`JSON`
+`Schema`
 
 an json object
 
 #### Defined in
 
-[src-ext/lib/utils.ts:81](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/0419be2/src-ext/lib/utils.ts#L81)
+[src/utils/utils.ts:76](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/utils/utils.ts#L76)
 
 ___
 
@@ -66,7 +67,7 @@ Get the HTML-Document which display the webview
 | :------ | :------ | :------ |
 | `webview` | `Webview` | Webview belonging to the panel |
 | `extensionUri` | `Uri` |  |
-| `initialContent` | `JSON` |  |
+| `initialContent` | `Schema` |  |
 | `mode` | `string` | Says which part of the Vue-App should be displayed |
 
 #### Returns
@@ -77,4 +78,24 @@ a string which represents the html content
 
 #### Defined in
 
-[src-ext/lib/utils.ts:101](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/0419be2/src-ext/lib/utils.ts#L101)
+[src/utils/utils.ts:96](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/utils/utils.ts#L96)
+
+___
+
+### getNonce
+
+▸ **getNonce**(`length?`): `string`
+
+#### Parameters
+
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `length` | `number` | `32` |
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[src/utils/utils.ts:155](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/utils/utils.ts#L155)
