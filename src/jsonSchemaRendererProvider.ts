@@ -6,6 +6,7 @@
 
 import * as vscode from 'vscode';
 import {getHtmlForWebview} from "./utils/utils";
+import {Schema} from "../types";
 
 /**
  * The [WebviewView](https://code.visualstudio.com/api/extension-guides/webview) renders the content of the current active
@@ -19,7 +20,7 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
     /** The webview which is displayed as a view inside a view container. */
     private view?: vscode.WebviewView;
     /** The current content which is displayed. */
-    private content?: JSON;
+    private content?: Schema;
 
     /**
      * Register the update-command.ƒ
@@ -73,7 +74,7 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
      * Function which is called by the custom text editor to update the content of the webview view.
      * @param schema The new content for rendering
      */
-    public updateRenderer(schema?: JSON): void {
+    public updateRenderer(schema?: Schema): void {
         if (schema && schema !== this.content) {
             // The content of the provider have to change whether a view exists or not.
             // This is because when the user switches from a 'JsonSchema Builder' to another file without a .form extension
@@ -112,7 +113,7 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
     /**
      * Function which is called by the custom text editor to set the initial content of the data model.
      */
-    public setInitialContent(schema: JSON): void {
+    public setInitialContent(schema: Schema): void {
         this.content = schema;
     }
 }

@@ -4,7 +4,7 @@
           label="Form Key"
           class="form-key"
           :value="formKey"
-          @change="keyChanged"
+          @input="keyChanged"
           :rules="rules"
           v-if="mode === 'builder'"
           outlined rounded dense hide-details="auto">
@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import {defineComponent, onMounted, onUnmounted, ref} from 'vue';
-import {VsCode, Formular} from "./types/types";
+import {VsCode, Schema} from "../types";
 import {DwfFormRenderer, Form} from "@muenchen/digiwf-form-renderer";
 import {DwfFormBuilder} from "@muenchen/digiwf-form-builder";
 import {SettingsEN} from "@muenchen/digiwf-form-builder-settings";
@@ -46,7 +46,7 @@ export default defineComponent({
 
       function getDataFromExtension(event: MessageEvent): void {
          const message = event.data;
-         const newForm: Formular = message.text;
+         const newForm: Schema = message.text;
 
          switch (message.type) {
             case 'jsonschema-renderer.updateFromExtension': {
@@ -68,20 +68,20 @@ export default defineComponent({
          }
       }
 
-      function sendDataToExtension(form: Formular): void {
-         const formAsJson: JSON = JSON.parse(JSON.stringify(form));
+      function sendDataToExtension(form: Schema): void {
+         const formAsStr = JSON.stringify(form);
 
          vscode.setState({
-            text: JSON.stringify(formAsJson),
+            text: formAsStr,
             mode: mode.value
          });
          vscode.postMessage({
             type: 'jsonschema-builder.updateFromWebview',
-            content: formAsJson
+            content: JSON.parse(formAsStr)
          });
       }
 
-      function updateForm(newForm: Formular): void {
+      function updateForm(newForm: Schema): void {
          vscode.setState({
             text: JSON.stringify(newForm),
             mode: mode.value
@@ -102,7 +102,7 @@ export default defineComponent({
       onMounted(() => {
          const state = vscode.getState();
          if (state) {
-            const form: Formular = JSON.parse(state.text);
+            const form: Schema = JSON.parse(state.text);
             formKey.value = form.key;
             schema.value = form.schema;
             mode.value = state.mode;

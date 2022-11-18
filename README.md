@@ -43,8 +43,6 @@ The documentation project is built with technologies we use in our projects:
 * [TypeScript](https://www.typescriptlang.org/)
 * [VS Code API](https://code.visualstudio.com/api/references/vscode-api)
 * [Vue.js](https://vuejs.org/)
-* [Vuetify.js](https://vuetifyjs.com/en/)
-* [Vite.js](https://vitejs.dev/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

@@ -6,10 +6,11 @@
  */
 
 import * as vscode from 'vscode';
-import {getContentAsJson, getDefault, getHtmlForWebview, getNonce} from './utils/utils';
+import {getContentAsSchema, getDefault, getHtmlForWebview, getNonce} from './utils/utils';
 import {TextEditor} from "./utils/TextEditor";
 import {debounce} from "debounce";
 import {JsonSchemaRendererProvider} from "./jsonSchemaRendererProvider";
+import {Schema} from "../types";
 
 /**
  * The [Custom Text Editor](https://code.visualstudio.com/api/extension-guides/custom-editors) uses a '.form'-File as its
@@ -29,7 +30,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
     /** Function to apply changes to the data model. */
     private readonly writeData = debounce(this.writeChangesToDocument);
     /** The content of the current active custom text editor. */
-    private content: JSON = JSON.parse('{}');
+    private content: Schema = JSON.parse('{}');
     /** The WebviewView ({@link JsonSchemaRendererProvider}) which renders the content of the active custom text editor. */
     private readonly renderer: JsonSchemaRendererProvider;
 
@@ -87,7 +88,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             if (webviewPanel.visible) {
                 webviewPanel.webview.postMessage({
                     type: msgType,
-                    text: this.content,
+                    text: JSON.parse(JSON.stringify(this.content)),
                 })
                     .then((success) => {
                         if (success) {
@@ -127,11 +128,13 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
                 if (!e.document.getText()) {
                     // e.g. when user deletes all lines in text editor
-                    const key = 'Form_' + getNonce(6).toLowerCase();
-                    const schema = JSON.parse('{"key": "MyStartForm", "type": "object", "allOf": []}');
-                    this.content = getContentAsJson(JSON.stringify({key, schema}));
+                    this.content = {
+                        key: 'Form_' + getNonce(6).toLowerCase(),
+                        schema: JSON.parse('{"key": "MyStartForm", "type": "object", "allOf": []}')
+                    };
+                    this.writeData(document, this.content);
                 } else {
-                    this.content = getContentAsJson(e.document.getText());
+                    this.content = getContentAsSchema(e.document.getText());
                 }
 
                 // If the webview is in the background then no messages can be sent to it.
@@ -169,13 +172,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                 case webviewPanel.active: {
                     TextEditor.document = document;
 
-                    if (!document.getText()) {
-                        const key = 'Form_' + getNonce(6).toLowerCase();
-                        const schema = JSON.parse('{"key": "MyStartForm", "type": "object", "allOf": []}');
-                        this.content = getContentAsJson(JSON.stringify({key, schema}));
-                    } else {
-                        this.content = getContentAsJson(document.getText());
-                    }
+                    this.content = getContentAsSchema(document.getText());
                     if (webviewPanel.options.retainContextWhenHidden) {
                         this.renderer.updateRenderer(this.content);
                     }
@@ -214,7 +211,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
      * @param content The data which was sent from the webview
      * @returns Thenable
      */
-    protected writeChangesToDocument(document: vscode.TextDocument, content: JSON): Thenable<boolean> {
+    protected writeChangesToDocument(document: vscode.TextDocument, content: Schema): Thenable<boolean> {
         const edit = new vscode.WorkspaceEdit();
         const text = JSON.stringify(content, undefined, 4);
 
@@ -227,7 +224,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         return vscode.workspace.applyEdit(edit)
             .then((success) => {
                 if (success) {
-                    this.content = getContentAsJson(text);
+                    this.content = getContentAsSchema(text);
                 }
                 return success;
             });
@@ -240,7 +237,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             this.content = getDefault();
             this.writeData(document, this.content);
         } else {
-            this.content = getContentAsJson(document.getText());
+            this.content = getContentAsSchema(document.getText());
         }
 
         // Necessary set up for toggle command

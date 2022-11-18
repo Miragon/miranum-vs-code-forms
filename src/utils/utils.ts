@@ -4,11 +4,12 @@
  */
 
 import * as vscode from "vscode";
+import {Schema} from "../../types";
 
 /**
  * Get the default content which is displayed when the data model is empty.
  */
-export function getDefault(): JSON {
+export function getDefault(): Schema {
     const key = 'Form_' + getNonce(6).toLowerCase();
     return JSON.parse(JSON.stringify({
         "key": key,
@@ -19,47 +20,38 @@ export function getDefault(): JSON {
                 "key": "sectionKey1",
                 "title": "First Section",
                 "type": "object",
-                // eslint-disable-next-line @typescript-eslint/naming-convention
                 "x-options": {"sectionsTitlesClasses": ["d-none"]},
                 "allOf": [{
                     "key": "group1",
                     "title": "First Group",
                     "type": "object",
-                    // eslint-disable-next-line @typescript-eslint/naming-convention
                     "x-options": {"childrenClass": "pl-0"},
                     "properties": {
                         "stringProp1": {
                             "fieldType": "text",
                             "title": "I am a text",
                             "type": "string",
-                            // eslint-disable-next-line @typescript-eslint/naming-convention
                             "x-options": {"fieldColProps": {"cols": 12, "sm": 6}},
-                            // eslint-disable-next-line @typescript-eslint/naming-convention
                             "x-props": {"outlined": true, "dense": true}
                         },
                         "numberProp1": {
                             "fieldType": "integer",
                             "type": "integer",
                             "title": "I am a number",
-                            // eslint-disable-next-line @typescript-eslint/naming-convention
                             "x-options": {"fieldColProps": {"cols": 12, "sm": 6}},
-                            // eslint-disable-next-line @typescript-eslint/naming-convention
                             "x-props": {"outlined": true, "dense": true}
                         },
                         "textarea1": {
                             "fieldType": "textarea",
                             "type": "string",
-                            // eslint-disable-next-line @typescript-eslint/naming-convention
                             "x-display": "textarea",
                             "title": "I am a textarea",
-                            // eslint-disable-next-line @typescript-eslint/naming-convention
                             "x-props": {"outlined": true, "dense": true}
                         },
                         "booleanprop": {
                             "fieldType": "boolean",
                             "type": "boolean",
                             "title": "I am a checkbox",
-                            // eslint-disable-next-line @typescript-eslint/naming-convention
                             "x-props": {"outlined": true, "dense": true}
                         },
                         "dateprop": {
@@ -67,7 +59,6 @@ export function getDefault(): JSON {
                             "type": "string",
                             "format": "date",
                             "title": "I am a date",
-                            // eslint-disable-next-line @typescript-eslint/naming-convention
                             "x-props": {"outlined": true, "dense": true}
                         }
                     }
@@ -82,7 +73,7 @@ export function getDefault(): JSON {
  * @param text The string which should be parsed to json
  * @returns an json object
  */
-export function getContentAsJson(text: string): JSON {
+export function getContentAsSchema(text: string): Schema {
     if (text.trim().length === 0) {
         return JSON.parse('{}');
     }
@@ -90,7 +81,7 @@ export function getContentAsJson(text: string): JSON {
     try {
         return JSON.parse(text);
     } catch {
-        throw new Error('Could not get document as json. Content is not valid json');
+        throw new Error();
     }
 }
 
@@ -102,7 +93,7 @@ export function getContentAsJson(text: string): JSON {
  * @param mode Says which part of the Vue-App should be displayed
  * @returns a string which represents the html content
  */
-export function getHtmlForWebview(webview: vscode.Webview, extensionUri: vscode.Uri, initialContent: JSON, mode: string): string {
+export function getHtmlForWebview(webview: vscode.Webview, extensionUri: vscode.Uri, initialContent: Schema, mode: string): string {
     const vueAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
         extensionUri, 'dist', 'client', 'client.mjs'
     ));
