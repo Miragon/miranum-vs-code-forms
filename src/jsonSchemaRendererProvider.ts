@@ -5,7 +5,7 @@
  */
 
 import * as vscode from 'vscode';
-import {getHtmlForWebview} from "./lib/utils";
+import {getHtmlForWebview} from "./utils/utils";
 
 /**
  * The [WebviewView](https://code.visualstudio.com/api/extension-guides/webview) renders the content of the current active
@@ -50,10 +50,6 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
 
         webviewView.webview.options = {
             enableScripts: true,
-            localResourceRoots: [
-                vscode.Uri.joinPath(this.context.extensionUri, 'localResources'),
-                vscode.Uri.joinPath(this.context.extensionUri, 'dist'),
-            ]
         };
 
         webviewView.webview.html = getHtmlForWebview(webviewView.webview, this.context.extensionUri, this.content!, "renderer");

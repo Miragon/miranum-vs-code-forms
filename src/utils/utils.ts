@@ -9,9 +9,13 @@ import * as vscode from "vscode";
  * Get the default content which is displayed when the data model is empty.
  */
 export function getDefault(): JSON {
+    const key = 'Form_' + getNonce(6).toLowerCase();
     return JSON.parse(JSON.stringify({
-        "key": "example1", "schema": {
-            "key": "MyStartForm", "type": "object", "allOf": [{
+        "key": key,
+        "schema": {
+            "key": "MyStartForm",
+            "type": "object",
+            "allOf": [{
                 "key": "sectionKey1",
                 "title": "First Section",
                 "type": "object",
@@ -104,7 +108,7 @@ export function getHtmlForWebview(webview: vscode.Webview, extensionUri: vscode.
     ));
 
     const styleResetUri = webview.asWebviewUri(vscode.Uri.joinPath(
-        extensionUri, 'localResources', 'css', 'reset.css'
+        extensionUri, 'resources', 'css', 'reset.css'
     ));
 
     const styleAppUri = webview.asWebviewUri(vscode.Uri.joinPath(
@@ -157,11 +161,12 @@ export function getHtmlForWebview(webview: vscode.Webview, extensionUri: vscode.
         `;
 }
 
-function getNonce(): string {
-    let text = '';
-    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (let i = 0; i < 32; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
+export function getNonce(length = 32): string {
+    let result           = '';
+    const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-    return text;
+    return result;
 }

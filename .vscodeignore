@@ -6,8 +6,9 @@
 .browserslistrc
 
 src/**
-src-ext/**
+web/**
 node_modules/
+example/
 
 **/tsconfig*.json
 **/.eslintrc.js

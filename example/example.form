@@ -1,0 +1,49 @@
+{
+    "key": "Form_bxvtfu",
+    "schema": {
+        "key": "MyStartForm",
+        "type": "object",
+        "allOf": [
+            {
+                "title": "Section",
+                "description": "",
+                "type": "object",
+                "x-options": {
+                    "sectionsTitlesClasses": [
+                        "d-none"
+                    ]
+                },
+                "allOf": [
+                    {
+                        "containerType": "group",
+                        "title": "Group",
+                        "description": "",
+                        "x-options": {
+                            "childrenClass": "pl-0"
+                        },
+                        "properties": {
+                            "cd8030c8-5c08-414b-a977-2df1b31c9304": {
+                                "fieldType": "textarea",
+                                "title": "Textarea",
+                                "x-display": "textarea",
+                                "type": "string",
+                                "x-options": {
+                                    "fieldColProps": {
+                                        "cols": 12,
+                                        "sm": 12
+                                    }
+                                },
+                                "x-props": {
+                                    "outlined": true,
+                                    "dense": true
+                                }
+                            }
+                        },
+                        "key": "5eb982a3-adcc-49e3-b1b0-a2774fa78c81"
+                    }
+                ],
+                "key": "8ac8fb20-3377-404a-817b-4f4876372881"
+            }
+        ]
+    }
+}

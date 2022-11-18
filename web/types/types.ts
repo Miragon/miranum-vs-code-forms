@@ -1,3 +1,10 @@
+import {Form} from "@muenchen/digiwf-form-renderer";
+
+export type Formular  = {
+    key: string
+    schema: Form
+}
+
 export type VsCode = {
     postMessage(message: VscMessage): void;
     getState(): VscState;

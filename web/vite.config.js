@@ -10,7 +10,7 @@ export default defineConfig({
         alias: [
             {
                 find: '@/',
-                replacement: `${path.resolve(__dirname, './src')}/`,
+                replacement: `${path.resolve(__dirname, './web')}/`,
             },
         ],
     },
@@ -34,7 +34,7 @@ export default defineConfig({
         target: 'es2021',
         commonjsOptions: {transformMixedEsModules: true},
         lib: {
-            entry: 'src/main.ts',
+            entry: 'web/main.ts',
             name: 'test',
             fileName: 'client',
         },

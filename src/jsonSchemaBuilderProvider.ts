@@ -6,8 +6,8 @@
  */
 
 import * as vscode from 'vscode';
-import {getContentAsJson, getDefault, getHtmlForWebview} from './lib/utils';
-import {TextEditor} from "./lib/TextEditor";
+import {getContentAsJson, getDefault, getHtmlForWebview, getNonce} from './utils/utils';
+import {TextEditor} from "./utils/TextEditor";
 import {debounce} from "debounce";
 import {JsonSchemaRendererProvider} from "./jsonSchemaRendererProvider";
 
@@ -77,10 +77,6 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         // Setup webview options
         webviewPanel.webview.options = {
             enableScripts: true,
-            localResourceRoots: [
-                vscode.Uri.joinPath(this.context.extensionUri, 'localResources'),
-                vscode.Uri.joinPath(this.context.extensionUri, 'dist')
-            ]
         };
 
         // Setup webview html content
@@ -129,7 +125,14 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         const changeDocumentSubscription = vscode.workspace.onDidChangeTextDocument(e => {
             if (e.document.uri.toString() === document.uri.toString() && e.contentChanges.length !== 0) {
 
-                this.content = getContentAsJson(e.document.getText());
+                if (!e.document.getText()) {
+                    // e.g. when user deletes all lines in text editor
+                    const key = 'Form_' + getNonce(6).toLowerCase();
+                    const schema = JSON.parse('{"key": "MyStartForm", "type": "object", "allOf": []}');
+                    this.content = getContentAsJson(JSON.stringify({key, schema}));
+                } else {
+                    this.content = getContentAsJson(e.document.getText());
+                }
 
                 // If the webview is in the background then no messages can be sent to it.
                 // So we have to remember that we need to update its content the next time the webview regain its focus.
@@ -166,7 +169,13 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                 case webviewPanel.active: {
                     TextEditor.document = document;
 
-                    this.content = this.getContent(document.getText());
+                    if (!document.getText()) {
+                        const key = 'Form_' + getNonce(6).toLowerCase();
+                        const schema = JSON.parse('{"key": "MyStartForm", "type": "object", "allOf": []}');
+                        this.content = getContentAsJson(JSON.stringify({key, schema}));
+                    } else {
+                        this.content = getContentAsJson(document.getText());
+                    }
                     if (webviewPanel.options.retainContextWhenHidden) {
                         this.renderer.updateRenderer(this.content);
                     }
@@ -227,7 +236,12 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
     /** @hidden */
     private init(document: vscode.TextDocument): void {
         // Set the initial content to be sent to the webview
-        this.content = this.getContent(document.getText());
+        if (!document.getText()) {
+            this.content = getDefault();
+            this.writeData(document, this.content);
+        } else {
+            this.content = getContentAsJson(document.getText());
+        }
 
         // Necessary set up for toggle command
         // only enable the command if a custom editor is open
@@ -242,16 +256,5 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             this.renderer.setInitialContent(this.content);  // First set the content
             vscode.commands.executeCommand('jsonschema-renderer.focus');  // Then resolve the webview view
         }
-    }
-
-    /** @hidden */
-    private getContent(text: string): JSON {
-        let content: JSON;
-        if (text.length === 0) {
-            content = getDefault();
-        } else {
-            content = getContentAsJson(text);
-        }
-        return content
     }
 }
