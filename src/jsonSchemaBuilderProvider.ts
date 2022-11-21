@@ -209,9 +209,10 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
      * Apply changes to the data model.
      * @param document The data model
      * @param content The data which was sent from the webview
+     * @param save Boolean to save the changes or not
      * @returns Thenable
      */
-    protected writeChangesToDocument(document: vscode.TextDocument, content: Schema): Thenable<boolean> {
+    protected writeChangesToDocument(document: vscode.TextDocument, content: Schema, save = false): Thenable<boolean> {
         const edit = new vscode.WorkspaceEdit();
         const text = JSON.stringify(content, undefined, 4);
 
@@ -225,6 +226,9 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             .then((success) => {
                 if (success) {
                     this.content = getContentAsSchema(text);
+                    if (save) {
+                        document.save();
+                    }
                 }
                 return success;
             });
@@ -235,7 +239,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         // Set the initial content to be sent to the webview
         if (!document.getText()) {
             this.content = getDefault();
-            this.writeData(document, this.content);
+            this.writeData(document, this.content, true)
         } else {
             this.content = getContentAsSchema(document.getText());
         }
