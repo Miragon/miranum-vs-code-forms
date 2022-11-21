@@ -3,7 +3,7 @@
   "displayName": "DigiWF: JSON Schema Builder",
   "description": "Edit JSON Schema files with an modern easy to use editor.",
   "license": "Apache License 2.0",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "publisher": "miragon-gmbh",
   "repository": {
     "type": "git",
@@ -121,17 +121,18 @@
   "scripts": {
     "publish": "vsce publish",
     "vscode:prepublish": "npm run build",
-    "build": "tsup src-ext/extension.ts --dts --external=vscode && vite build --config ./src/vite.config.js && npm run doc",
-    "dev-client": "vite build --config ./src/vite.config.js --watch",
-    "watch": "tsup src-ext/extension.ts --dts --external=vscode --sourcemap",
+    "build": "tsup src/extension.ts --dts --external=vscode && vite build --config web/vite.config.js && npm run doc",
+    "web": "vite build --config web/vite.config.js",
+    "web-dev": "vite build --config web/vite.config.js --watch",
+    "watch": "tsup src/extension.ts --dts --external=vscode --sourcemap",
     "test": "node ./out/test/runTest.js",
     "doc": "typedoc --options ./docs/typedoc.json"
   },
   "dependencies": {
     "@koumoul/vjsf": "^2.18.0",
-    "@muenchen/digiwf-form-builder": "^0.18.8",
-    "@muenchen/digiwf-form-builder-settings": "^0.18.8",
-    "@muenchen/digiwf-form-renderer": "^0.18.8",
+    "@muenchen/digiwf-form-builder": "^0.20.2",
+    "@muenchen/digiwf-form-builder-settings": "^0.20.2",
+    "@muenchen/digiwf-form-renderer": "^0.20.2",
     "core-js": "^3.8.3",
     "vue": "^2.7.10",
     "vuetify": "^2.6.0"
