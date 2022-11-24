@@ -116,7 +116,8 @@ export default defineComponent({
 
       // Vuetify
       const rules = [
-         (value: string) => !!value || 'Required.'
+         (value: string) => !!value || 'Required.',
+         (value: string) => /^[a-zA-Z0-9_.-]+$/.test(value) || 'Allowed characters [a-zA-Z0-9_.-]'
       ];
 
       return {
