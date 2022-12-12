@@ -9,8 +9,9 @@ import * as vscode from 'vscode';
 import {getContentAsSchema, getDefault, getHtmlForWebview, getNonce} from './utils/utils';
 import {TextEditor} from "./utils/TextEditor";
 import {debounce} from "debounce";
-import {JsonSchemaRendererProvider} from "./jsonSchemaRendererProvider";
+//import {JsonSchemaRendererProvider} from "./jsonSchemaRendererProvider";
 import {Schema} from "../types";
+import {JsonSchemaPreview} from "./JsonSchemaPreview";
 
 /**
  * The [Custom Text Editor](https://code.visualstudio.com/api/extension-guides/custom-editors) uses a '.form'-File as its
@@ -32,7 +33,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
     /** The content of the current active custom text editor. */
     private content: Schema = JSON.parse('{}');
     /** The WebviewView ({@link JsonSchemaRendererProvider}) which renders the content of the active custom text editor. */
-    private readonly renderer: JsonSchemaRendererProvider;
+    private readonly renderer: JsonSchemaPreview;
 
     /**
      * Register the standard vscode text editor ({@link TextEditor}) and the WebviewView ({@link JsonSchemaRendererProvider}).
@@ -50,12 +51,8 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             }
         ));
 
-        // Register the WebviewView for rendering Json Schema
-        this.renderer = new JsonSchemaRendererProvider(this.context);
-        this.context.subscriptions.push(vscode.window.registerWebviewViewProvider(
-            JsonSchemaRendererProvider.viewType,
-            this.renderer
-        ));
+        // Register the Webview for rendering Json Schema
+        this.renderer = new JsonSchemaPreview(this.context);
     }
 
     /**
@@ -76,9 +73,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         this.init(document);
 
         // Setup webview options
-        webviewPanel.webview.options = {
-            enableScripts: true,
-        };
+        webviewPanel.webview.options = {enableScripts: true};
 
         // Setup webview html content
         webviewPanel.webview.html = getHtmlForWebview(webviewPanel.webview, this.context.extensionUri, this.content, "builder");
@@ -92,7 +87,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                 })
                     .then((success) => {
                         if (success) {
-                            this.renderer.updateRenderer(this.content);
+                            this.renderer.update(this.content);
                         }
                     }, (rejected) => {
                         if (!document.isClosed) {
@@ -107,7 +102,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             switch (e.type) {
                 case JsonSchemaBuilderProvider.viewType + '.updateFromWebview': {
                     isUpdateFromWebview = true;
-                    this.renderer.updateRenderer(e.content);
+                    this.renderer.update(e.content);
                     this.writeData(document, e.content);
                     break;
                 }
@@ -174,7 +169,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
                     this.content = getContentAsSchema(document.getText());
                     if (webviewPanel.options.retainContextWhenHidden) {
-                        this.renderer.updateRenderer(this.content);
+                        this.renderer.update(this.content);
                     }
                     /* falls through */
                 }
@@ -200,7 +195,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
             TextEditor.close();
             if (JsonSchemaBuilderProvider.counter <= 0) {
-                this.renderer.dispose();
+                this.renderer.closePreview();
             }
         });
     }
@@ -252,10 +247,10 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
         // Open/Update the JsonSchema-Renderer
         if (this.renderer.isVisible()) {
-            this.renderer.updateRenderer(this.content);
+            this.renderer.update(this.content);
         } else {
-            this.renderer.setInitialContent(this.content);  // First set the content
-            vscode.commands.executeCommand('jsonschema-renderer.focus');  // Then resolve the webview view
+            this.renderer.setContent(this.content);  // First set the content
+            //vscode.commands.executeCommand('jsonschema-renderer.focus');  // Then resolve the webview view
         }
     }
 }
