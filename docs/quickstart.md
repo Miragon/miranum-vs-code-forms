@@ -1,10 +1,10 @@
 ## Download from Marketplace
-1. Visit the official vscode [marketplace](https://marketplace.visualstudio.com/items?itemName=miragon-gmbh.vs-code-vuetify-jsonschema-builder)
+1. Visit the official vscode [marketplace](https://marketplace.visualstudio.com/items?itemName=miragon-gmbh.miranum-vs-code-forms)
 2. Click on `Install`
 
 ## Manual Installation
 ### First Option
-1. Download the VSIX file from the latest [release](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/releases)
+1. Download the VSIX file from the latest [release](https://github.com/FlowSquad/miranum-vs-code-forms/releases)
 2. Install the extension manually
     ```shell
     code --install-extension vs-code-vuetify-jsonschema-builder-0.1.0.vsix
@@ -14,11 +14,11 @@
 ### Second Option
 1. Clone the repo
     ```shell
-    git clone https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder.git
+    git clone https://github.com/FlowSquad/miranum-vs-code-forms.git
     ```
 2. Install dependencies
     ```shell
-    cd vs-code-vuetify-jsonschema-builder
+    cd miranum-vs-code-forms
     npm install
     ```
 3. Build Extension

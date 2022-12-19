@@ -1,21 +1,21 @@
 {
-  "name": "vs-code-vuetify-jsonschema-builder",
-  "displayName": "DigiWF: JSON Schema Builder",
+  "name": "miranum-vs-code-forms",
+  "displayName": "Miranum: Form Builder",
   "description": "Edit JSON Schema files with an modern easy to use editor.",
   "license": "Apache License 2.0",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "publisher": "miragon-gmbh",
   "repository": {
     "type": "git",
-    "url": "https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder.git"
+    "url": "https://github.com/FlowSquad/miranum-vs-code-forms.git"
   },
   "bugs": {
-    "url": "https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/issues"
+    "url": "https://github.com/FlowSquad/miranum-vs-code-forms/issues"
   },
   "engines": {
     "vscode": "^1.69.0"
   },
-  "icon": "images/logo_marketplace.png",
+  "icon": "images/komet.png",
   "categories": [
     "Other",
     "Visualization"
@@ -42,7 +42,7 @@
       }
     ],
     "configuration": {
-      "title": "DigiWF",
+      "title": "Miranum",
       "properties": {
         "jsonSchemaBuilder.toggleTextEditor": {
           "type": "string",
@@ -82,12 +82,12 @@
     "commands": [
       {
         "command": "jsonschema-renderer.update",
-        "title": "DigiWF: Update Renderer",
+        "title": "Miranum: Update Renderer",
         "icon": "$(extensions-sync-enabled)"
       },
       {
         "command": "jsonschema-builder.toggleTextEditor",
-        "title": "DigiWF: Toggle Standard Text Editor",
+        "title": "Miranum: Toggle Standard Text Editor",
         "icon": "$(notebook-mimetype)"
       }
     ],

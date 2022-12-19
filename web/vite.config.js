@@ -26,7 +26,8 @@ export default defineConfig({
         viteStaticCopy({
             targets: [
                 {src: 'node_modules/@mdi/font/css/**', dest: 'assets/css/'},
-                {src: 'node_modules/@mdi/font/fonts/**', dest: 'assets/fonts/'}
+                {src: 'node_modules/@mdi/font/fonts/**', dest: 'assets/fonts/'},
+                {src: 'images/logo_marketplace.png', dest: 'assets/images/'}
             ]
         })
     ],

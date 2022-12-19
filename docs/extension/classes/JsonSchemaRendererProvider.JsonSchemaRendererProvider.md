@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.3.1](../documentation.md) / [JsonSchemaRendererProvider](../modules/JsonSchemaRendererProvider.md) / JsonSchemaRendererProvider
+[VS Code JsonSchema Builder - v0.3.2](../documentation.md) / [JsonSchemaRendererProvider](../modules/JsonSchemaRendererProvider.md) / JsonSchemaRendererProvider
 
 # Class: JsonSchemaRendererProvider
 
@@ -42,7 +42,7 @@ Unique identifier for the webview view provider.
 
 #### Defined in
 
-[src/jsonSchemaRendererProvider.ts:18](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaRendererProvider.ts#L18)
+[src/jsonSchemaRendererProvider.ts:18](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaRendererProvider.ts#L18)
 
 ___
 
@@ -54,7 +54,7 @@ The webview which is displayed as a view inside a view container.
 
 #### Defined in
 
-[src/jsonSchemaRendererProvider.ts:21](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaRendererProvider.ts#L21)
+[src/jsonSchemaRendererProvider.ts:21](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaRendererProvider.ts#L21)
 
 ___
 
@@ -66,7 +66,7 @@ The current content which is displayed.
 
 #### Defined in
 
-[src/jsonSchemaRendererProvider.ts:23](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaRendererProvider.ts#L23)
+[src/jsonSchemaRendererProvider.ts:23](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaRendererProvider.ts#L23)
 
 ___
 
@@ -78,7 +78,7 @@ The context of the extension
 
 #### Defined in
 
-[src/jsonSchemaRendererProvider.ts:29](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaRendererProvider.ts#L29)
+[src/jsonSchemaRendererProvider.ts:29](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaRendererProvider.ts#L29)
 
 ## Constructors
 
@@ -96,7 +96,7 @@ Register the update-command.ƒ
 
 #### Defined in
 
-[src/jsonSchemaRendererProvider.ts:29](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaRendererProvider.ts#L29)
+[src/jsonSchemaRendererProvider.ts:29](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaRendererProvider.ts#L29)
 
 ## Methods
 
@@ -124,7 +124,7 @@ vscode.WebviewViewProvider.resolveWebviewView
 
 #### Defined in
 
-[src/jsonSchemaRendererProvider.ts:44](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaRendererProvider.ts#L44)
+[src/jsonSchemaRendererProvider.ts:44](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaRendererProvider.ts#L44)
 
 ___
 
@@ -146,7 +146,7 @@ Function which is called by the custom text editor to update the content of the 
 
 #### Defined in
 
-[src/jsonSchemaRendererProvider.ts:77](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaRendererProvider.ts#L77)
+[src/jsonSchemaRendererProvider.ts:77](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaRendererProvider.ts#L77)
 
 ___
 
@@ -162,7 +162,7 @@ Function which is called by the custom text editor to dispose the webview view.
 
 #### Defined in
 
-[src/jsonSchemaRendererProvider.ts:99](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaRendererProvider.ts#L99)
+[src/jsonSchemaRendererProvider.ts:99](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaRendererProvider.ts#L99)
 
 ___
 
@@ -178,7 +178,7 @@ Function which is called by the custom text editor to get the current view state
 
 #### Defined in
 
-[src/jsonSchemaRendererProvider.ts:106](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaRendererProvider.ts#L106)
+[src/jsonSchemaRendererProvider.ts:106](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaRendererProvider.ts#L106)
 
 ___
 
@@ -200,4 +200,4 @@ Function which is called by the custom text editor to set the initial content of
 
 #### Defined in
 
-[src/jsonSchemaRendererProvider.ts:116](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaRendererProvider.ts#L116)
+[src/jsonSchemaRendererProvider.ts:116](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaRendererProvider.ts#L116)
