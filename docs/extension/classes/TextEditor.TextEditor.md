@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.3.1](../documentation.md) / [TextEditor](../modules/TextEditor.md) / TextEditor
+[VS Code JsonSchema Builder - v0.3.2](../documentation.md) / [TextEditor](../modules/TextEditor.md) / TextEditor
 
 # Class: TextEditor
 
