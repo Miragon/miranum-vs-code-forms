@@ -1,14 +1,25 @@
 <template>
    <v-app>
-      <v-text-field
-          label="Form Key"
-          class="form-key"
-          :value="formKey"
-          @input="keyChanged"
-          :rules="rules"
-          v-if="mode === 'builder'"
-          outlined rounded dense hide-details="auto">
-      </v-text-field>
+     <v-row v-if="mode === 'builder'" align="center" >
+       <v-text-field
+         label="Form Key"
+         class="input"
+         :value="formKey"
+         @input="keyChanged"
+         :rules="rules"
+         outlined rounded dense hide-details="auto">
+       </v-text-field>
+       <v-select
+           label="x-display"
+           class="input"
+           v-model="xDisplay"
+           :items="xDisplayOptions"
+           item-text="name"
+           item-value="value"
+           @input="xDisplayChanged"
+           outlined rounded dense hide-details="auto">
+       </v-select>
+     </v-row>
       <DwfFormBuilder
           :builder-settings="builderSettings"
           :value="schema"
@@ -38,6 +49,13 @@ export default defineComponent({
    },
    setup() {
       const formKey = ref<string>();
+      const xDisplay = ref<string>();
+      const xDisplayOptions = [
+          { name:"Single Page", value:"" },
+          { name:"Expansion Panels", value:"expansion-panels" },
+          { name:"Tabs", value:"tabs" },
+          { name:"Stepper", value:"stepper" }
+      ];
       const schema = ref<Form>();
       const builderSettings = SettingsEN;
 
@@ -88,6 +106,7 @@ export default defineComponent({
          });
 
          formKey.value = newForm.key;
+         xDisplay.value = newForm.schema["x-display"];
          schema.value = newForm.schema;
       }
 
@@ -99,11 +118,24 @@ export default defineComponent({
          sendDataToExtension({key: update, schema: schema.value!});
       }
 
+     function xDisplayChanged(update: string): void {
+       sendDataToExtension({
+         key: formKey.value!,
+         schema: {
+           type: schema.value!.type,
+           "x-display": update,
+           allOf: schema.value!.allOf,
+           key: schema.value!.key
+         }
+       });
+     }
+
       onMounted(() => {
          const state = vscode.getState();
          if (state) {
             const form: Schema = JSON.parse(state.text);
             formKey.value = form.key;
+            xDisplay.value = form.schema["x-display"];
             schema.value = form.schema;
             mode.value = state.mode;
          }
@@ -122,26 +154,29 @@ export default defineComponent({
 
       return {
          formKey,
+         xDisplay,
+         xDisplayOptions,
          schema,
          builderSettings,
          mode,
          componentKey,
          rules,
          schemaChanged,
-         keyChanged
+         keyChanged,
+         xDisplayChanged
       }
    }
 });
 </script>
 
 <style>
-.form-key.theme--light.v-input {
-   width: 50% !important;
+.input.theme--light.v-input {
+   width: 48% !important;
    flex: 0 0 auto !important;
-   padding-top: 20px !important;
+   padding-top: 40px !important;
    padding-left: 20px !important;
 }
-.form-key.theme--light.v-input > .v-input__control > .v-input__slot {
+.input.theme--light.v-input > .v-input__control > .v-input__slot {
    flex-direction: row !important;
    flex-wrap: nowrap !important;
 }
