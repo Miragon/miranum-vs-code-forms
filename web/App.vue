@@ -1,6 +1,6 @@
 <template>
    <v-app>
-     <v-row v-if="mode === 'builder'">
+     <v-row v-if="mode === 'builder'" align="center" >
        <v-text-field
          label="Form Key"
          class="input"
@@ -9,14 +9,16 @@
          :rules="rules"
          outlined rounded dense hide-details="auto">
        </v-text-field>
-       <v-text-field
+       <v-select
            label="x-display"
            class="input"
-           :value="xDisplay"
+           v-model="xDisplay"
+           :items="xDisplayOptions"
+           item-text="name"
+           item-value="value"
            @input="xDisplayChanged"
-           :rules="rules"
            outlined rounded dense hide-details="auto">
-       </v-text-field>
+       </v-select>
      </v-row>
       <DwfFormBuilder
           :builder-settings="builderSettings"
@@ -48,6 +50,12 @@ export default defineComponent({
    setup() {
       const formKey = ref<string>();
       const xDisplay = ref<string>();
+      const xDisplayOptions = [
+          { name:"Single Page", value:"" },
+          { name:"Expansion Panels", value:"expansion-panels" },
+          { name:"Tabs", value:"tabs" },
+          { name:"Stepper", value:"stepper" }
+      ];
       const schema = ref<Form>();
       const builderSettings = SettingsEN;
 
@@ -98,6 +106,7 @@ export default defineComponent({
          });
 
          formKey.value = newForm.key;
+         xDisplay.value = newForm.schema["x-display"];
          schema.value = newForm.schema;
       }
 
@@ -110,12 +119,15 @@ export default defineComponent({
       }
 
      function xDisplayChanged(update: string): void {
-       sendDataToExtension({key: formKey.value!, schema: {
+       sendDataToExtension({
+         key: formKey.value!,
+         schema: {
            type: schema.value!.type,
            "x-display": update,
            allOf: schema.value!.allOf,
            key: schema.value!.key
-       }});
+         }
+       });
      }
 
       onMounted(() => {
@@ -143,6 +155,7 @@ export default defineComponent({
       return {
          formKey,
          xDisplay,
+         xDisplayOptions,
          schema,
          builderSettings,
          mode,
