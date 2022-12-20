@@ -15,13 +15,13 @@
     <img src="images/logo.png" alt="Logo" height="100">
   </a>
 
-<h3 align="center">Miragon <i>vs-code-vuetify-jsonschema-builder</i></h3>
+<h3 align="center"><i>miranum-vs-code-forms</i></h3>
 
   <p align="center">
     <i></i>
-    <br /><a href="https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/issues">Report Bug</a>
+    <br /><a href="https://github.com/FlowSquad/miranum-vs-code-forms/issues">Report Bug</a>
     ·
-    <a href="https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/issues">Request Feature</a>
+    <a href="https://github.com/FlowSquad/miranum-vs-code-forms/issues">Request Feature</a>
   </p>
 </div>
 
@@ -104,20 +104,20 @@ Distributed under the Apache License Version 2.0. See [`License`](LICENSE) file 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/FlowSquad/vs-code-vuetify-jsonschema-builder.svg?style=for-the-badge
 
-[contributors-url]: https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/graphs/contributors
+[contributors-url]: https://github.com/FlowSquad/miranum-vs-code-forms/graphs/contributors
 
 [forks-shield]: https://img.shields.io/github/forks/FlowSquad/vs-code-vuetify-jsonschema-builder.svg?style=for-the-badge
 
-[forks-url]: https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/network/members
+[forks-url]: https://github.com/FlowSquad/miranum-vs-code-forms/network/members
 
 [stars-shield]: https://img.shields.io/github/stars/FlowSquad/vs-code-vuetify-jsonschema-builder.svg?style=for-the-badge
 
-[stars-url]: https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/stargazers
+[stars-url]: https://github.com/FlowSquad/miranum-vs-code-forms/stargazers
 
 [issues-shield]: https://img.shields.io/github/issues/FlowSquad/vs-code-vuetify-jsonschema-builder.svg?style=for-the-badge
 
-[issues-url]: https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/issues
+[issues-url]: https://github.com/FlowSquad/miranum-vs-code-forms/issues
 
 [license-shield]: https://img.shields.io/github/license/FlowSquad/vs-code-vuetify-jsonschema-builder.svg?style=for-the-badge
 
-[license-url]: https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/master/LICENSE
+[license-url]: https://github.com/FlowSquad/miranum-vs-code-forms/blob/develop/LICENSE

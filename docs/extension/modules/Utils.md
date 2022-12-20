@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.3.1](../documentation.md) / Utils
+[VS Code JsonSchema Builder - v0.3.2](../documentation.md) / Utils
 
 # Module: Utils
 
@@ -27,7 +27,7 @@ Get the default content which is displayed when the data model is empty.
 
 #### Defined in
 
-[src/utils/utils.ts:12](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/utils/utils.ts#L12)
+[src/utils/utils.ts:12](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/utils/utils.ts#L12)
 
 ___
 
@@ -51,7 +51,7 @@ an json object
 
 #### Defined in
 
-[src/utils/utils.ts:76](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/utils/utils.ts#L76)
+[src/utils/utils.ts:76](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/utils/utils.ts#L76)
 
 ___
 
@@ -78,7 +78,7 @@ a string which represents the html content
 
 #### Defined in
 
-[src/utils/utils.ts:96](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/utils/utils.ts#L96)
+[src/utils/utils.ts:96](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/utils/utils.ts#L96)
 
 ___
 
@@ -98,4 +98,4 @@ ___
 
 #### Defined in
 
-[src/utils/utils.ts:155](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/utils/utils.ts#L155)
+[src/utils/utils.ts:155](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/utils/utils.ts#L155)
