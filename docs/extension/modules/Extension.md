@@ -31,4 +31,4 @@ It registers a [Custom Text Editor](https://code.visualstudio.com/api/extension-
 
 #### Defined in
 
-[src/extension.ts:14](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/extension.ts#L14)
+[src/extension.ts:14](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/extension.ts#L14)

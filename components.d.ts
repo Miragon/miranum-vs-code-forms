@@ -6,6 +6,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     VApp: typeof import('vuetify/lib')['VApp']
+    VRow: typeof import('vuetify/lib')['VRow']
     VTextField: typeof import('vuetify/lib')['VTextField']
   }
 }

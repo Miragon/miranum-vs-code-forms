@@ -45,7 +45,7 @@ Unique identifier for the custom editor provider.
 
 #### Defined in
 
-[src/jsonSchemaBuilderProvider.ts:26](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaBuilderProvider.ts#L26)
+[src/jsonSchemaBuilderProvider.ts:26](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaBuilderProvider.ts#L26)
 
 ___
 
@@ -57,19 +57,19 @@ Number of currently open custom text editors with the view type `jsonschema-buil
 
 #### Defined in
 
-[src/jsonSchemaBuilderProvider.ts:29](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaBuilderProvider.ts#L29)
+[src/jsonSchemaBuilderProvider.ts:29](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaBuilderProvider.ts#L29)
 
 ___
 
 ### writeData
 
-• `Private` `Readonly` **writeData**: (`document`: `TextDocument`, `content`: `Schema`) => `Thenable`<`boolean`\> & { `clear`: () => `void`  } & { `flush`: () => `void`  }
+• `Private` `Readonly` **writeData**: (`document`: `TextDocument`, `content`: `Schema`, `save`: `boolean`) => `Thenable`<`boolean`\> & { `clear`: () => `void`  } & { `flush`: () => `void`  }
 
 Function to apply changes to the data model.
 
 #### Defined in
 
-[src/jsonSchemaBuilderProvider.ts:31](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaBuilderProvider.ts#L31)
+[src/jsonSchemaBuilderProvider.ts:31](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaBuilderProvider.ts#L31)
 
 ___
 
@@ -81,7 +81,7 @@ The content of the current active custom text editor.
 
 #### Defined in
 
-[src/jsonSchemaBuilderProvider.ts:33](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaBuilderProvider.ts#L33)
+[src/jsonSchemaBuilderProvider.ts:33](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaBuilderProvider.ts#L33)
 
 ___
 
@@ -93,7 +93,7 @@ The WebviewView ([JsonSchemaRendererProvider](../modules/JsonSchemaRendererProvi
 
 #### Defined in
 
-[src/jsonSchemaBuilderProvider.ts:35](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaBuilderProvider.ts#L35)
+[src/jsonSchemaBuilderProvider.ts:35](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaBuilderProvider.ts#L35)
 
 ___
 
@@ -105,7 +105,7 @@ The context of the extension
 
 #### Defined in
 
-[src/jsonSchemaBuilderProvider.ts:42](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaBuilderProvider.ts#L42)
+[src/jsonSchemaBuilderProvider.ts:42](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaBuilderProvider.ts#L42)
 
 ## Constructors
 
@@ -123,7 +123,7 @@ Register the standard vscode text editor ([TextEditor](../modules/TextEditor.md)
 
 #### Defined in
 
-[src/jsonSchemaBuilderProvider.ts:41](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaBuilderProvider.ts#L41)
+[src/jsonSchemaBuilderProvider.ts:41](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaBuilderProvider.ts#L41)
 
 ## Methods
 
@@ -151,22 +151,23 @@ vscode.CustomTextEditorProvider.resolveCustomTextEditor
 
 #### Defined in
 
-[src/jsonSchemaBuilderProvider.ts:67](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaBuilderProvider.ts#L67)
+[src/jsonSchemaBuilderProvider.ts:67](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaBuilderProvider.ts#L67)
 
 ___
 
 ### writeChangesToDocument
 
-▸ `Protected` **writeChangesToDocument**(`document`, `content`): `Thenable`<`boolean`\>
+▸ `Protected` **writeChangesToDocument**(`document`, `content`, `save?`): `Thenable`<`boolean`\>
 
 Apply changes to the data model.
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `document` | `TextDocument` | The data model |
-| `content` | `Schema` | The data which was sent from the webview |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `document` | `TextDocument` | `undefined` | The data model |
+| `content` | `Schema` | `undefined` | The data which was sent from the webview |
+| `save` | `boolean` | `false` | Boolean to save the changes or not |
 
 #### Returns
 
@@ -176,4 +177,4 @@ Thenable
 
 #### Defined in
 
-[src/jsonSchemaBuilderProvider.ts:214](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaBuilderProvider.ts#L214)
+[src/jsonSchemaBuilderProvider.ts:215](https://github.com/FlowSquad/miranum-vs-code-forms/blob/45ce17f/src/jsonSchemaBuilderProvider.ts#L215)
