@@ -4,7 +4,7 @@
  */
 
 import * as vscode from "vscode";
-import {Schema} from "../../types";
+import {Schema} from "../types";
 
 /**
  * Get the default content which is displayed when the data model is empty.

@@ -4,7 +4,7 @@
  */
 
 import * as vscode from 'vscode';
-import {JsonSchemaBuilderProvider} from './jsonSchemaBuilderProvider';
+import {JsonSchemaBuilderProvider} from './JsonSchemaBuilderProvider';
 
 /**
  * Function called by vscode when the user opens a .form-file and no JsonSchemaBuilderProvider is registered.

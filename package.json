@@ -90,7 +90,7 @@
         {
           "command": "jsonschema-renderer.togglePreview",
           "group": "navigation",
-          "when": "jsonschema-builder.openCustomEditors > 0"
+          "when": "resourceExtname == .form && jsonschema-builder.openCustomEditors > 0"
         }
       ]
     }
