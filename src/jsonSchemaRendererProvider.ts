@@ -5,7 +5,7 @@
  */
 
 import * as vscode from 'vscode';
-import {getHtmlForWebview} from "./utils/utils";
+import {getHtmlForWebview} from "./utils";
 import {Schema} from "../types";
 
 /**

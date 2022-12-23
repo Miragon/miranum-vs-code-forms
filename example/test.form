@@ -1,0 +1,90 @@
+{
+    "key": "Form_jw5yok",
+    "schema": {
+        "key": "MyStartForm",
+        "type": "object",
+        "allOf": [
+            {
+                "key": "sectionKey1",
+                "title": "First Section",
+                "type": "object",
+                "x-options": {
+                    "sectionsTitlesClasses": [
+                        "d-none"
+                    ]
+                },
+                "allOf": [
+                    {
+                        "key": "group1",
+                        "title": "First Group",
+                        "type": "object",
+                        "x-options": {
+                            "childrenClass": "pl-0"
+                        },
+                        "properties": {
+                            "stringProp1": {
+                                "fieldType": "text",
+                                "title": "I am a text",
+                                "type": "string",
+                                "x-options": {
+                                    "fieldColProps": {
+                                        "cols": 12,
+                                        "sm": 6
+                                    }
+                                },
+                                "x-props": {
+                                    "outlined": true,
+                                    "dense": true
+                                }
+                            },
+                            "numberProp1": {
+                                "fieldType": "integer",
+                                "type": "integer",
+                                "title": "I am a number",
+                                "x-options": {
+                                    "fieldColProps": {
+                                        "cols": 12,
+                                        "sm": 6
+                                    }
+                                },
+                                "x-props": {
+                                    "outlined": true,
+                                    "dense": true
+                                }
+                            },
+                            "textarea1": {
+                                "fieldType": "textarea",
+                                "type": "string",
+                                "x-display": "textarea",
+                                "title": "I am a textarea",
+                                "x-props": {
+                                    "outlined": true,
+                                    "dense": true
+                                }
+                            },
+                            "booleanprop": {
+                                "fieldType": "boolean",
+                                "type": "boolean",
+                                "title": "I am a checkbox",
+                                "x-props": {
+                                    "outlined": true,
+                                    "dense": true
+                                }
+                            },
+                            "dateprop": {
+                                "fieldType": "date",
+                                "type": "string",
+                                "format": "date",
+                                "title": "I am a date",
+                                "x-props": {
+                                    "outlined": true,
+                                    "dense": true
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
