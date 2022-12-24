@@ -34,7 +34,7 @@ export default defineConfig({
         target: 'es2021',
         commonjsOptions: {transformMixedEsModules: true},
         lib: {
-            entry: 'web/main.ts',
+            entry: 'src/web/main.ts',
             name: 'test',
             fileName: 'client',
         },

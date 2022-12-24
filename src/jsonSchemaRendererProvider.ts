@@ -6,7 +6,7 @@
 
 import * as vscode from 'vscode';
 import {getHtmlForWebview} from "./utils";
-import {Schema} from "../types";
+import {Schema} from "./lib/types";
 
 /**
  * The [WebviewView](https://code.visualstudio.com/api/extension-guides/webview) renders the content of the current active
@@ -43,7 +43,9 @@ export class JsonSchemaRendererProvider implements vscode.WebviewViewProvider {
      */
     public resolveWebviewView(
         webviewView: vscode.WebviewView,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         context: vscode.WebviewViewResolveContext,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         token: vscode.CancellationToken
     ): Thenable<void> | void {
 
