@@ -1,8 +1,5 @@
-import {Form} from "@muenchen/digiwf-form-renderer";
-
-export type Schema  = {
-    key: string
-    schema: Form
+export interface Content<T> {
+    content: T;
 }
 
 export type VsCode = {

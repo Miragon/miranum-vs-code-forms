@@ -1,18 +1,16 @@
 import * as vscode from "vscode";
+import {Content} from "./types";
 
 export abstract class Preview<ContentType> {
 
     protected abstract readonly context: vscode.ExtensionContext;
     protected abstract readonly viewType: string;
     protected abstract webviewOptions: WebviewOptions;
-    protected abstract _content: ContentType | undefined;
+    protected abstract content: Content<ContentType>;
     private webviewObject: WebviewObject[] = [];
     private isBuffer = false;
     private _isOpen = false;
 
-
-    public abstract get content(): ContentType | undefined;
-    public abstract set content(content: ContentType | undefined);
 
     protected abstract getHtml(webview: vscode.Webview, extensionUri: vscode.Uri, content: ContentType): string;
 
@@ -52,13 +50,13 @@ export abstract class Preview<ContentType> {
 
         webviewPanel.iconPath = this.webviewOptions.icon;
         webviewPanel.webview.options = {enableScripts: true};
-        webviewPanel.webview.html = this.getHtml(webviewPanel.webview, this.context.extensionUri, this.content!);
+        webviewPanel.webview.html = this.getHtml(webviewPanel.webview, this.context.extensionUri, this.content.content);
 
         webviewPanel.onDidChangeViewState((event) => {
             switch (true) {
                 case event.webviewPanel?.visible: {
                     if (this.isBuffer) {
-                        this.update(this.content);
+                        this.update();
                         this.isBuffer = false;
                     }
                 }
@@ -87,14 +85,10 @@ export abstract class Preview<ContentType> {
 
     /**
      * Update the active preview window.
-     * @param content
      */
-    public update(content?: ContentType): boolean {
+    public update(): boolean {
         const webviewPanel = this.webviewObject[0].webviewPanel;
 
-        if (content && content !== this.content) {
-            this.content = content;
-        }
         if (!webviewPanel) {
             console.log('Webview is not initialized!');
             return false;
@@ -107,7 +101,7 @@ export abstract class Preview<ContentType> {
         try {
             webviewPanel.webview.postMessage({
                 type: this.webviewOptions.msgType,
-                text: JSON.parse(JSON.stringify(this.content))
+                text: JSON.parse(JSON.stringify(this.content.content))
             })
             return true;
         } catch (error) {

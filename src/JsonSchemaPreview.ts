@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
-import {getHtmlForWebview} from "./utils";
-import {Schema} from "../types";
-import {Preview, WebviewOptions} from "./lib"
+import {getHtmlForWebview, Schema} from "./utils";
+import {Content, Preview, WebviewOptions} from "./lib"
 
 export class JsonSchemaPreview extends Preview<Schema> {
 
@@ -11,11 +10,12 @@ export class JsonSchemaPreview extends Preview<Schema> {
         icon: vscode.Uri.joinPath(this.context.extensionUri, 'resources/logo_blau.png'),
         msgType: this.viewType + '.updateFromExtension',
     };
-    protected _content: Schema | undefined;
+    //protected _content: Content<Schema>;
     private _lastViewState = false;
 
     constructor(
         protected readonly context: vscode.ExtensionContext,
+        protected readonly content: Content<Schema>,
     ) {
         super();
         context.subscriptions.push(vscode.commands.registerCommand(
@@ -23,14 +23,6 @@ export class JsonSchemaPreview extends Preview<Schema> {
             () => {
                 super.toggle();
             }))
-    }
-
-    public get content(): Schema | undefined {
-        return this._content;
-    }
-
-    public set content(content: Schema | undefined) {
-        this._content = content;
     }
 
     public get lastViewState(): boolean {

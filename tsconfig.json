@@ -21,10 +21,10 @@
   },
   "include": [
     "src",
-    "types.ts"
+    "src/lib/types.ts"
   ],
   "exclude": [
     "node_modules",
-    "web"
+    "src/web"
   ]
 }
