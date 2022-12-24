@@ -140,8 +140,7 @@ export default defineComponent({
             schema.value = form.schema;
             mode.value = state.mode;
          }
-         console.log('onMounted() -> formKey', formKey.value);
-         console.log('onMounted() -> schema', schema.value);
+
          window.addEventListener('message', getDataFromExtension);
       })
 

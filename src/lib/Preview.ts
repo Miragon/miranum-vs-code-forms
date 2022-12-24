@@ -1,12 +1,11 @@
 import * as vscode from "vscode";
-import {Content} from "./types";
 
 export abstract class Preview<ContentType> {
 
-    protected abstract readonly context: vscode.ExtensionContext;
-    protected abstract readonly viewType: string;
+    protected abstract readonly extensionUri: vscode.Uri;
+    //protected abstract readonly viewType: string;
     protected abstract webviewOptions: WebviewOptions;
-    protected abstract content: Content<ContentType>;
+    //protected abstract content: Content<ContentType>;
     private webviewObject: WebviewObject[] = [];
     private isBuffer = false;
     private _isOpen = false;
@@ -37,9 +36,9 @@ export abstract class Preview<ContentType> {
     /**
      * Create a new webview panel.
      */
-    public create(): void {
+    public create(viewType: string, content: ContentType): void {
         const webviewPanel = vscode.window.createWebviewPanel(
-            this.viewType,
+            viewType,
             this.webviewOptions.title,
             {
                 preserveFocus: true,
@@ -50,13 +49,13 @@ export abstract class Preview<ContentType> {
 
         webviewPanel.iconPath = this.webviewOptions.icon;
         webviewPanel.webview.options = {enableScripts: true};
-        webviewPanel.webview.html = this.getHtml(webviewPanel.webview, this.context.extensionUri, this.content.content);
+        webviewPanel.webview.html = this.getHtml(webviewPanel.webview, this.extensionUri, content);
 
         webviewPanel.onDidChangeViewState((event) => {
             switch (true) {
                 case event.webviewPanel?.visible: {
                     if (this.isBuffer) {
-                        this.update();
+                        this.update(content);
                         this.isBuffer = false;
                     }
                 }
@@ -86,26 +85,15 @@ export abstract class Preview<ContentType> {
     /**
      * Update the active preview window.
      */
-    public update(): boolean {
-        const webviewPanel = this.webviewObject[0].webviewPanel;
-
-        if (!webviewPanel) {
-            console.log('Webview is not initialized!');
-            return false;
-        }
-        if (!webviewPanel.visible) {
-            this.isBuffer = true;
-            return false;
-        }
-
+    public update(content: ContentType): void {
         try {
-            webviewPanel.webview.postMessage({
+            this.webviewObject[0].webviewPanel.webview.postMessage({
                 type: this.webviewOptions.msgType,
-                text: JSON.parse(JSON.stringify(this.content.content))
-            })
-            return true;
+                text: JSON.parse(JSON.stringify(content))
+            });
         } catch (error) {
-            throw new Error('Can\'t post message!' + error);
+            this.isBuffer = true;
+            throw new Error('[Preview] Can\'t post message!\n' + error);
         }
     }
 
@@ -117,11 +105,11 @@ export abstract class Preview<ContentType> {
         this.webviewObject[0].webviewPanel.dispose();
     }
 
-    protected toggle(): void {
+    public toggle(viewType: string, content: ContentType): void {
         if (this.isOpen) {
             this.close();
         } else {
-            this.create();
+            this.create(viewType, content);
         }
     }
 
@@ -142,34 +130,6 @@ export abstract class Preview<ContentType> {
 
         this._isOpen = false;
     }
-
-    /*public async close(): Promise<boolean> {
-        try {
-            const tab = this.getTab();
-            const result = await vscode.window.tabGroups.close(tab)
-                .then((success) => {
-                    this._isOpen = !success;
-                    return success;
-                });
-            return Promise.resolve(result);
-        } catch (error) {
-            return Promise.reject('close() -> ' + error);
-        }
-
-    }
-
-    private getTab(): vscode.Tab {
-        for (const tabGroup of vscode.window.tabGroups.all) {
-            for (const tab of tabGroup.tabs) {
-                if (tab.input instanceof vscode.TabInputWebview &&
-                    tab.input.viewType === 'mainThreadWebview-' + this.viewType) {
-
-                    return tab;
-                }
-            }
-        }
-        throw new Error('No tab found!')
-    }*/
 }
 
 export interface WebviewOptions {
