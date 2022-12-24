@@ -45,7 +45,7 @@
       "properties": {
         "jsonSchemaBuilder.toggleTextEditor": {
           "type": "string",
-          "default": "Group",
+          "default": "Tab",
           "description": "Choose where to open the standard text editor.",
           "enum": [
             "Group",

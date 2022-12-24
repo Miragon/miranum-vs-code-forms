@@ -1,5 +1,10 @@
-export interface Content<T> {
+export interface IContentController<T> {
     content: T;
+    subscribe(observer: Updatable<T>): void;
+}
+
+export interface Updatable<T> {
+    update(content: T): void;
 }
 
 export type VsCode = {

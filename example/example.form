@@ -24,7 +24,7 @@
                         "properties": {
                             "30a60f0a-66e7-46ea-a317-2b43ee378b27": {
                                 "fieldType": "boolean",
-                                "title": "Checkbox",
+                                "title": "Test-Test",
                                 "default": false,
                                 "type": "boolean",
                                 "x-options": {
@@ -55,6 +55,22 @@
                                     "dense": true
                                 },
                                 "x-rules": []
+                            },
+                            "172f4f5e-50bd-4614-b508-b7df465b7958": {
+                                "fieldType": "textarea",
+                                "title": "Textarea",
+                                "x-display": "textarea",
+                                "type": "string",
+                                "x-options": {
+                                    "fieldColProps": {
+                                        "cols": 12,
+                                        "sm": 12
+                                    }
+                                },
+                                "x-props": {
+                                    "outlined": true,
+                                    "dense": true
+                                }
                             }
                         },
                         "key": "ff923e85-6d9c-42c0-8460-2efda521177e"
