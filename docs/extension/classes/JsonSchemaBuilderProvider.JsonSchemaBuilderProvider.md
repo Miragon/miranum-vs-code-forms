@@ -45,7 +45,11 @@ Unique identifier for the custom editor provider.
 
 #### Defined in
 
+<<<<<<< HEAD
 [src/jsonSchemaBuilderProvider.ts:26](https://github.com/FlowSquad/miranum-vs-code-forms/blob/c9e53b9/src/jsonSchemaBuilderProvider.ts#L26)
+=======
+[src/JsonSchemaBuilderProvider.ts:26](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaBuilderProvider.ts#L26)
+>>>>>>> 14fc537771e1b109689f6c3b2b2c656441ac20b9
 
 ___
 
@@ -57,7 +61,11 @@ Number of currently open custom text editors with the view type `jsonschema-buil
 
 #### Defined in
 
+<<<<<<< HEAD
 [src/jsonSchemaBuilderProvider.ts:29](https://github.com/FlowSquad/miranum-vs-code-forms/blob/c9e53b9/src/jsonSchemaBuilderProvider.ts#L29)
+=======
+[src/JsonSchemaBuilderProvider.ts:29](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaBuilderProvider.ts#L29)
+>>>>>>> 14fc537771e1b109689f6c3b2b2c656441ac20b9
 
 ___
 
@@ -69,7 +77,11 @@ Function to apply changes to the data model.
 
 #### Defined in
 
+<<<<<<< HEAD
 [src/jsonSchemaBuilderProvider.ts:31](https://github.com/FlowSquad/miranum-vs-code-forms/blob/c9e53b9/src/jsonSchemaBuilderProvider.ts#L31)
+=======
+[src/JsonSchemaBuilderProvider.ts:31](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaBuilderProvider.ts#L31)
+>>>>>>> 14fc537771e1b109689f6c3b2b2c656441ac20b9
 
 ___
 
@@ -81,7 +93,11 @@ The content of the current active custom text editor.
 
 #### Defined in
 
+<<<<<<< HEAD
 [src/jsonSchemaBuilderProvider.ts:33](https://github.com/FlowSquad/miranum-vs-code-forms/blob/c9e53b9/src/jsonSchemaBuilderProvider.ts#L33)
+=======
+[src/JsonSchemaBuilderProvider.ts:33](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaBuilderProvider.ts#L33)
+>>>>>>> 14fc537771e1b109689f6c3b2b2c656441ac20b9
 
 ___
 
@@ -93,7 +109,11 @@ The WebviewView ([JsonSchemaRendererProvider](../modules/JsonSchemaRendererProvi
 
 #### Defined in
 
+<<<<<<< HEAD
 [src/jsonSchemaBuilderProvider.ts:35](https://github.com/FlowSquad/miranum-vs-code-forms/blob/c9e53b9/src/jsonSchemaBuilderProvider.ts#L35)
+=======
+[src/JsonSchemaBuilderProvider.ts:35](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaBuilderProvider.ts#L35)
+>>>>>>> 14fc537771e1b109689f6c3b2b2c656441ac20b9
 
 ___
 
@@ -105,7 +125,11 @@ The context of the extension
 
 #### Defined in
 
+<<<<<<< HEAD
 [src/jsonSchemaBuilderProvider.ts:42](https://github.com/FlowSquad/miranum-vs-code-forms/blob/c9e53b9/src/jsonSchemaBuilderProvider.ts#L42)
+=======
+[src/JsonSchemaBuilderProvider.ts:42](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaBuilderProvider.ts#L42)
+>>>>>>> 14fc537771e1b109689f6c3b2b2c656441ac20b9
 
 ## Constructors
 
@@ -123,7 +147,11 @@ Register the standard vscode text editor ([TextEditor](../modules/TextEditor.md)
 
 #### Defined in
 
+<<<<<<< HEAD
 [src/jsonSchemaBuilderProvider.ts:41](https://github.com/FlowSquad/miranum-vs-code-forms/blob/c9e53b9/src/jsonSchemaBuilderProvider.ts#L41)
+=======
+[src/JsonSchemaBuilderProvider.ts:41](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaBuilderProvider.ts#L41)
+>>>>>>> 14fc537771e1b109689f6c3b2b2c656441ac20b9
 
 ## Methods
 
@@ -151,7 +179,11 @@ vscode.CustomTextEditorProvider.resolveCustomTextEditor
 
 #### Defined in
 
+<<<<<<< HEAD
 [src/jsonSchemaBuilderProvider.ts:67](https://github.com/FlowSquad/miranum-vs-code-forms/blob/c9e53b9/src/jsonSchemaBuilderProvider.ts#L67)
+=======
+[src/JsonSchemaBuilderProvider.ts:67](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaBuilderProvider.ts#L67)
+>>>>>>> 14fc537771e1b109689f6c3b2b2c656441ac20b9
 
 ___
 
@@ -177,4 +209,8 @@ Thenable
 
 #### Defined in
 
+<<<<<<< HEAD
 [src/jsonSchemaBuilderProvider.ts:215](https://github.com/FlowSquad/miranum-vs-code-forms/blob/c9e53b9/src/jsonSchemaBuilderProvider.ts#L215)
+=======
+[src/JsonSchemaBuilderProvider.ts:214](https://github.com/FlowSquad/vs-code-vuetify-jsonschema-builder/blob/040ddfe/src/jsonSchemaBuilderProvider.ts#L214)
+>>>>>>> 14fc537771e1b109689f6c3b2b2c656441ac20b9
