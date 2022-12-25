@@ -1,3 +1,3 @@
 export * from './Preview';
-export * from './TextEditor';
+export * from './TextEditorWrapper';
 export * from './types';

@@ -1,5 +1,7 @@
+import {TextDocument} from "vscode";
+
 export interface IContentController<T> {
-    content: T;
+    document: TextDocument;
     subscribe(observer: Updatable<T>): void;
 }
 
