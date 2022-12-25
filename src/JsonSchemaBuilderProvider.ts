@@ -1,7 +1,7 @@
 /**
  * This module contains the CustomTextEditorProvider for the `JsonSchema Builder`.
  * It handles the webview and synchronizes the webview with the data model.
- * Furthermore, it registers the {@link JsonSchemaRendererProvider} and {@link TextEditor}.
+ * Furthermore, it registers the {@link JsonSchemaPreview} and {@link TextEditor}.
  * @module JsonSchemaBuilderProvider
  */
 
@@ -37,13 +37,13 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
     private readonly writeData = debounce(this.writeChangesToDocument);
     /** The content of the current active custom text editor. */
     private readonly controller: IContentController<Schema>;
-    /** The WebviewView ({@link JsonSchemaRendererProvider}) which renders the content of the active custom text editor. */
+    /** The WebviewView ({@link JsonSchemaPreview}) which renders the content of the active custom text editor. */
     private readonly renderer: JsonSchemaPreview;
     private disposables: vscode.Disposable[] = [];
     private isToggle = false;
 
     /**
-     * Register the standard vscode text editor ({@link TextEditor}) and the WebviewView ({@link JsonSchemaRendererProvider}).
+     * Register the standard vscode text editor ({@link TextEditor}) and the WebviewView ({@link JsonSchemaPreview}).
      * @param context The context of the extension
      */
     constructor(
@@ -58,7 +58,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         this.context.subscriptions.push(vscode.commands.registerCommand(
             JsonSchemaBuilderProvider.viewType + '.toggleTextEditor',
             () => {
-                this.isToggle = true;
+                this.isToggle = true;   // prevent preview from closing
                 TextEditor.toggle()
             }
         ));
