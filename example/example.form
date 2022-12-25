@@ -24,7 +24,7 @@
                         "properties": {
                             "30a60f0a-66e7-46ea-a317-2b43ee378b27": {
                                 "fieldType": "boolean",
-                                "title": "Test-Test",
+                                "title": "TestTestTest",
                                 "default": false,
                                 "type": "boolean",
                                 "x-options": {

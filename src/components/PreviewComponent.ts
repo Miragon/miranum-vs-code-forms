@@ -1,14 +1,14 @@
 import * as vscode from "vscode";
-import {getHtmlForWebview, Schema} from "./utils";
-import {Preview, Updatable, WebviewOptions} from "./lib"
+import {getHtmlForWebview, Schema} from "../utils";
+import {Preview, WebviewOptions} from "../lib"
 
-export class JsonSchemaPreview extends Preview<Schema> implements Updatable<Schema> {
+export class PreviewComponent extends Preview<Schema> {
 
     public static readonly viewType = 'jsonschema-renderer';
     protected readonly webviewOptions: WebviewOptions = {
         title: 'JSON Schema Renderer',
         icon: vscode.Uri.joinPath(this.extensionUri, 'resources/logo_blau.png'),
-        msgType: JsonSchemaPreview.viewType + '.updateFromExtension',
+        msgType: PreviewComponent.viewType + '.updateFromExtension',
     };
     private _lastViewState = false;
 

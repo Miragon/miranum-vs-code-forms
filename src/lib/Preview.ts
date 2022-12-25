@@ -1,11 +1,10 @@
 import * as vscode from "vscode";
+import {Updatable} from "./types";
 
-export abstract class Preview<ContentType> {
+export abstract class Preview<ContentType> implements Updatable<ContentType> {
 
     protected abstract readonly extensionUri: vscode.Uri;
-    //protected abstract readonly viewType: string;
     protected abstract webviewOptions: WebviewOptions;
-    //protected abstract content: Content<ContentType>;
     private webviewObject: WebviewObject[] = [];
     private isBuffer = false;
     private _isOpen = false;
@@ -37,49 +36,54 @@ export abstract class Preview<ContentType> {
      * Create a new webview panel.
      */
     public create(viewType: string, content: ContentType): void {
-        const webviewPanel = vscode.window.createWebviewPanel(
-            viewType,
-            this.webviewOptions.title,
-            {
-                preserveFocus: true,
-                viewColumn: vscode.ViewColumn.Beside
-            }
-        );
-        const disposables: vscode.Disposable[] = []
+        try {
+            const webviewPanel = vscode.window.createWebviewPanel(
+                viewType,
+                this.webviewOptions.title,
+                {
+                    preserveFocus: true,
+                    viewColumn: vscode.ViewColumn.Beside
+                }
+            );
+            const disposables: vscode.Disposable[] = []
 
-        webviewPanel.iconPath = this.webviewOptions.icon;
-        webviewPanel.webview.options = {enableScripts: true};
-        webviewPanel.webview.html = this.getHtml(webviewPanel.webview, this.extensionUri, content);
+            webviewPanel.iconPath = this.webviewOptions.icon;
+            webviewPanel.webview.options = {enableScripts: true};
+            webviewPanel.webview.html = this.getHtml(webviewPanel.webview, this.extensionUri, content);
 
-        webviewPanel.onDidChangeViewState((event) => {
-            switch (true) {
-                case event.webviewPanel?.visible: {
-                    if (this.isBuffer) {
-                        this.update(content);
-                        this.isBuffer = false;
+            webviewPanel.onDidChangeViewState((event) => {
+                switch (true) {
+                    case event.webviewPanel?.visible: {
+                        if (this.isBuffer) {
+                            this.update(content);
+                            this.isBuffer = false;
+                        }
                     }
                 }
+            }, null, disposables);
+
+            webviewPanel.onDidDispose(() => {
+                this.dispose();
+            }, null, disposables);
+
+            this._isOpen = true;
+
+            // Make sure there will never be more than 2 webview panels inside our array
+            while (this.webviewObject.length > 1) {
+                const wp = this.webviewObject.pop();
+                wp?.webviewPanel.dispose();
             }
-        }, null, disposables);
 
-        webviewPanel.onDidDispose(() => {
-            this.dispose();
-        }, null, disposables);
+            // add the current webview panel on top of our array
+            // so our active preview window is always on index 0
+            this.webviewObject.unshift({
+                webviewPanel,
+                disposables
+            })
 
-        this._isOpen = true;
-
-        // Make sure there will never be more than 2 webview panels inside our array
-        while (this.webviewObject.length > 1) {
-            const wp = this.webviewObject.pop();
-            wp?.webviewPanel.dispose();
+        } catch (error) {
+            console.error('[Preview]' + error);
         }
-
-        // add the current webview panel on top of our array
-        // so our active preview window is always on index 0
-        this.webviewObject.unshift({
-            webviewPanel,
-            disposables
-        })
     }
 
     /**
@@ -93,7 +97,7 @@ export abstract class Preview<ContentType> {
             });
         } catch (error) {
             this.isBuffer = true;
-            throw new Error('[Preview] Can\'t post message!\n' + error);
+            console.error('[Preview] Can\'t post message!\n' + error);
         }
     }
 
@@ -101,8 +105,12 @@ export abstract class Preview<ContentType> {
      * Close the active preview window.
      */
     public close(): void {
-        // Trigger onDidDispose-Event
-        this.webviewObject[0].webviewPanel.dispose();
+        try {
+            // Trigger onDidDispose-Event
+            this.webviewObject[0].webviewPanel.dispose();
+        } catch (error) {
+            console.error('[Preview] Unable to close preview!')
+        }
     }
 
     public toggle(viewType: string, content: ContentType): void {
@@ -115,20 +123,22 @@ export abstract class Preview<ContentType> {
 
     private dispose(): void {
         const wo = this.webviewObject.pop();
-        const webviewPanel = wo?.webviewPanel;
-        const disposables = wo?.disposables;
+        if (wo) {
+            const webviewPanel = wo.webviewPanel;
+            const disposables = wo.disposables;
 
-        if (webviewPanel) {
-            webviewPanel.dispose();
-            while (disposables && disposables.length) {
-                const item = disposables.pop();
-                if (item) {
-                    item.dispose();
+            if (webviewPanel) {
+                webviewPanel.dispose();
+                while (disposables && disposables.length) {
+                    const item = disposables.pop();
+                    if (item) {
+                        item.dispose();
+                    }
                 }
             }
-        }
 
-        this._isOpen = false;
+            this._isOpen = false;
+        }
     }
 }
 

@@ -69,23 +69,6 @@ export function getDefault(): Schema {
 }
 
 /**
- * Parse a string to json
- * @param text The string which should be parsed to json
- * @returns an json object
- */
-export function getContentAsSchema(text: string): Schema {
-    if (text.trim().length === 0) {
-        return JSON.parse('{}');
-    }
-
-    try {
-        return JSON.parse(text);
-    } catch {
-        throw new Error();
-    }
-}
-
-/**
  * Get the HTML-Document which display the webview
  * @param webview Webview belonging to the panel
  * @param extensionUri
