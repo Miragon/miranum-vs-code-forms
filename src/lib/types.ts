@@ -9,6 +9,11 @@ export interface Updatable<T> {
     update(content: T): void;
 }
 
+export enum ViewState {
+    'open' = 'open',
+    'closed' = 'closed'
+}
+
 export type VsCode = {
     postMessage(message: VscMessage): void;
     getState(): VscState;

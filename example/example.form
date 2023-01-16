@@ -24,7 +24,7 @@
                         "properties": {
                             "30a60f0a-66e7-46ea-a317-2b43ee378b27": {
                                 "fieldType": "boolean",
-                                "title": "TestTestTest",
+                                "title": "Test",
                                 "default": false,
                                 "type": "boolean",
                                 "x-options": {
@@ -61,6 +61,51 @@
                                 "title": "Textarea",
                                 "x-display": "textarea",
                                 "type": "string",
+                                "x-options": {
+                                    "fieldColProps": {
+                                        "cols": 12,
+                                        "sm": 12
+                                    }
+                                },
+                                "x-props": {
+                                    "outlined": true,
+                                    "dense": true
+                                }
+                            },
+                            "4e22a00e-f121-4fef-9773-e8ade9ddb4aa": {
+                                "fieldType": "integer",
+                                "title": "Number",
+                                "type": "integer",
+                                "x-options": {
+                                    "fieldColProps": {
+                                        "cols": 12,
+                                        "sm": 12
+                                    }
+                                },
+                                "x-props": {
+                                    "outlined": true,
+                                    "dense": true
+                                }
+                            },
+                            "0f72447f-f15c-416c-937a-bb5609dd49f7": {
+                                "fieldType": "integer",
+                                "title": "Number",
+                                "type": "integer",
+                                "x-options": {
+                                    "fieldColProps": {
+                                        "cols": 12,
+                                        "sm": 12
+                                    }
+                                },
+                                "x-props": {
+                                    "outlined": true,
+                                    "dense": true
+                                }
+                            },
+                            "77d41b58-b643-4977-843c-119d3c5ee190": {
+                                "fieldType": "integer",
+                                "title": "Number",
+                                "type": "integer",
                                 "x-options": {
                                     "fieldColProps": {
                                         "cols": 12,

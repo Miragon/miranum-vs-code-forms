@@ -1,14 +1,15 @@
 import * as vscode from "vscode";
-import {Updatable} from "./types";
+import {Updatable, ViewState} from "./types";
 
 export abstract class Preview<ContentType> implements Updatable<ContentType> {
 
     protected abstract readonly extensionUri: vscode.Uri;
     protected abstract webviewOptions: WebviewOptions;
     private webviewObject: WebviewObject[] = [];
+    private closeCaller: CloseCaller = CloseCaller.undefined;
     private isBuffer = false;
     private _isOpen = false;
-
+    private _lastViewState: ViewState = ViewState.open;
 
     protected abstract getHtml(webview: vscode.Webview, extensionUri: vscode.Uri, content: ContentType): string;
 
@@ -32,6 +33,10 @@ export abstract class Preview<ContentType> implements Updatable<ContentType> {
         return this._isOpen;
     }
 
+    public get lastViewState(): ViewState {
+        return this._lastViewState;
+    }
+
     /**
      * Create a new webview panel.
      */
@@ -46,6 +51,7 @@ export abstract class Preview<ContentType> implements Updatable<ContentType> {
                 }
             );
             const disposables: vscode.Disposable[] = []
+            this._lastViewState = ViewState.open;
 
             webviewPanel.iconPath = this.webviewOptions.icon;
             webviewPanel.webview.options = {enableScripts: true};
@@ -63,6 +69,20 @@ export abstract class Preview<ContentType> implements Updatable<ContentType> {
             }, null, disposables);
 
             webviewPanel.onDidDispose(() => {
+                // update lastViewState
+                switch (this.closeCaller) {
+                    case CloseCaller.undefined:
+                    case CloseCaller.explicit: {
+                        this._lastViewState = ViewState.closed;
+                        break;
+                    }
+                    case CloseCaller.implicit: {
+                        this._lastViewState = ViewState.open;
+                        break;
+                    }
+                }
+                this.closeCaller = CloseCaller.undefined;   // reset
+
                 this.dispose();
             }, null, disposables);
 
@@ -97,7 +117,7 @@ export abstract class Preview<ContentType> implements Updatable<ContentType> {
             });
         } catch (error) {
             this.isBuffer = true;
-            console.error('[Preview] Can\'t post message!\n' + error);
+            console.log('[Preview] Can\'t post message!\n' + error);
         }
     }
 
@@ -105,6 +125,10 @@ export abstract class Preview<ContentType> implements Updatable<ContentType> {
      * Close the active preview window.
      */
     public close(): void {
+        if (this.closeCaller !== CloseCaller.explicit) {
+            this.closeCaller = CloseCaller.implicit;
+        }
+
         try {
             // Trigger onDidDispose-Event
             this.webviewObject[0].webviewPanel.dispose();
@@ -115,6 +139,7 @@ export abstract class Preview<ContentType> implements Updatable<ContentType> {
 
     public toggle(viewType: string, content: ContentType): void {
         if (this.isOpen) {
+            this.closeCaller = CloseCaller.explicit;
             this.close();
         } else {
             this.create(viewType, content);
@@ -140,6 +165,12 @@ export abstract class Preview<ContentType> implements Updatable<ContentType> {
             this._isOpen = false;
         }
     }
+}
+
+enum CloseCaller {
+    'explicit' = 'explicit',
+    'implicit' = 'implicit',
+    'undefined' = ''
 }
 
 export interface WebviewOptions {

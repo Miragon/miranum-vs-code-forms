@@ -1,7 +1,6 @@
 /**
  * This module contains the CustomTextEditorProvider for the `JsonSchema Builder`.
- * It handles the webview and synchronizes the webview with the data model.
- * Furthermore, it registers the {@link PreviewComponent} and {@link TextEditorComponent}.
+ * It handles the webview and synchronizes the webview with the data model and a preview.
  * @module JsonSchemaBuilderProvider
  */
 
@@ -10,14 +9,15 @@ import {DocumentController} from "./controller";
 import {PreviewComponent, TextEditorComponent} from "./components";
 import {getDefault, getHtmlForWebview, getNonce, Schema} from './utils';
 import {debounce} from "debounce";
+import {ViewState} from "./lib";
 
 /**
  * The [Custom Text Editor](https://code.visualstudio.com/api/extension-guides/custom-editors) uses a '.form'-File as its
  * data model and synchronize changes with the [webview](https://code.visualstudio.com/api/extension-guides/webview).
- * The webview is build with [Vue.js](https://vuejs.org/) and uses the [DigiWF Form Builder](https://github.com/it-at-m/digiwf-form-builder).
+ * The webview is build with [Vue.js](https://vuejs.org/) and uses the
+ * [DigiWF Form Builder](https://github.com/FlowSquad/digiwf-core/tree/dev/digiwf-apps/packages/components/digiwf-form-builder).
  * The provider also register a [command](https://code.visualstudio.com/api/extension-guides/command) for toggling the
- * standard vscode text editor and a [WebviewView](https://code.visualstudio.com/api/extension-guides/webview)
- * for rendering [Json Schema](https://json-schema.org/).
+ * standard vscode text editor and a preview for rendering [Json Schema](https://json-schema.org/).
  */
 export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvider {
 
@@ -28,15 +28,16 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
     private static counter = 0;
     /** Function to apply changes to the data model. */
     private readonly writeData = debounce(this.writeChangesToDocument);
-    /** The content of the current active custom text editor. */
+    /** The controller ({@link DocumentController}) managing the document (.form-file). */
     private readonly controller: DocumentController;
-    /** The WebviewView ({@link PreviewComponent}) which renders the content of the active custom text editor. */
+    /** The preview ({@link PreviewComponent}) which renders the content of the active custom text editor. */
     private readonly preview: PreviewComponent;
+    /** The text editor ({@link TextEditorComponent}) for direct changes inside the document. */
     private readonly textEditor: TextEditorComponent;
     private disposables: vscode.Disposable[] = [];
 
     /**
-     * Register the standard vscode text editor ({@link TextEditorWrapper}) and the WebviewView ({@link PreviewComponent}).
+     * Register all components and controllers and set up all commands.
      * @param context The context of the extension
      */
     constructor(
@@ -85,6 +86,9 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
         await this.init(document);
 
+        // Disable preview mode
+        await vscode.commands.executeCommand('workbench.action.keepEditor');
+
         // Setup webview options
         webviewPanel.webview.options = {enableScripts: true};
 
@@ -117,12 +121,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             switch (event.type) {
                 case JsonSchemaBuilderProvider.viewType + '.updateFromWebview': {
                     isUpdateFromWebview = true;
-                    this.writeData(document, event.content)
-                        .then((result) => {
-                            if (result) {
-                                this.controller.updatePreview();
-                            }
-                        });
+                    this.writeData(document, event.content);
                     break;
                 }
             }
@@ -138,17 +137,15 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
          * the webview to synchronize it with the current content of the model.
          */
         vscode.workspace.onDidChangeTextDocument(e => {
-            if (e.document.uri.toString() === document.uri.toString() && e.contentChanges.length !== 0) {
+            if (e.document.uri.toString() === document.uri.toString() && e.contentChanges.length !== 0 && !isUpdateFromWebview) {
 
                 if (!e.document.getText()) {
                     // e.g. when user deletes all lines in text editor
                     const minimumSchema = {
-                        key: 'Form_' + getNonce(6).toLowerCase(),
-                        schema: JSON.parse('{"key": "MyStartForm", "type": "object", "allOf": []}')
+                        schema: JSON.parse('{"key": "MyStartForm", "type": "object", "allOf": []}'),
+                        key: 'Form_' + getNonce(6).toLowerCase()
                     };
                     this.writeData(document, minimumSchema);
-                } else {
-                    this.controller.updatePreview();
                 }
 
                 // If the webview is in the background then no messages can be sent to it.
@@ -170,14 +167,12 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                     }
                     case undefined: {
                         // If the initial update came from the webview then we don't need to update the webview.
-                        if (!isUpdateFromWebview) {
-                            updateWebview(JsonSchemaBuilderProvider.viewType + '.updateFromExtension');
-                        }
-                        isUpdateFromWebview = false;
+                        updateWebview(JsonSchemaBuilderProvider.viewType + '.updateFromExtension');
                         break;
                     }
                 }
             }
+            isUpdateFromWebview = false;    // reset
         }, null, this.disposables);
 
         // Called when the view state changes (e.g. user switch the tab)
@@ -186,8 +181,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                 /* ------- Panel is active/visible ------- */
                 case webviewPanel.active: {
                     this.controller.document = document;
-                    if (!this.preview.isOpen && this.preview.lastViewState) {
-                        // Only execute when the preview is currently closed
+                    if (!this.preview.isOpen && this.preview.lastViewState === ViewState.open) {
                         this.preview.create(PreviewComponent.viewType, this.controller.content);
                     }
 
@@ -203,10 +197,10 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                     break;
                 }
                 /* ------- Panel is NOT active/visible ------- */
-                case (!webviewPanel.active && !this.preview.active): {
-                    this.preview.lastViewState = this.preview.isOpen;
-                    this.preview.close();
-                    break;
+                case !webviewPanel.active: {
+                    if (!this.preview.active) {
+                        this.preview.close();
+                    }
                 }
             }
         }, null, this.disposables);
@@ -240,7 +234,15 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             text
         );
 
-        return Promise.resolve(vscode.workspace.applyEdit(edit));
+        return Promise.resolve(
+            vscode.workspace.applyEdit(edit)
+                .then((success) => {
+                    if (success) {
+                        this.controller.updatePreview();
+                    }
+                    return success;
+                })
+        );
     }
 
     /** @hidden */
@@ -260,11 +262,12 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
             this.controller.document = document;
 
+            // if we open a second editor beside one with an open preview window we have to close it and create a new one.
             if (this.preview.isOpen) {
-                // if we open a second editor beside one with an open preview window we have to close it and create a new one.
                 this.preview.close();
-                this.preview.create(PreviewComponent.viewType, this.controller.content);
             }
+            this.preview.create(PreviewComponent.viewType, this.controller.content);
+
         } catch (error) {
             return Promise.reject(error);
         }

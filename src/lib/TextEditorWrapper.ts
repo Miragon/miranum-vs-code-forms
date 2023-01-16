@@ -14,6 +14,18 @@ export abstract class TextEditorWrapper implements Updatable<TextDocument> {
     private _textEditor: TextEditor | undefined;
     private isOpen = false;
 
+    protected constructor() {
+        vscode.window.tabGroups.onDidChangeTabs((tabs) => {
+            tabs.closed.forEach((tab) => {
+                if (tab.input instanceof vscode.TabInputText &&
+                    tab.input.uri.path === this.textEditor.document.fileName) {
+
+                    this.isOpen = false;
+                }
+            })
+        });
+    }
+
     private get textEditor(): TextEditor {
         if (this._textEditor) {
             return this._textEditor;
