@@ -3,8 +3,7 @@
 # Module: JsonSchemaBuilderProvider
 
 This module contains the CustomTextEditorProvider for the `JsonSchema Builder`.
-It handles the webview and synchronizes the webview with the data model.
-Furthermore, it registers the [JsonSchemaRendererProvider](JsonSchemaRendererProvider.md) and [TextEditor](TextEditor.md).
+It handles the webview and synchronizes the webview with the data model and a preview.
 
 ## Table of contents
 
