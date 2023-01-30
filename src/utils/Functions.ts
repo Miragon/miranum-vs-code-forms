@@ -1,10 +1,10 @@
 /**
- * This module includes helper-functions and functions which are used by the `JsonSchema Builder` and `JsonSchema Renderer`.
- * @module Utils
+ * This module includes helper-functions wich are use by the JSON Schema Builder and Preview.
+ * @module Functions
  */
 
 import * as vscode from "vscode";
-import {Schema} from "../../types";
+import {Schema} from "./types";
 
 /**
  * Get the default content which is displayed when the data model is empty.
@@ -66,23 +66,6 @@ export function getDefault(): Schema {
             }]
         }
     }));
-}
-
-/**
- * Parse a string to json
- * @param text The string which should be parsed to json
- * @returns an json object
- */
-export function getContentAsSchema(text: string): Schema {
-    if (text.trim().length === 0) {
-        return JSON.parse('{}');
-    }
-
-    try {
-        return JSON.parse(text);
-    } catch {
-        throw new Error();
-    }
 }
 
 /**

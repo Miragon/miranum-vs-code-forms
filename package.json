@@ -22,8 +22,7 @@
   ],
   "activationEvents": [
     "onCustomEditor:jsonschema-builder",
-    "onView:jsonschema-renderer",
-    "onCommand:jsonschema-renderer.update",
+    "onCommand:jsonschema-renderer.togglePreview",
     "onCommand:jsonschema-builder.toggleTextEditor"
   ],
   "main": "./dist/extension.js",
@@ -46,7 +45,7 @@
       "properties": {
         "jsonSchemaBuilder.toggleTextEditor": {
           "type": "string",
-          "default": "Group",
+          "default": "Tab",
           "description": "Choose where to open the standard text editor.",
           "enum": [
             "Group",
@@ -59,31 +58,11 @@
         }
       }
     },
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "jsonschema-preview",
-          "title": "JsonSchema Preview",
-          "icon": "$(notebook-render-output)"
-        }
-      ]
-    },
-    "views": {
-      "jsonschema-preview": [
-        {
-          "id": "jsonschema-renderer",
-          "name": "JSON Schema Renderer",
-          "type": "webview",
-          "icon": "$(notebook-render-output)",
-          "when": "resourceExtname == .form && jsonschema-builder.openCustomEditors > 0"
-        }
-      ]
-    },
     "commands": [
       {
-        "command": "jsonschema-renderer.update",
-        "title": "Miranum: Update Renderer",
-        "icon": "$(extensions-sync-enabled)"
+        "command": "jsonschema-renderer.togglePreview",
+        "title": "Miranum: Toggle Preview",
+        "icon": "$(notebook-render-output)"
       },
       {
         "command": "jsonschema-builder.toggleTextEditor",
@@ -94,24 +73,22 @@
     "menus": {
       "commandPalette": [
         {
-          "command": "jsonschema-renderer.update",
-          "when": "view == jsonschema-renderer"
+          "command": "jsonschema-renderer.togglePreview",
+          "when": "resourceExtname == .form && jsonschema-builder.openCustomEditors > 0"
         },
         {
           "command": "jsonschema-builder.toggleTextEditor",
           "when": "resourceExtname == .form && jsonschema-builder.openCustomEditors > 0"
         }
       ],
-      "view/title": [
-        {
-          "command": "jsonschema-renderer.update",
-          "group": "navigation",
-          "when": "view == jsonschema-renderer"
-        }
-      ],
       "editor/title": [
         {
           "command": "jsonschema-builder.toggleTextEditor",
+          "group": "navigation",
+          "when": "resourceExtname == .form && jsonschema-builder.openCustomEditors > 0"
+        },
+        {
+          "command": "jsonschema-renderer.togglePreview",
           "group": "navigation",
           "when": "resourceExtname == .form && jsonschema-builder.openCustomEditors > 0"
         }
@@ -121,18 +98,18 @@
   "scripts": {
     "publish": "vsce publish",
     "vscode:prepublish": "npm run build",
-    "build": "tsup src/extension.ts --dts --external=vscode && vite build --config web/vite.config.js && npm run doc",
-    "web": "vite build --config web/vite.config.js",
-    "web-dev": "vite build --config web/vite.config.js --watch",
+    "build": "tsup src/extension.ts --dts --external=vscode && vite build --config src/web/vite.config.js && npm run doc",
+    "web": "vite build --config src/web/vite.config.js",
+    "web-dev": "vite build --config src/web/vite.config.js --watch",
     "watch": "tsup src/extension.ts --dts --external=vscode --sourcemap",
     "test": "node ./out/test/runTest.js",
     "doc": "typedoc --options ./docs/typedoc.json"
   },
   "dependencies": {
     "@koumoul/vjsf": "^2.18.0",
-    "@muenchen/digiwf-form-builder": "^0.20.2",
-    "@muenchen/digiwf-form-builder-settings": "^0.20.2",
-    "@muenchen/digiwf-form-renderer": "^0.20.2",
+    "@muenchen/digiwf-form-builder": "^0.21.3",
+    "@muenchen/digiwf-form-builder-settings": "^0.21.3",
+    "@muenchen/digiwf-form-renderer": "^0.21.3",
     "core-js": "^3.8.3",
     "vue": "^2.7.10",
     "vuetify": "^2.6.0"

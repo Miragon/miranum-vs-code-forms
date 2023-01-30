@@ -34,7 +34,8 @@
 
 <script lang="ts">
 import {defineComponent, onMounted, onUnmounted, ref} from 'vue';
-import {VsCode, Schema} from "../types";
+import {VsCode} from "../lib";
+import {Schema} from "../utils";
 import {DwfFormRenderer, Form} from "@muenchen/digiwf-form-renderer";
 import {DwfFormBuilder} from "@muenchen/digiwf-form-builder";
 import {SettingsEN} from "@muenchen/digiwf-form-builder-settings";
@@ -139,6 +140,7 @@ export default defineComponent({
             schema.value = form.schema;
             mode.value = state.mode;
          }
+
          window.addEventListener('message', getDataFromExtension);
       })
 
