@@ -83,17 +83,29 @@
       ],
       "editor/title": [
         {
-          "command": "jsonschema-builder.toggleTextEditor",
+          "command": "jsonschema-renderer.togglePreview",
           "group": "navigation",
           "when": "resourceExtname == .form && jsonschema-builder.openCustomEditors > 0"
         },
         {
-          "command": "jsonschema-renderer.togglePreview",
+          "command": "jsonschema-builder.toggleTextEditor",
           "group": "navigation",
           "when": "resourceExtname == .form && jsonschema-builder.openCustomEditors > 0"
         }
       ]
-    }
+    },
+    "keybindings": [
+      {
+        "command": "jsonschema-renderer.togglePreview",
+        "key": "ctrl+shift+p",
+        "when": "resourceExtname == .form && jsonschema-builder.openCustomEditors > 0"
+      },
+      {
+        "command": "jsonschema-builder.toggleTextEditor",
+        "key": "ctrl+shift+t",
+        "when": "resourceExtname == .form && jsonschema-builder.openCustomEditors > 0"
+      }
+    ]
   },
   "scripts": {
     "publish": "vsce publish",

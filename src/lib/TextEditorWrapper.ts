@@ -12,7 +12,11 @@ export abstract class TextEditorWrapper implements Updatable<TextDocument> {
 
     protected abstract showOption: TextEditorShowOption;
     private _textEditor: TextEditor | undefined;
-    private isOpen = false;
+    private _isOpen = false;
+
+    public get isOpen(): boolean {
+        return this._isOpen
+    }
 
     protected constructor() {
         vscode.window.tabGroups.onDidChangeTabs((tabs) => {
@@ -20,7 +24,7 @@ export abstract class TextEditorWrapper implements Updatable<TextDocument> {
                 if (tab.input instanceof vscode.TabInputText &&
                     tab.input.uri.path === this.textEditor.document.fileName) {
 
-                    this.isOpen = false;
+                    this._isOpen = false;
                 }
             })
         });
@@ -36,7 +40,7 @@ export abstract class TextEditorWrapper implements Updatable<TextDocument> {
 
     public toggle(document: TextDocument): void {
         try {
-            if (this.isOpen) {
+            if (this._isOpen) {
                 this.close(document.fileName);
             } else {
                 this.create(document);
@@ -48,10 +52,10 @@ export abstract class TextEditorWrapper implements Updatable<TextDocument> {
 
     public async create(document: TextDocument): Promise<boolean> {
         try {
-            if (!this.isOpen) {
+            if (!this._isOpen) {
                 this._textEditor = await vscode.window.showTextDocument(document, this.getShowOptions())
                     .then((textEditor) => {
-                        this.isOpen = true;
+                        this._isOpen = true;
                         return textEditor;
                     }, (reason) => {
                         throw new Error(reason);
@@ -66,7 +70,7 @@ export abstract class TextEditorWrapper implements Updatable<TextDocument> {
     }
 
     public async close(fileName: string): Promise<boolean> {
-        if (!this.isOpen) {
+        if (!this._isOpen) {
             return Promise.resolve(true);
         }
 
@@ -74,7 +78,7 @@ export abstract class TextEditorWrapper implements Updatable<TextDocument> {
             const tab = this.getTab(fileName);
             return Promise.resolve(vscode.window.tabGroups.close(tab)
                 .then((result) => {
-                    this.isOpen = false;
+                    this._isOpen = false;
                     return result;
                 }, (reason) => {
                     throw new Error(reason);
@@ -87,7 +91,7 @@ export abstract class TextEditorWrapper implements Updatable<TextDocument> {
 
     public async update(document: TextDocument): Promise<boolean> {
         try {
-            if (this.isOpen && this.textEditor.document.uri.toString() !== document.uri.toString()) {
+            if (this._isOpen && this.textEditor.document.uri.toString() !== document.uri.toString()) {
                 if (await this.close(this.textEditor.document.fileName)) {
                     return Promise.resolve(this.create(document));
                 }
@@ -111,7 +115,7 @@ export abstract class TextEditorWrapper implements Updatable<TextDocument> {
             }
             case 'Tab': {
                 return {
-                    preserveFocus: true,
+                    preserveFocus: false,
                     preview: false,
                     viewColumn: vscode.ViewColumn.Active
                 };

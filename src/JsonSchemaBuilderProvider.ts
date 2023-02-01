@@ -32,6 +32,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
     /** The text editor ({@link TextEditorComponent}) for direct changes inside the document. */
     private readonly textEditor: TextEditorComponent;
     private disposables: Map<string, vscode.Disposable[]> = new Map();
+    private closePreview = true;
 
     /**
      * Register all components and controllers and set up all commands.
@@ -53,6 +54,9 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         const toggleTextEditor = vscode.commands.registerCommand(
             JsonSchemaBuilderProvider.viewType + '.toggleTextEditor',
             () => {
+                if (!this.textEditor.isOpen) {
+                    this.closePreview = false;
+                }
                 this.textEditor.toggle(this.controller.document);
             });
         const togglePreview = vscode.commands.registerCommand(
@@ -118,7 +122,6 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                 case JsonSchemaBuilderProvider.viewType + '.updateFromWebview': {
                     isUpdateFromWebview = true;
                     this.controller.writeData(document.uri, event.content);
-                    //this.writeData(this.controller.document, event.content);
                     break;
                 }
             }
@@ -139,7 +142,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
                 if (!e.document.getText()) {
                     // e.g. when user deletes all lines in text editor
-                    this.controller.writeData(document.uri, getMinimum());
+                    this.controller.writeData(e.document.uri, getMinimum());
                 }
 
                 // If the webview is in the background then no messages can be sent to it.
@@ -191,9 +194,10 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                 }
                 /* ------- Panel is NOT active/visible ------- */
                 case !webviewPanel.active: {
-                    if (!this.preview.active) {
+                    if (!this.preview.active && this.closePreview) {
                         this.preview.close();
                     }
+                    this.closePreview = true; // reset
                 }
             }
         }, null, disposables);
