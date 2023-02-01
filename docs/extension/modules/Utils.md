@@ -7,6 +7,7 @@
 ### References
 
 - [Schema](utils.md#schema)
+- [getMinimum](utils.md#getminimum)
 - [getDefault](utils.md#getdefault)
 - [getHtmlForWebview](utils.md#gethtmlforwebview)
 - [getNonce](utils.md#getnonce)
@@ -16,6 +17,12 @@
 ### Schema
 
 Re-exports [Schema](utils_types.md#schema)
+
+___
+
+### getMinimum
+
+Re-exports [getMinimum](Functions.md#getminimum)
 
 ___
 
