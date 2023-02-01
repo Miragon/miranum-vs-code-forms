@@ -76,12 +76,12 @@ export class DocumentController implements IContentController<TextDocument | Sch
     }
 
     public async setInitialDocument(document: TextDocument) {
-        if (!document.getText()) {
+        this._document = document;
+        if (!this.document.getText()) {
             if (await this.writeChangesToDocument(document.uri, getDefault())) {
-                document.save();
+                this.document.save();
             }
         }
-        this._document = document;
     }
 
     public updatePreview(): void {
