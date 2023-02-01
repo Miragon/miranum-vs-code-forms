@@ -1,15 +1,22 @@
+import * as vscode from 'vscode';
 import {IContentController, Preview, TextEditorWrapper, Updatable} from "../lib";
-import {Schema} from "../utils";
-import {TextDocument} from "vscode";
+import {getDefault, Schema} from "../utils";
+import {TextDocument, Uri} from "vscode";
+import {debounce} from "debounce";
 
 export class DocumentController implements IContentController<TextDocument | Schema> {
 
+    public writeData = debounce(this.writeChangesToDocument)
     private static instance: DocumentController;
     private observers: Updatable<TextDocument | Schema>[] = [];
     private _document: TextDocument | undefined;
 
     private constructor() {
-        // empty constructor
+        vscode.workspace.onDidChangeTextDocument((event) => {
+            if (event.document.uri.toString() === this.document.uri.toString() && event.contentChanges.length !== 0) {
+                this.updatePreview();
+            }
+        })
     }
 
     public static getInstance(): DocumentController {
@@ -56,6 +63,27 @@ export class DocumentController implements IContentController<TextDocument | Sch
         });
     }
 
+    private getContentAsSchema(text: string): Schema {
+        if (text.trim().length === 0) {
+            return JSON.parse('{}');
+        }
+
+        try {
+            return JSON.parse(text);
+        } catch {
+            throw new Error('[Controller] Could not parse text!');
+        }
+    }
+
+    public async setInitialDocument(document: TextDocument) {
+        if (!document.getText()) {
+            if (await this.writeChangesToDocument(document.uri, getDefault())) {
+                document.save();
+            }
+        }
+        this._document = document;
+    }
+
     public updatePreview(): void {
         this.observers.forEach((observer) => {
             try {
@@ -72,15 +100,26 @@ export class DocumentController implements IContentController<TextDocument | Sch
         });
     }
 
-    private getContentAsSchema(text: string): Schema {
-        if (text.trim().length === 0) {
-            return JSON.parse('{}');
+    /**
+     * Apply changes to the document.
+     * @param uri
+     * @param content The data which was sent from the webview
+     * @returns Promise
+     */
+    public writeChangesToDocument(uri: Uri, content: Schema): Promise<boolean> {
+        if (this._document && this.document.uri != uri) {
+            return Promise.reject('Inconsistent document!');
         }
 
-        try {
-            return JSON.parse(text);
-        } catch {
-            throw new Error('[Controller] Could not parse text!');
-        }
+        const edit = new vscode.WorkspaceEdit();
+        const text = JSON.stringify(content, undefined, 4);
+
+        edit.replace(
+            this.document.uri,
+            new vscode.Range(0, 0, this.document.lineCount, 0),
+            text
+        );
+
+        return Promise.resolve(vscode.workspace.applyEdit(edit));
     }
 }

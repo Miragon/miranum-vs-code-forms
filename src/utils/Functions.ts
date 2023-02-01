@@ -7,15 +7,31 @@ import * as vscode from "vscode";
 import {Schema} from "./types";
 
 /**
+ * Get minimum form.
+ */
+export function getMinimum(): Schema {
+    const key = 'Form_' + getNonce(6).toLowerCase();
+    return JSON.parse(JSON.stringify({
+        "schema": {
+            "key": "MyStartForm",
+            "type": "object",
+            "x-display": "stepper",
+            "allOf": []
+        },
+        "key": key
+    }))
+}
+
+/**
  * Get the default content which is displayed when the data model is empty.
  */
 export function getDefault(): Schema {
     const key = 'Form_' + getNonce(6).toLowerCase();
     return JSON.parse(JSON.stringify({
-        "key": key,
         "schema": {
             "key": "MyStartForm",
             "type": "object",
+            "x-display": "stepper",
             "allOf": [{
                 "key": "sectionKey1",
                 "title": "First Section",
@@ -63,8 +79,9 @@ export function getDefault(): Schema {
                         }
                     }
                 }]
-            }]
-        }
+            }],
+        },
+        "key": key
     }));
 }
 
@@ -136,8 +153,8 @@ export function getHtmlForWebview(webview: vscode.Webview, extensionUri: vscode.
 }
 
 export function getNonce(length = 32): string {
-    let result           = '';
-    const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const charactersLength = characters.length;
     for ( let i = 0; i < length; i++ ) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
