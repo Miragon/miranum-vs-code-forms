@@ -1,5 +1,5 @@
 /**
- * This module contains the CustomTextEditorProvider for the `JsonSchema Builder`.
+ * This module contains the CustomTextEditorProvider for `Miranum Forms`.
  * It handles the webview and synchronizes the webview with the data model and a preview.
  * @module JsonSchemaBuilderProvider
  */
@@ -25,13 +25,15 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
     /** Number of currently open custom text editors with the view type `jsonschema-builder`. */
     private static counter = 0;
-    /** The controller ({@link DocumentController}) managing the document (.form-file). */
+    /** The controller ({@link DocumentController}) manages the document (.form-file). */
     private readonly controller: DocumentController;
-    /** The preview ({@link PreviewComponent}) which renders the content of the active custom text editor. */
+    /** The preview ({@link PreviewComponent}) renders the content of the active custom text editor. */
     private readonly preview: PreviewComponent;
     /** The text editor ({@link TextEditorComponent}) for direct changes inside the document. */
     private readonly textEditor: TextEditorComponent;
+    /** An array with all disposables per webview panel. */
     private disposables: Map<string, vscode.Disposable[]> = new Map();
+    /** @hidden Little helper to prevent the preview from closing after the text editor is opened. */
     private closePreview = true;
 
     /**
@@ -241,6 +243,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         return Promise.resolve(true);
     }
 
+    /** @hidden */
     private dispose(key: string): void {
         let disposables = this.disposables.get(key);
         if (disposables) {

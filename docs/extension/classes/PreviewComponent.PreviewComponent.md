@@ -1,8 +1,8 @@
-[VS Code JsonSchema Builder - v0.3.2](../documentation.md) / [components/PreviewComponent](../modules/components_PreviewComponent.md) / PreviewComponent
+[Miranum Forms - v0.3.2](../documentation.md) / [PreviewComponent](../modules/PreviewComponent.md) / PreviewComponent
 
 # Class: PreviewComponent
 
-[components/PreviewComponent](../modules/components_PreviewComponent.md).PreviewComponent
+[PreviewComponent](../modules/PreviewComponent.md).PreviewComponent
 
 ## Hierarchy
 
@@ -14,28 +14,28 @@
 
 ### Properties
 
-- [viewType](components_PreviewComponent.PreviewComponent.md#viewtype)
-- [webviewOptions](components_PreviewComponent.PreviewComponent.md#webviewoptions)
-- [extensionUri](components_PreviewComponent.PreviewComponent.md#extensionuri)
+- [viewType](PreviewComponent.PreviewComponent.md#viewtype)
+- [webviewOptions](PreviewComponent.PreviewComponent.md#webviewoptions)
+- [extensionUri](PreviewComponent.PreviewComponent.md#extensionuri)
 
 ### Constructors
 
-- [constructor](components_PreviewComponent.PreviewComponent.md#constructor)
+- [constructor](PreviewComponent.PreviewComponent.md#constructor)
 
 ### Accessors
 
-- [active](components_PreviewComponent.PreviewComponent.md#active)
-- [visible](components_PreviewComponent.PreviewComponent.md#visible)
-- [isOpen](components_PreviewComponent.PreviewComponent.md#isopen)
-- [lastViewState](components_PreviewComponent.PreviewComponent.md#lastviewstate)
+- [active](PreviewComponent.PreviewComponent.md#active)
+- [visible](PreviewComponent.PreviewComponent.md#visible)
+- [isOpen](PreviewComponent.PreviewComponent.md#isopen)
+- [lastViewState](PreviewComponent.PreviewComponent.md#lastviewstate)
 
 ### Methods
 
-- [create](components_PreviewComponent.PreviewComponent.md#create)
-- [update](components_PreviewComponent.PreviewComponent.md#update)
-- [close](components_PreviewComponent.PreviewComponent.md#close)
-- [toggle](components_PreviewComponent.PreviewComponent.md#toggle)
-- [getHtml](components_PreviewComponent.PreviewComponent.md#gethtml)
+- [create](PreviewComponent.PreviewComponent.md#create)
+- [update](PreviewComponent.PreviewComponent.md#update)
+- [close](PreviewComponent.PreviewComponent.md#close)
+- [toggle](PreviewComponent.PreviewComponent.md#toggle)
+- [getHtml](PreviewComponent.PreviewComponent.md#gethtml)
 
 ## Properties
 
@@ -43,9 +43,11 @@
 
 ▪ `Static` `Readonly` **viewType**: ``"jsonschema-renderer"``
 
+Unique identifier for the preview.
+
 #### Defined in
 
-[src/components/PreviewComponent.ts:7](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/components/PreviewComponent.ts#L7)
+[src/components/PreviewComponent.ts:14](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/components/PreviewComponent.ts#L14)
 
 ___
 
@@ -53,13 +55,15 @@ ___
 
 • `Protected` `Readonly` **webviewOptions**: [`WebviewOptions`](../interfaces/lib_Preview.WebviewOptions.md)
 
+Object that contains information for the webview.
+
 #### Overrides
 
 [Preview](lib_Preview.Preview.md).[webviewOptions](lib_Preview.Preview.md#webviewoptions)
 
 #### Defined in
 
-[src/components/PreviewComponent.ts:8](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/components/PreviewComponent.ts#L8)
+[src/components/PreviewComponent.ts:16](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/components/PreviewComponent.ts#L16)
 
 ___
 
@@ -73,7 +77,7 @@ ___
 
 #### Defined in
 
-[src/components/PreviewComponent.ts:14](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/components/PreviewComponent.ts#L14)
+[src/components/PreviewComponent.ts:22](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/components/PreviewComponent.ts#L22)
 
 ## Constructors
 
@@ -93,7 +97,7 @@ ___
 
 #### Defined in
 
-[src/components/PreviewComponent.ts:14](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/components/PreviewComponent.ts#L14)
+[src/components/PreviewComponent.ts:22](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/components/PreviewComponent.ts#L22)
 
 ## Accessors
 
@@ -111,7 +115,7 @@ Preview.active
 
 #### Defined in
 
-[src/lib/Preview.ts:16](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L16)
+[src/lib/Preview.ts:16](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L16)
 
 ___
 
@@ -129,7 +133,7 @@ Preview.visible
 
 #### Defined in
 
-[src/lib/Preview.ts:24](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L24)
+[src/lib/Preview.ts:24](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L24)
 
 ___
 
@@ -147,7 +151,7 @@ Preview.isOpen
 
 #### Defined in
 
-[src/lib/Preview.ts:32](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L32)
+[src/lib/Preview.ts:32](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L32)
 
 ___
 
@@ -165,7 +169,7 @@ Preview.lastViewState
 
 #### Defined in
 
-[src/lib/Preview.ts:36](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L36)
+[src/lib/Preview.ts:36](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L36)
 
 ## Methods
 
@@ -192,7 +196,7 @@ Create a new webview panel.
 
 #### Defined in
 
-[src/lib/Preview.ts:43](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L43)
+[src/lib/Preview.ts:43](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L43)
 
 ___
 
@@ -218,7 +222,7 @@ Update the active preview window.
 
 #### Defined in
 
-[src/lib/Preview.ts:112](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L112)
+[src/lib/Preview.ts:112](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L112)
 
 ___
 
@@ -238,7 +242,7 @@ Close the active preview window.
 
 #### Defined in
 
-[src/lib/Preview.ts:127](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L127)
+[src/lib/Preview.ts:127](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L127)
 
 ___
 
@@ -263,7 +267,7 @@ ___
 
 #### Defined in
 
-[src/lib/Preview.ts:140](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L140)
+[src/lib/Preview.ts:140](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L140)
 
 ___
 
@@ -271,13 +275,15 @@ ___
 
 ▸ `Protected` **getHtml**(`webview`, `extensionUri`, `content`): `string`
 
+Returns the html content that is rendered inside the webview.
+
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `webview` | `Webview` |
-| `extensionUri` | `Uri` |
-| `content` | [`Schema`](../modules/utils_types.md#schema) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `webview` | `Webview` | The webview. |
+| `extensionUri` | `Uri` | The URI of the extension. |
+| `content` | [`Schema`](../modules/utils_types.md#schema) | The json schema. |
 
 #### Returns
 
@@ -289,4 +295,4 @@ ___
 
 #### Defined in
 
-[src/components/PreviewComponent.ts:18](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/components/PreviewComponent.ts#L18)
+[src/components/PreviewComponent.ts:33](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/components/PreviewComponent.ts#L33)

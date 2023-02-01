@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.3.2](../documentation.md) / [lib/Preview](../modules/lib_Preview.md) / Preview
+[Miranum Forms - v0.3.2](../documentation.md) / [lib/Preview](../modules/lib_Preview.md) / Preview
 
 # Class: Preview<ContentType\>
 
@@ -14,7 +14,7 @@
 
 - **`Preview`**
 
-  ↳ [`PreviewComponent`](components_PreviewComponent.PreviewComponent.md)
+  ↳ [`PreviewComponent`](PreviewComponent.PreviewComponent.md)
 
 ## Implements
 
@@ -76,7 +76,7 @@
 
 #### Defined in
 
-[src/lib/Preview.ts:16](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L16)
+[src/lib/Preview.ts:16](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L16)
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 #### Defined in
 
-[src/lib/Preview.ts:24](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L24)
+[src/lib/Preview.ts:24](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L24)
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 #### Defined in
 
-[src/lib/Preview.ts:32](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L32)
+[src/lib/Preview.ts:32](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L32)
 
 ___
 
@@ -118,7 +118,7 @@ ___
 
 #### Defined in
 
-[src/lib/Preview.ts:36](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L36)
+[src/lib/Preview.ts:36](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L36)
 
 ## Methods
 
@@ -141,7 +141,7 @@ Create a new webview panel.
 
 #### Defined in
 
-[src/lib/Preview.ts:43](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L43)
+[src/lib/Preview.ts:43](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L43)
 
 ___
 
@@ -167,7 +167,7 @@ Update the active preview window.
 
 #### Defined in
 
-[src/lib/Preview.ts:112](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L112)
+[src/lib/Preview.ts:112](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L112)
 
 ___
 
@@ -183,7 +183,7 @@ Close the active preview window.
 
 #### Defined in
 
-[src/lib/Preview.ts:127](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L127)
+[src/lib/Preview.ts:127](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L127)
 
 ___
 
@@ -204,7 +204,7 @@ ___
 
 #### Defined in
 
-[src/lib/Preview.ts:140](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L140)
+[src/lib/Preview.ts:140](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L140)
 
 ___
 
@@ -226,7 +226,7 @@ ___
 
 #### Defined in
 
-[src/lib/Preview.ts:14](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L14)
+[src/lib/Preview.ts:14](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L14)
 
 ___
 
@@ -240,7 +240,7 @@ ___
 
 #### Defined in
 
-[src/lib/Preview.ts:149](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L149)
+[src/lib/Preview.ts:149](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L149)
 
 ## Properties
 
@@ -250,7 +250,7 @@ ___
 
 #### Defined in
 
-[src/lib/Preview.ts:6](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L6)
+[src/lib/Preview.ts:6](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L6)
 
 ___
 
@@ -260,7 +260,7 @@ ___
 
 #### Defined in
 
-[src/lib/Preview.ts:7](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L7)
+[src/lib/Preview.ts:7](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L7)
 
 ___
 
@@ -270,7 +270,7 @@ ___
 
 #### Defined in
 
-[src/lib/Preview.ts:8](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L8)
+[src/lib/Preview.ts:8](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L8)
 
 ___
 
@@ -280,7 +280,7 @@ ___
 
 #### Defined in
 
-[src/lib/Preview.ts:9](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L9)
+[src/lib/Preview.ts:9](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L9)
 
 ___
 
@@ -290,7 +290,7 @@ ___
 
 #### Defined in
 
-[src/lib/Preview.ts:10](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L10)
+[src/lib/Preview.ts:10](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L10)
 
 ___
 
@@ -300,7 +300,7 @@ ___
 
 #### Defined in
 
-[src/lib/Preview.ts:11](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L11)
+[src/lib/Preview.ts:11](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L11)
 
 ___
 
@@ -310,4 +310,4 @@ ___
 
 #### Defined in
 
-[src/lib/Preview.ts:12](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L12)
+[src/lib/Preview.ts:12](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L12)

@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.3.2](../documentation.md) / [lib/types](../modules/lib_types.md) / IContentController
+[Miranum Forms - v0.3.2](../documentation.md) / [lib/types](../modules/lib_types.md) / IContentController
 
 # Interface: IContentController<T\>
 
@@ -12,7 +12,7 @@
 
 ## Implemented by
 
-- [`DocumentController`](../classes/controller_DocumentController.DocumentController.md)
+- [`DocumentController`](../classes/DocumentController.DocumentController.md)
 
 ## Table of contents
 
@@ -32,7 +32,7 @@
 
 #### Defined in
 
-[src/lib/types.ts:4](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/types.ts#L4)
+[src/lib/types.ts:4](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/types.ts#L4)
 
 ## Methods
 
@@ -52,4 +52,4 @@
 
 #### Defined in
 
-[src/lib/types.ts:5](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/types.ts#L5)
+[src/lib/types.ts:5](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/types.ts#L5)

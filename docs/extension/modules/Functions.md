@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.3.2](../documentation.md) / Functions
+[Miranum Forms - v0.3.2](../documentation.md) / Functions
 
 # Module: Functions
 
@@ -27,7 +27,7 @@ Get minimum form.
 
 #### Defined in
 
-[src/utils/Functions.ts:12](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/utils/Functions.ts#L12)
+[src/utils/Functions.ts:12](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/utils/Functions.ts#L12)
 
 ___
 
@@ -43,7 +43,7 @@ Get the default content which is displayed when the data model is empty.
 
 #### Defined in
 
-[src/utils/Functions.ts:28](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/utils/Functions.ts#L28)
+[src/utils/Functions.ts:28](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/utils/Functions.ts#L28)
 
 ___
 
@@ -70,7 +70,7 @@ a string which represents the html content
 
 #### Defined in
 
-[src/utils/Functions.ts:96](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/utils/Functions.ts#L96)
+[src/utils/Functions.ts:96](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/utils/Functions.ts#L96)
 
 ___
 
@@ -90,4 +90,4 @@ ___
 
 #### Defined in
 
-[src/utils/Functions.ts:155](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/utils/Functions.ts#L155)
+[src/utils/Functions.ts:155](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/utils/Functions.ts#L155)

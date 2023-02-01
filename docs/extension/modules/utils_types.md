@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.3.2](../documentation.md) / utils/types
+[Miranum Forms - v0.3.2](../documentation.md) / utils/types
 
 # Module: utils/types
 
@@ -23,4 +23,4 @@
 
 #### Defined in
 
-[src/utils/types.ts:3](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/utils/types.ts#L3)
+[src/utils/types.ts:3](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/utils/types.ts#L3)

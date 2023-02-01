@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.3.2](../documentation.md) / components
+[Miranum Forms - v0.3.2](../documentation.md) / components
 
 # Module: components
 
@@ -13,10 +13,10 @@
 
 ### PreviewComponent
 
-Re-exports [PreviewComponent](../classes/components_PreviewComponent.PreviewComponent.md)
+Re-exports [PreviewComponent](../classes/PreviewComponent.PreviewComponent.md)
 
 ___
 
 ### TextEditorComponent
 
-Re-exports [TextEditorComponent](../classes/components_TextEditorComponent.TextEditorComponent.md)
+Re-exports [TextEditorComponent](../classes/TextEditorComponent.TextEditorComponent.md)

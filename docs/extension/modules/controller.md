@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.3.2](../documentation.md) / controller
+[Miranum Forms - v0.3.2](../documentation.md) / controller
 
 # Module: controller
 
@@ -12,4 +12,4 @@
 
 ### DocumentController
 
-Re-exports [DocumentController](../classes/controller_DocumentController.DocumentController.md)
+Re-exports [DocumentController](../classes/DocumentController.DocumentController.md)

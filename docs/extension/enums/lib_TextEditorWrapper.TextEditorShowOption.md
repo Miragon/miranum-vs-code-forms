@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.3.2](../documentation.md) / [lib/TextEditorWrapper](../modules/lib_TextEditorWrapper.md) / TextEditorShowOption
+[Miranum Forms - v0.3.2](../documentation.md) / [lib/TextEditorWrapper](../modules/lib_TextEditorWrapper.md) / TextEditorShowOption
 
 # Enumeration: TextEditorShowOption
 
@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[src/lib/TextEditorWrapper.ts:7](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/TextEditorWrapper.ts#L7)
+[src/lib/TextEditorWrapper.ts:7](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/TextEditorWrapper.ts#L7)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[src/lib/TextEditorWrapper.ts:8](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/TextEditorWrapper.ts#L8)
+[src/lib/TextEditorWrapper.ts:8](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/TextEditorWrapper.ts#L8)

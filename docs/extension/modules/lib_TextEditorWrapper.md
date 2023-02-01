@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.3.2](../documentation.md) / lib/TextEditorWrapper
+[Miranum Forms - v0.3.2](../documentation.md) / lib/TextEditorWrapper
 
 # Module: lib/TextEditorWrapper
 

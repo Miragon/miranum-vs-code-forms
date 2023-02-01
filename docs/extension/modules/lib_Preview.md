@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.3.2](../documentation.md) / lib/Preview
+[Miranum Forms - v0.3.2](../documentation.md) / lib/Preview
 
 # Module: lib/Preview
 

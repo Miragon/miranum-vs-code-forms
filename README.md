@@ -61,7 +61,7 @@ The documentation project is built with technologies we use in our projects:
 
 ## Getting started
 
-For an explanation on how to get started, please refer to the [quickstart doc](docs/quickstart.md).
+For an explanation on how to get started, please refer to [our website](https://www.miranum.io/docs/gettingstarted).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

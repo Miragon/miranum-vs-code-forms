@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.3.2](../documentation.md) / [lib/Preview](../modules/lib_Preview.md) / WebviewOptions
+[Miranum Forms - v0.3.2](../documentation.md) / [lib/Preview](../modules/lib_Preview.md) / WebviewOptions
 
 # Interface: WebviewOptions
 
@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[src/lib/Preview.ts:177](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L177)
+[src/lib/Preview.ts:177](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L177)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[src/lib/Preview.ts:178](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L178)
+[src/lib/Preview.ts:178](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L178)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 #### Defined in
 
-[src/lib/Preview.ts:179](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/Preview.ts#L179)
+[src/lib/Preview.ts:179](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/Preview.ts#L179)

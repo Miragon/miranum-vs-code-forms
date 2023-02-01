@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.3.2](../documentation.md) / [lib/TextEditorWrapper](../modules/lib_TextEditorWrapper.md) / TextEditorWrapper
+[Miranum Forms - v0.3.2](../documentation.md) / [lib/TextEditorWrapper](../modules/lib_TextEditorWrapper.md) / TextEditorWrapper
 
 # Class: TextEditorWrapper
 
@@ -8,13 +8,18 @@
 
 - **`TextEditorWrapper`**
 
-  ↳ [`TextEditorComponent`](components_TextEditorComponent.TextEditorComponent.md)
+  ↳ [`TextEditorComponent`](TextEditorComponent.TextEditorComponent.md)
 
 ## Implements
 
 - [`Updatable`](../interfaces/lib_types.Updatable.md)<`TextDocument`\>
 
 ## Table of contents
+
+### Accessors
+
+- [isOpen](lib_TextEditorWrapper.TextEditorWrapper.md#isopen)
+- [textEditor](lib_TextEditorWrapper.TextEditorWrapper.md#texteditor)
 
 ### Methods
 
@@ -33,11 +38,35 @@
 
 - [showOption](lib_TextEditorWrapper.TextEditorWrapper.md#showoption)
 - [\_textEditor](lib_TextEditorWrapper.TextEditorWrapper.md#_texteditor)
-- [isOpen](lib_TextEditorWrapper.TextEditorWrapper.md#isopen)
+- [\_isOpen](lib_TextEditorWrapper.TextEditorWrapper.md#_isopen)
 
-### Accessors
+## Accessors
 
-- [textEditor](lib_TextEditorWrapper.TextEditorWrapper.md#texteditor)
+### isOpen
+
+• `get` **isOpen**(): `boolean`
+
+#### Returns
+
+`boolean`
+
+#### Defined in
+
+[src/lib/TextEditorWrapper.ts:17](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/TextEditorWrapper.ts#L17)
+
+___
+
+### textEditor
+
+• `Private` `get` **textEditor**(): `TextEditor`
+
+#### Returns
+
+`TextEditor`
+
+#### Defined in
+
+[src/lib/TextEditorWrapper.ts:33](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/TextEditorWrapper.ts#L33)
 
 ## Methods
 
@@ -57,7 +86,7 @@
 
 #### Defined in
 
-[src/lib/TextEditorWrapper.ts:37](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/TextEditorWrapper.ts#L37)
+[src/lib/TextEditorWrapper.ts:41](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/TextEditorWrapper.ts#L41)
 
 ___
 
@@ -77,7 +106,7 @@ ___
 
 #### Defined in
 
-[src/lib/TextEditorWrapper.ts:49](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/TextEditorWrapper.ts#L49)
+[src/lib/TextEditorWrapper.ts:53](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/TextEditorWrapper.ts#L53)
 
 ___
 
@@ -97,7 +126,7 @@ ___
 
 #### Defined in
 
-[src/lib/TextEditorWrapper.ts:68](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/TextEditorWrapper.ts#L68)
+[src/lib/TextEditorWrapper.ts:72](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/TextEditorWrapper.ts#L72)
 
 ___
 
@@ -121,7 +150,7 @@ ___
 
 #### Defined in
 
-[src/lib/TextEditorWrapper.ts:88](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/TextEditorWrapper.ts#L88)
+[src/lib/TextEditorWrapper.ts:92](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/TextEditorWrapper.ts#L92)
 
 ___
 
@@ -135,7 +164,7 @@ ___
 
 #### Defined in
 
-[src/lib/TextEditorWrapper.ts:103](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/TextEditorWrapper.ts#L103)
+[src/lib/TextEditorWrapper.ts:107](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/TextEditorWrapper.ts#L107)
 
 ___
 
@@ -155,7 +184,7 @@ ___
 
 #### Defined in
 
-[src/lib/TextEditorWrapper.ts:125](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/TextEditorWrapper.ts#L125)
+[src/lib/TextEditorWrapper.ts:129](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/TextEditorWrapper.ts#L129)
 
 ## Constructors
 
@@ -165,7 +194,7 @@ ___
 
 #### Defined in
 
-[src/lib/TextEditorWrapper.ts:17](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/TextEditorWrapper.ts#L17)
+[src/lib/TextEditorWrapper.ts:21](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/TextEditorWrapper.ts#L21)
 
 ## Properties
 
@@ -175,7 +204,7 @@ ___
 
 #### Defined in
 
-[src/lib/TextEditorWrapper.ts:13](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/TextEditorWrapper.ts#L13)
+[src/lib/TextEditorWrapper.ts:13](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/TextEditorWrapper.ts#L13)
 
 ___
 
@@ -185,28 +214,14 @@ ___
 
 #### Defined in
 
-[src/lib/TextEditorWrapper.ts:14](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/TextEditorWrapper.ts#L14)
+[src/lib/TextEditorWrapper.ts:14](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/TextEditorWrapper.ts#L14)
 
 ___
 
-### isOpen
+### \_isOpen
 
-• `Private` **isOpen**: `boolean` = `false`
-
-#### Defined in
-
-[src/lib/TextEditorWrapper.ts:15](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/TextEditorWrapper.ts#L15)
-
-## Accessors
-
-### textEditor
-
-• `Private` `get` **textEditor**(): `TextEditor`
-
-#### Returns
-
-`TextEditor`
+• `Private` **\_isOpen**: `boolean` = `false`
 
 #### Defined in
 
-[src/lib/TextEditorWrapper.ts:29](https://github.com/FlowSquad/miranum-vs-code-forms/blob/861dc0a/src/lib/TextEditorWrapper.ts#L29)
+[src/lib/TextEditorWrapper.ts:15](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/lib/TextEditorWrapper.ts#L15)

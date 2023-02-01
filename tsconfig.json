@@ -21,7 +21,7 @@
   },
   "include": [
     "src",
-    "src/lib/types.ts"
+    //"src/lib/types.ts"
   ],
   "exclude": [
     "node_modules",
