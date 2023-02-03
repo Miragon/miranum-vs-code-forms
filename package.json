@@ -3,7 +3,7 @@
   "displayName": "Miranum: Form Builder",
   "description": "Edit JSON Schema files with an modern easy to use editor.",
   "license": "Apache License 2.0",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "publisher": "miragon-gmbh",
   "repository": {
     "type": "git",
