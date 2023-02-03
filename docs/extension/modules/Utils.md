@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.3.2](../documentation.md) / utils
+[Miranum Forms - v0.3.2](../documentation.md) / utils
 
 # Module: utils
 
@@ -7,6 +7,7 @@
 ### References
 
 - [Schema](utils.md#schema)
+- [getMinimum](utils.md#getminimum)
 - [getDefault](utils.md#getdefault)
 - [getHtmlForWebview](utils.md#gethtmlforwebview)
 - [getNonce](utils.md#getnonce)
@@ -16,6 +17,12 @@
 ### Schema
 
 Re-exports [Schema](utils_types.md#schema)
+
+___
+
+### getMinimum
+
+Re-exports [getMinimum](Functions.md#getminimum)
 
 ___
 

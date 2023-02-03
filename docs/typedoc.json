@@ -4,14 +4,14 @@
   ],
   "entryPointStrategy": "expand",
   "externalPattern": [
-    "../src/utils/**/*.ts",
-    "./types.ts"
+    "../src/utils/**/*.ts"
   ],
   "exclude": [
-    "../src/test/**/*"
+    "../src/test/**/*",
+    "../src/web/**/*"
   ],
   "out": "extension",
-  "name": "VS Code JsonSchema Builder",
+  "name": "Miranum Forms",
   "entryDocument": "documentation.md",
   "includeVersion": true,
   "tsconfig": "../tsconfig.json",

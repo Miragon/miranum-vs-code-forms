@@ -1,16 +1,16 @@
-VS Code JsonSchema Builder - v0.3.2
+Miranum Forms - v0.3.2
 
-# VS Code JsonSchema Builder - v0.3.2
+# Miranum Forms - v0.3.2
 
 ## Table of contents
 
 ### Modules
 
 - [JsonSchemaBuilderProvider](modules/JsonSchemaBuilderProvider.md)
-- [components/PreviewComponent](modules/components_PreviewComponent.md)
-- [components/TextEditorComponent](modules/components_TextEditorComponent.md)
+- [PreviewComponent](modules/PreviewComponent.md)
+- [TextEditorComponent](modules/TextEditorComponent.md)
 - [components](modules/components.md)
-- [controller/DocumentController](modules/controller_DocumentController.md)
+- [DocumentController](modules/DocumentController.md)
 - [controller](modules/controller.md)
 - [Extension](modules/Extension.md)
 - [lib/Preview](modules/lib_Preview.md)

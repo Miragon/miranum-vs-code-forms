@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.3.2](../documentation.md) / Extension
+[Miranum Forms - v0.3.2](../documentation.md) / Extension
 
 # Module: Extension
 
@@ -31,4 +31,4 @@ It registers a [Custom Text Editor](https://code.visualstudio.com/api/extension-
 
 #### Defined in
 
-[src/extension.ts:14](https://github.com/FlowSquad/miranum-vs-code-forms/blob/01253b3/src/extension.ts#L14)
+[src/extension.ts:14](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/extension.ts#L14)

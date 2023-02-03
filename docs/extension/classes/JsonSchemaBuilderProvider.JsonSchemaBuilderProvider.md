@@ -1,4 +1,4 @@
-[VS Code JsonSchema Builder - v0.3.2](../documentation.md) / [JsonSchemaBuilderProvider](../modules/JsonSchemaBuilderProvider.md) / JsonSchemaBuilderProvider
+[Miranum Forms - v0.3.2](../documentation.md) / [JsonSchemaBuilderProvider](../modules/JsonSchemaBuilderProvider.md) / JsonSchemaBuilderProvider
 
 # Class: JsonSchemaBuilderProvider
 
@@ -21,7 +21,6 @@ standard vscode text editor and a preview for rendering [Json Schema](https://js
 
 - [viewType](JsonSchemaBuilderProvider.JsonSchemaBuilderProvider.md#viewtype)
 - [counter](JsonSchemaBuilderProvider.JsonSchemaBuilderProvider.md#counter)
-- [writeData](JsonSchemaBuilderProvider.JsonSchemaBuilderProvider.md#writedata)
 - [controller](JsonSchemaBuilderProvider.JsonSchemaBuilderProvider.md#controller)
 - [preview](JsonSchemaBuilderProvider.JsonSchemaBuilderProvider.md#preview)
 - [textEditor](JsonSchemaBuilderProvider.JsonSchemaBuilderProvider.md#texteditor)
@@ -35,8 +34,6 @@ standard vscode text editor and a preview for rendering [Json Schema](https://js
 ### Methods
 
 - [resolveCustomTextEditor](JsonSchemaBuilderProvider.JsonSchemaBuilderProvider.md#resolvecustomtexteditor)
-- [writeChangesToDocument](JsonSchemaBuilderProvider.JsonSchemaBuilderProvider.md#writechangestodocument)
-- [dispose](JsonSchemaBuilderProvider.JsonSchemaBuilderProvider.md#dispose)
 
 ## Properties
 
@@ -48,7 +45,7 @@ Unique identifier for the custom editor provider.
 
 #### Defined in
 
-[src/JsonSchemaBuilderProvider.ts:25](https://github.com/FlowSquad/miranum-vs-code-forms/blob/01253b3/src/JsonSchemaBuilderProvider.ts#L25)
+[src/JsonSchemaBuilderProvider.ts:24](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/JsonSchemaBuilderProvider.ts#L24)
 
 ___
 
@@ -60,65 +57,55 @@ Number of currently open custom text editors with the view type `jsonschema-buil
 
 #### Defined in
 
-[src/JsonSchemaBuilderProvider.ts:28](https://github.com/FlowSquad/miranum-vs-code-forms/blob/01253b3/src/JsonSchemaBuilderProvider.ts#L28)
-
-___
-
-### writeData
-
-• `Private` `Readonly` **writeData**: (`document`: `TextDocument`, `content`: [`Schema`](../modules/utils_types.md#schema)) => `Promise`<`boolean`\> & { `clear`: () => `void`  } & { `flush`: () => `void`  }
-
-Function to apply changes to the data model.
-
-#### Defined in
-
-[src/JsonSchemaBuilderProvider.ts:30](https://github.com/FlowSquad/miranum-vs-code-forms/blob/01253b3/src/JsonSchemaBuilderProvider.ts#L30)
+[src/JsonSchemaBuilderProvider.ts:27](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/JsonSchemaBuilderProvider.ts#L27)
 
 ___
 
 ### controller
 
-• `Private` `Readonly` **controller**: [`DocumentController`](controller_DocumentController.DocumentController.md)
+• `Private` `Readonly` **controller**: [`DocumentController`](DocumentController.DocumentController.md)
 
-The controller (DocumentController) managing the document (.form-file).
+The controller ([DocumentController](../modules/DocumentController.md)) manages the document (.form-file).
 
 #### Defined in
 
-[src/JsonSchemaBuilderProvider.ts:32](https://github.com/FlowSquad/miranum-vs-code-forms/blob/01253b3/src/JsonSchemaBuilderProvider.ts#L32)
+[src/JsonSchemaBuilderProvider.ts:29](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/JsonSchemaBuilderProvider.ts#L29)
 
 ___
 
 ### preview
 
-• `Private` `Readonly` **preview**: [`PreviewComponent`](components_PreviewComponent.PreviewComponent.md)
+• `Private` `Readonly` **preview**: [`PreviewComponent`](PreviewComponent.PreviewComponent.md)
 
-The preview (PreviewComponent) which renders the content of the active custom text editor.
+The preview ([PreviewComponent](../modules/PreviewComponent.md)) renders the content of the active custom text editor.
 
 #### Defined in
 
-[src/JsonSchemaBuilderProvider.ts:34](https://github.com/FlowSquad/miranum-vs-code-forms/blob/01253b3/src/JsonSchemaBuilderProvider.ts#L34)
+[src/JsonSchemaBuilderProvider.ts:31](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/JsonSchemaBuilderProvider.ts#L31)
 
 ___
 
 ### textEditor
 
-• `Private` `Readonly` **textEditor**: [`TextEditorComponent`](components_TextEditorComponent.TextEditorComponent.md)
+• `Private` `Readonly` **textEditor**: [`TextEditorComponent`](TextEditorComponent.TextEditorComponent.md)
 
-The text editor (TextEditorComponent) for direct changes inside the document.
+The text editor ([TextEditorComponent](../modules/TextEditorComponent.md)) for direct changes inside the document.
 
 #### Defined in
 
-[src/JsonSchemaBuilderProvider.ts:36](https://github.com/FlowSquad/miranum-vs-code-forms/blob/01253b3/src/JsonSchemaBuilderProvider.ts#L36)
+[src/JsonSchemaBuilderProvider.ts:33](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/JsonSchemaBuilderProvider.ts#L33)
 
 ___
 
 ### disposables
 
-• `Private` **disposables**: `Disposable`[] = `[]`
+• `Private` **disposables**: `Map`<`string`, `Disposable`[]\>
+
+An array with all disposables per webview panel.
 
 #### Defined in
 
-[src/JsonSchemaBuilderProvider.ts:37](https://github.com/FlowSquad/miranum-vs-code-forms/blob/01253b3/src/JsonSchemaBuilderProvider.ts#L37)
+[src/JsonSchemaBuilderProvider.ts:35](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/JsonSchemaBuilderProvider.ts#L35)
 
 ___
 
@@ -130,7 +117,7 @@ The context of the extension
 
 #### Defined in
 
-[src/JsonSchemaBuilderProvider.ts:44](https://github.com/FlowSquad/miranum-vs-code-forms/blob/01253b3/src/JsonSchemaBuilderProvider.ts#L44)
+[src/JsonSchemaBuilderProvider.ts:44](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/JsonSchemaBuilderProvider.ts#L44)
 
 ## Constructors
 
@@ -148,7 +135,7 @@ Register all components and controllers and set up all commands.
 
 #### Defined in
 
-[src/JsonSchemaBuilderProvider.ts:43](https://github.com/FlowSquad/miranum-vs-code-forms/blob/01253b3/src/JsonSchemaBuilderProvider.ts#L43)
+[src/JsonSchemaBuilderProvider.ts:43](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/JsonSchemaBuilderProvider.ts#L43)
 
 ## Methods
 
@@ -176,43 +163,4 @@ vscode.CustomTextEditorProvider.resolveCustomTextEditor
 
 #### Defined in
 
-[src/JsonSchemaBuilderProvider.ts:77](https://github.com/FlowSquad/miranum-vs-code-forms/blob/01253b3/src/JsonSchemaBuilderProvider.ts#L77)
-
-___
-
-### writeChangesToDocument
-
-▸ `Private` **writeChangesToDocument**(`document`, `content`): `Promise`<`boolean`\>
-
-Apply changes to the data model.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `document` | `TextDocument` | The data model |
-| `content` | [`Schema`](../modules/utils_types.md#schema) | The data which was sent from the webview |
-
-#### Returns
-
-`Promise`<`boolean`\>
-
-Thenable
-
-#### Defined in
-
-[src/JsonSchemaBuilderProvider.ts:227](https://github.com/FlowSquad/miranum-vs-code-forms/blob/01253b3/src/JsonSchemaBuilderProvider.ts#L227)
-
-___
-
-### dispose
-
-▸ `Private` **dispose**(): `void`
-
-#### Returns
-
-`void`
-
-#### Defined in
-
-[src/JsonSchemaBuilderProvider.ts:278](https://github.com/FlowSquad/miranum-vs-code-forms/blob/01253b3/src/JsonSchemaBuilderProvider.ts#L278)
+[src/JsonSchemaBuilderProvider.ts:80](https://github.com/FlowSquad/miranum-vs-code-forms/blob/f821aa6/src/JsonSchemaBuilderProvider.ts#L80)

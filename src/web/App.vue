@@ -121,13 +121,13 @@ export default defineComponent({
 
      function xDisplayChanged(update: string): void {
        sendDataToExtension({
-         key: formKey.value!,
          schema: {
+           key: schema.value!.key,
            type: schema.value!.type,
            "x-display": update,
            allOf: schema.value!.allOf,
-           key: schema.value!.key
-         }
+         },
+         key: formKey.value!
        });
      }
 

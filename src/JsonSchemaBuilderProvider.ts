@@ -1,5 +1,5 @@
 /**
- * This module contains the CustomTextEditorProvider for the `JsonSchema Builder`.
+ * This module contains the CustomTextEditorProvider for `Miranum Forms`.
  * It handles the webview and synchronizes the webview with the data model and a preview.
  * @module JsonSchemaBuilderProvider
  */
@@ -7,8 +7,7 @@
 import * as vscode from 'vscode';
 import {DocumentController} from "./controller";
 import {PreviewComponent, TextEditorComponent} from "./components";
-import {getDefault, getHtmlForWebview, getNonce, Schema} from './utils';
-import {debounce} from "debounce";
+import {getHtmlForWebview, getMinimum} from './utils';
 import {ViewState} from "./lib";
 
 /**
@@ -26,15 +25,16 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
     /** Number of currently open custom text editors with the view type `jsonschema-builder`. */
     private static counter = 0;
-    /** Function to apply changes to the data model. */
-    private readonly writeData = debounce(this.writeChangesToDocument);
-    /** The controller ({@link DocumentController}) managing the document (.form-file). */
+    /** The controller ({@link DocumentController}) manages the document (.form-file). */
     private readonly controller: DocumentController;
-    /** The preview ({@link PreviewComponent}) which renders the content of the active custom text editor. */
+    /** The preview ({@link PreviewComponent}) renders the content of the active custom text editor. */
     private readonly preview: PreviewComponent;
     /** The text editor ({@link TextEditorComponent}) for direct changes inside the document. */
     private readonly textEditor: TextEditorComponent;
-    private disposables: vscode.Disposable[] = [];
+    /** An array with all disposables per webview panel. */
+    private disposables: Map<string, vscode.Disposable[]> = new Map();
+    /** @hidden Little helper to prevent the preview from closing after the text editor is opened. */
+    private closePreview = true;
 
     /**
      * Register all components and controllers and set up all commands.
@@ -56,6 +56,9 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         const toggleTextEditor = vscode.commands.registerCommand(
             JsonSchemaBuilderProvider.viewType + '.toggleTextEditor',
             () => {
+                if (!this.textEditor.isOpen) {
+                    this.closePreview = false;
+                }
                 this.textEditor.toggle(this.controller.document);
             });
         const togglePreview = vscode.commands.registerCommand(
@@ -81,6 +84,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         token: vscode.CancellationToken
     ): Promise<void> {
 
+        const disposables: vscode.Disposable[] = [];
         let isUpdateFromWebview = false;
         let isBuffer = false;
 
@@ -89,10 +93,8 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         // Disable preview mode
         await vscode.commands.executeCommand('workbench.action.keepEditor');
 
-        // Setup webview options
+        // Setup webview
         webviewPanel.webview.options = {enableScripts: true};
-
-        // Setup webview html content
         webviewPanel.webview.html = getHtmlForWebview(
             webviewPanel.webview, this.context.extensionUri, this.controller.content, "builder"
         );
@@ -121,11 +123,11 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
             switch (event.type) {
                 case JsonSchemaBuilderProvider.viewType + '.updateFromWebview': {
                     isUpdateFromWebview = true;
-                    this.writeData(document, event.content);
+                    this.controller.writeData(document.uri, event.content);
                     break;
                 }
             }
-        }, null, this.disposables);
+        }, null, disposables);
 
         /**
          * When changes are made inside the webview a message to the extension will be sent with the new data.
@@ -137,15 +139,12 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
          * the webview to synchronize it with the current content of the model.
          */
         vscode.workspace.onDidChangeTextDocument(e => {
-            if (e.document.uri.toString() === document.uri.toString() && e.contentChanges.length !== 0 && !isUpdateFromWebview) {
+            if (e.document.uri.toString() === this.controller.document.uri.toString() &&
+                e.contentChanges.length !== 0 && !isUpdateFromWebview) {
 
                 if (!e.document.getText()) {
                     // e.g. when user deletes all lines in text editor
-                    const minimumSchema = {
-                        schema: JSON.parse('{"key": "MyStartForm", "type": "object", "allOf": []}'),
-                        key: 'Form_' + getNonce(6).toLowerCase()
-                    };
-                    this.writeData(document, minimumSchema);
+                    this.controller.writeData(e.document.uri, getMinimum());
                 }
 
                 // If the webview is in the background then no messages can be sent to it.
@@ -166,14 +165,13 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                         break;
                     }
                     case undefined: {
-                        // If the initial update came from the webview then we don't need to update the webview.
                         updateWebview(JsonSchemaBuilderProvider.viewType + '.updateFromExtension');
                         break;
                     }
                 }
             }
             isUpdateFromWebview = false;    // reset
-        }, null, this.disposables);
+        }, null, disposables);
 
         // Called when the view state changes (e.g. user switch the tab)
         webviewPanel.onDidChangeViewState(() => {
@@ -198,51 +196,27 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
                 }
                 /* ------- Panel is NOT active/visible ------- */
                 case !webviewPanel.active: {
-                    if (!this.preview.active) {
+                    if (!this.preview.active && this.closePreview) {
                         this.preview.close();
                     }
+                    this.closePreview = true; // reset
                 }
             }
-        }, null, this.disposables);
+        }, null, disposables);
 
         // CleanUp after Custom Editor was closed.
         webviewPanel.onDidDispose(() => {
             JsonSchemaBuilderProvider.counter--;
             vscode.commands.executeCommand('setContext', 'jsonschema-builder.openCustomEditors', JsonSchemaBuilderProvider.counter);
 
-            this.textEditor.close(document.fileName);
+            this.textEditor.close(this.controller.document.fileName);
             this.preview.close();
 
-            this.dispose();
+            this.dispose(document.uri.toString());
             webviewPanel.dispose();
-        });
-    }
+        }, webviewPanel.title);
 
-    /**
-     * Apply changes to the data model.
-     * @param document The data model
-     * @param content The data which was sent from the webview
-     * @returns Thenable
-     */
-    private async writeChangesToDocument(document: vscode.TextDocument, content: Schema): Promise<boolean> {
-        const edit = new vscode.WorkspaceEdit();
-        const text = JSON.stringify(content, undefined, 4);
-
-        edit.replace(
-            document.uri,
-            new vscode.Range(0, 0, document.lineCount, 0),
-            text
-        );
-
-        return Promise.resolve(
-            vscode.workspace.applyEdit(edit)
-                .then((success) => {
-                    if (success) {
-                        this.controller.updatePreview();
-                    }
-                    return success;
-                })
-        );
+        this.disposables.set(document.uri.toString(), disposables);
     }
 
     /** @hidden */
@@ -254,13 +228,7 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
 
         // set the document
         try {
-            if (!document.getText()) {
-                if (await this.writeData(document, getDefault())) {
-                    document.save()
-                }
-            }
-
-            this.controller.document = document;
+            await this.controller.setInitialDocument(document);
 
             // if we open a second editor beside one with an open preview window we have to close it and create a new one.
             if (this.preview.isOpen) {
@@ -275,9 +243,17 @@ export class JsonSchemaBuilderProvider implements vscode.CustomTextEditorProvide
         return Promise.resolve(true);
     }
 
-    private dispose(): void {
-        while (this.disposables.length) {
-            const item = this.disposables.pop();
+    /** @hidden */
+    private dispose(key: string): void {
+        let disposables = this.disposables.get(key);
+        if (disposables) {
+            this.disposables.delete(key);
+        } else {
+            disposables = [];
+        }
+
+        while (disposables.length) {
+            const item = disposables.pop();
             if (item) {
                 item.dispose();
             }
