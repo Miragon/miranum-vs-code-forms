@@ -65,7 +65,7 @@ export default defineComponent({
 
       function getDataFromExtension(event: MessageEvent): void {
          const message = event.data;
-         const newForm: Schema = JSON.parse(escape(message.text));
+         const newForm: Schema = JSON.parse(message.text);
 
          switch (message.type) {
             case 'jsonschema-renderer.updateFromExtension': {
