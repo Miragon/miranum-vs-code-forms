@@ -1,0 +1,68 @@
+{
+    "key": "miragon-onboarding_dokumente-anfordern",
+    "schema": {
+        "type": "object",
+        "x-display": "",
+        "allOf": [
+            {
+                "title": "Section",
+                "description": "",
+                "type": "object",
+                "x-options": {
+                    "sectionsTitlesClasses": [
+                        "d-none"
+                    ]
+                },
+                "allOf": [
+                    {
+                        "containerType": "group",
+                        "title": "Group",
+                        "description": "",
+                        "x-options": {
+                            "childrenClass": "pl-0"
+                        },
+                        "properties": {
+                            "ee1b4902-9580-4e46-ba88-a91f753de4ae": {
+                                "fieldType": "textarea",
+                                "title": "E-Mail Vorlage",
+                                "x-display": "textarea",
+                                "type": "string",
+                                "key": "ee1b4902-9580-4e46-ba88-a91f753de4ae",
+                                "default": "Liebe / Lieber ${name_newbie},\n\nwir freuen uns sehr, dass du dich dazu entschieden hast, Teil unseres Teams zu werden. Zum Bearbeiten der Formalitäten, bitten wir dich, uns 'folgende' Dokumente zuzusenden:\n\nViele Grüße\n${name_hr_verantworlich}",
+                                "x-options": {
+                                    "fieldColProps": {
+                                        "cols": 12,
+                                        "sm": 12,
+                                        "messages": {}
+                                    }
+                                },
+                                "x-props": {
+                                    "outlined": true,
+                                    "dense": true
+                                },
+                                "x-rules": []
+                            },
+                            "0fcbb7b7-1cbc-4554-ab08-d4112659dc67": {
+                                "fieldType": "text",
+                                "title": "Textfield",
+                                "type": "string",
+                                "x-options": {
+                                    "fieldColProps": {
+                                        "cols": 12,
+                                        "sm": 12
+                                    }
+                                },
+                                "x-props": {
+                                    "outlined": true,
+                                    "dense": true
+                                }
+                            }
+                        },
+                        "key": "8b34283d-e180-4235-bd2f-f5768370e22b"
+                    }
+                ],
+                "key": "cceb669a-a00d-4a98-ac72-82d846dc2489"
+            }
+        ]
+    }
+}
