@@ -133,7 +133,7 @@ export default defineComponent({
 
      function escape(value: string): string {
         return value
-            //.replace(/[\\]/g, '\\\\')
+            .replace(/[\\]/g, '\\\\')
             .replace(/[\b]/g, '\\b')
             .replace(/[\f]/g, '\\f')
             .replace(/[\n]/g, '\\n')
