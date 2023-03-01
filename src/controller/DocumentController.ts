@@ -127,8 +127,7 @@ export class DocumentController implements IContentController<TextDocument | Sch
             try {
                 switch (true) {
                     case observer instanceof Preview: {
-                        const content = this.getContentAsSchema(this.document.getText());
-                        observer.update(content);
+                        observer.update(this.content);
                         break;
                     }
                 }
