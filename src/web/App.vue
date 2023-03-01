@@ -65,7 +65,7 @@ export default defineComponent({
 
       function getDataFromExtension(event: MessageEvent): void {
          const message = event.data;
-         const newForm: Schema = message.text;
+         const newForm: Schema = JSON.parse(escape(message.text));
 
          switch (message.type) {
             case 'jsonschema-renderer.updateFromExtension': {
@@ -88,15 +88,15 @@ export default defineComponent({
       }
 
       function sendDataToExtension(form: Schema): void {
-         const formAsStr = JSON.stringify(form);
+         const serialized = JSON.stringify(form);
 
          vscode.setState({
-            text: formAsStr,
+            text: serialized,
             mode: mode.value
          });
          vscode.postMessage({
             type: 'jsonschema-builder.updateFromWebview',
-            content: JSON.parse(formAsStr)
+            content: serialized
          });
       }
 
@@ -131,10 +131,21 @@ export default defineComponent({
        });
      }
 
+     function escape(value: string): string {
+        return value
+            //.replace(/[\\]/g, '\\\\')
+            .replace(/[\b]/g, '\\b')
+            .replace(/[\f]/g, '\\f')
+            .replace(/[\n]/g, '\\n')
+            .replace(/[\r]/g, '\\r')
+            .replace(/[\t]/g, '\\t')
+            .replace(/\\'/g, "\\'");
+     }
+
       onMounted(() => {
          const state = vscode.getState();
          if (state) {
-            const form: Schema = JSON.parse(state.text);
+            const form: Schema = JSON.parse(escape(state.text));
             formKey.value = form.key;
             xDisplay.value = form.schema["x-display"];
             schema.value = form.schema;
