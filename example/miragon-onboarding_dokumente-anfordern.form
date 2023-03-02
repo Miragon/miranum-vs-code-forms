@@ -1,8 +1,8 @@
 {
-    "key": "exampleForm",
+    "key": "miragon-onboarding_dokumente-anfordern",
     "schema": {
-        "key": "MyStartForm",
         "type": "object",
+        "x-display": "",
         "allOf": [
             {
                 "title": "Section",
@@ -22,32 +22,13 @@
                             "childrenClass": "pl-0"
                         },
                         "properties": {
-                            "1633e786-e273-42b0-b6fc-dccddc5620db": {
-                                "fieldType": "text",
-                                "title": "Textfield",
-                                "type": "string",
-                                "key": "1633e786-e273-42b0-b6fc-dccddc5620db",
-                                "x-options": {
-                                    "fieldColProps": {
-                                        "messages": {},
-                                        "sm": 12,
-                                        "cols": 12
-                                    }
-                                },
-                                "x-props": {
-                                    "outlined": true,
-                                    "dense": true
-                                },
-                                "x-rules": [],
-                                "pattern": "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-]+)(\\.[a-zA-Z]{2,5}){1,2}$"
-                            },
-                            "172f4f5e-50bd-4614-b508-b7df465b7958": {
+                            "ee1b4902-9580-4e46-ba88-a91f753de4ae": {
                                 "fieldType": "textarea",
-                                "title": "Textarea",
+                                "title": "E-Mail Vorlage",
                                 "x-display": "textarea",
                                 "type": "string",
-                                "key": "172f4f5e-50bd-4614-b508-b7df465b7958",
-                                "default": "Hello,\n\nI'm back!!!",
+                                "key": "ee1b4902-9580-4e46-ba88-a91f753de4ae",
+                                "default": "Liebe / Lieber ${name_newbie},\n\nwir freuen uns sehr, dass du dich dazu entschieden hast, Teil unseres Teams zu werden. Zum Bearbeiten der Formalitäten, bitten wir dich, uns 'folgende' Dokumente zuzusenden:\n\nViele Grüße\n${name_hr_verantworlich}",
                                 "x-options": {
                                     "fieldColProps": {
                                         "cols": 12,
@@ -60,12 +41,27 @@
                                     "dense": true
                                 },
                                 "x-rules": []
+                            },
+                            "0fcbb7b7-1cbc-4554-ab08-d4112659dc67": {
+                                "fieldType": "text",
+                                "title": "Textfield",
+                                "type": "string",
+                                "x-options": {
+                                    "fieldColProps": {
+                                        "cols": 12,
+                                        "sm": 12
+                                    }
+                                },
+                                "x-props": {
+                                    "outlined": true,
+                                    "dense": true
+                                }
                             }
                         },
-                        "key": "ff923e85-6d9c-42c0-8460-2efda521177e"
+                        "key": "8b34283d-e180-4235-bd2f-f5768370e22b"
                     }
                 ],
-                "key": "441e27f3-76d5-42e9-9641-f8b2410bdf6d"
+                "key": "cceb669a-a00d-4a98-ac72-82d846dc2489"
             }
         ]
     }

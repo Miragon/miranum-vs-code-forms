@@ -110,6 +110,8 @@ export function getHtmlForWebview(webview: vscode.Webview, extensionUri: vscode.
         extensionUri, 'dist', 'client', 'assets', 'css', 'materialdesignicons.min.css'
     ));
 
+    const jsonSchema = JSON.stringify(initialContent).replace(/'/g, "\\'");
+
     const nonce = getNonce();
 
     //TODO
@@ -142,7 +144,7 @@ export function getHtmlForWebview(webview: vscode.Webview, extensionUri: vscode.
                     const vscode = acquireVsCodeApi();
                     // Set the initial state of the webview
                     vscode.setState({
-                        text: '${JSON.stringify(initialContent)}',
+                        text: '${jsonSchema}',
                         mode: '${mode}'
                     });
                 </script>
